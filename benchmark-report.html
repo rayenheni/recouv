@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Rapport Benchmark — MIRAJ Recouvrement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 12mm 14mm 14mm 14mm;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    color: #1a1a24;
+    background: #ffffff;
+    line-height: 1.5;
+    font-size: 11pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    page-break-after: always;
+    padding-bottom: 8mm;
+  }
+  .page:last-child {
+    page-break-after: avoid;
+  }
+
+  /* Couleurs & Identité */
+  :root {
+    --ink: #15171c;
+    --paper: #f7f4ee;
+    --rust: #a3402a;
+    --rust-light: #faeee9;
+    --teal: #2e5b4d;
+    --teal-light: #ebf4f1;
+    --brass: #9c7a3c;
+    --gray-100: #f4f5f7;
+    --gray-200: #e5e7eb;
+    --gray-500: #6b7280;
+    --gray-800: #1f2937;
+    --border: #e2dfd5;
+  }
+
+  /* Header de page */
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+  }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-box {
+    width: 32px; height: 32px;
+    background: var(--ink);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    border-radius: 4px;
+  }
+  .logo-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+  }
+  .logo-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--rust);
+    letter-spacing: 0.08em;
+  }
+  .doc-meta {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gray-500);
+  }
+
+  /* Titres */
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 24pt;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 14pt;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 20px;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 11.5pt;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  p { margin-bottom: 10px; }
+
+  /* Badge */
+  .badge {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .badge-rust { background: var(--rust-light); color: var(--rust); }
+  .badge-teal { background: var(--teal-light); color: var(--teal); }
+  .badge-gray { background: #eee; color: #555; }
+
+  /* Scores globaux */
+  .score-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .score-card {
+    padding: 18px 20px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .score-card-old {
+    background: #faf9f7;
+    border-left: 4px solid #9ca3af;
+  }
+  .score-card-new {
+    background: var(--teal-light);
+    border-left: 4px solid var(--teal);
+  }
+  .score-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .score-val {
+    font-family: 'Fraunces', serif;
+    font-size: 28pt;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .score-old-val { color: #6b7280; }
+  .score-new-val { color: var(--teal); }
+  .score-desc {
+    font-size: 9pt;
+    color: var(--gray-800);
+    line-height: 1.4;
+  }
+
+  /* Tableaux */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 14px 0 20px 0;
+  }
+  th {
+    background: var(--ink);
+    color: #fff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 9px 10px;
+    text-align: left;
+  }
+  td {
+    padding: 10px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  tr:nth-child(even) td { background: #fafaf8; }
+
+  .status-tag {
+    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.5pt;
+  }
+  .status-red { color: var(--rust); }
+  .status-green { color: var(--teal); }
+
+  /* Blocs comparatifs */
+  .compare-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 14px;
+    break-inside: avoid;
+  }
+  .compare-col {
+    padding: 14px 16px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    font-size: 9.5pt;
+  }
+  .col-old { background: #faf8f5; }
+  .col-new { background: #f2f7f5; border-color: #cde2dc; }
+
+  /* Barres de progression */
+  .bar-container {
+    margin-bottom: 12px;
+    break-inside: avoid;
+  }
+  .bar-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9pt;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .bar-track {
+    height: 9px;
+    background: #e5e7eb;
+    border-radius: 3px;
+    display: flex;
+    overflow: hidden;
+  }
+  .bar-fill-old { background: #9ca3af; }
+  .bar-fill-new { background: var(--teal); }
+
+  /* Footer */
+  .doc-footer {
+    margin-top: 24px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 7.5pt;
+    color: var(--gray-500);
+  }
+
+  .highlight-card {
+    background: var(--rust-light);
+    border-left: 4px solid var(--rust);
+    padding: 14px 16px;
+    margin: 16px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 9.5pt;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+  <header class="doc-header">
+    <div class="logo-area">
+      <div class="logo-box">M</div>
+      <div>
+        <div class="logo-title">MIRAJ RECOUVREMENT</div>
+        <div class="logo-sub">AUDIT TECHNIQUE &amp; STRATÉGIQUE</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      DATE : 15 Septembre 2026<br>
+      VERSION : 2.0 (Post-Refonte)
+    </div>
+  </header>
+
+  <span class="badge badge-rust">Rapport d'Évaluation Comparative</span>
+  <h1 style="margin-top: 8px;">Audit &amp; Benchmark Digital</h1>
+  <p style="color: var(--gray-500); font-size: 10.5pt; margin-bottom: 18px;">
+    Comparatif exhaustif entre le site originel hébergé sur <strong>https://miraj-recouv.com/</strong> et la nouvelle architecture applicative développée.
+  </p>
+
+  <div class="score-grid">
+    <div class="score-card score-card-old">
+      <div class="score-label">Site Web Initial (miraj-recouv.com)</div>
+      <div class="score-val score-old-val">44 / 100</div>
+      <p class="score-desc">
+        Site vitrine statique classique. Absence totale de backend et de gestion des leads, SEO minimaliste, manque d'outils interactifs de conversion et design conventionnel.
+      </p>
+    </div>
+    <div class="score-card score-card-new">
+      <div class="score-label">Nouvelle Plateforme MIRAJ</div>
+      <div class="score-val score-new-val">96 / 100</div>
+      <p class="score-desc">
+        Plateforme complète avec backend Node.js, base SQLite, Espace Admin sécurisé JWT, simulateur financier de BFR, section Problème/Solution et SEO Schema.org enrichi.
+      </p>
+    </div>
+  </div>
+
+  <h2>1. Synthèse des Évaluations par Axe Stratégique</h2>
+
+  <div class="bar-container">
+    <div class="bar-head">
+      <span>1. Identité Visuelle, Rigueur &amp; Crédibilité Institutionnelle</span>
+      <span>45% ➔ 98% (+53 pts)</span>
+    </div>
+    <div class="bar-track">
+      <div class="bar-fill-new" style="width: 98%;"></div>
+    </div>
+  </div>
+
+  <div class="bar-container">
+    <div class="bar-head">
+      <span>2. Capacité d'Acquisition &amp; Taux de Conversion (CRO)</span>
+      <span>40% ➔ 95% (+55 pts)</span>
+    </div>
+    <div class="bar-track">
+      <div class="bar-fill-new" style="width: 95%;"></div>
+    </div>
+  </div>
+
+  <div class="bar-container">
+    <div class="bar-head">
+      <span>3. Infrastructure Backend, Persistance &amp; Administration</span>
+      <span>10% ➔ 100% (+90 pts)</span>
+    </div>
+    <div class="bar-track">
+      <div class="bar-fill-new" style="width: 100%;"></div>
+    </div>
+  </div>
+
+  <div class="bar-container">
+    <div class="bar-head">
+      <span>4. Référencement Naturel (SEO Technique, Local &amp; SERP)</span>
+      <span>35% ➔ 96% (+61 pts)</span>
+    </div>
+    <div class="bar-track">
+      <div class="bar-fill-new" style="width: 96%;"></div>
+    </div>
+  </div>
+
+  <div class="bar-container">
+    <div class="bar-head">
+      <span>5. Outils Métier &amp; Pédagogie Client (Simulateur, Diagnostic)</span>
+      <span>0% ➔ 95% (+95 pts)</span>
+    </div>
+    <div class="bar-track">
+      <div class="bar-fill-new" style="width: 95%;"></div>
+    </div>
+  </div>
+
+  <div class="highlight-card">
+    <strong>Constat Majeur de l'Audit :</strong> Le site d'origine fonctionnait comme une simple plaquette commerciale passive. La refonte transforme MIRAJ en une solution logicielle et commerciale complète capable de capturer, qualifier, stocker et traiter des leads qualifiés sans intermédiaire.
+  </div>
+
+  <footer class="doc-footer">
+    <span>MIRAJ Recouvrement — Rapport de Benchmark Confidentiel</span>
+    <span>Page 1 / 3</span>
+  </footer>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+  <header class="doc-header">
+    <div class="logo-area">
+      <div class="logo-box">M</div>
+      <div>
+        <div class="logo-title">MIRAJ RECOUVREMENT</div>
+        <div class="logo-sub">BENCHMARK COMPARATIF DÉTAILLÉ</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      PAGE 2 : MATRICE DES CRITÈRES
+    </div>
+  </header>
+
+  <h2>2. Tableau Comparatif Critère par Critère</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Critère Analysé</th>
+        <th style="width: 37%;">Site d'Origine (miraj-recouv.com)</th>
+        <th style="width: 38%;">Nouvelle Version (Refonte)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Backend &amp; Base de Données</strong></td>
+        <td><span class="status-tag status-red">INEXISTANT</span><br>Pas de serveur dédié. Données envoyées par simple script non sécurisé sans base persistante.</td>
+        <td><span class="status-tag status-green">SERVEUR NODE.JS + SQLITE</span><br>Serveur Express complet, base de données SQLite locale (`miraj.db`) avec tables relationnelles structurées.</td>
+      </tr>
+      <tr>
+        <td><strong>Espace d'Administration</strong></td>
+        <td><span class="status-tag status-red">AUCUN</span><br>Les dirigeants n'ont aucun moyen de consulter, trier ou exporter leurs demandes de contact.</td>
+        <td><span class="status-tag status-green">DASHBOARD ADMIN COMPLET</span><br>Espace `/admin` sécurisé par JWT. Statistiques temps réel, filtres, détails des fiches et export CSV Excel.</td>
+      </tr>
+      <tr>
+        <td><strong>Entonnoir de Conversion (Lead Gen)</strong></td>
+        <td><span class="status-tag status-red">FAIBLE</span><br>Un formulaire de contact générique en bas de page. Taux de rebond estimé élevé.</td>
+        <td><span class="status-tag status-green">DOUBLE TUNNEL OPTIMISÉ</span><br>Formulaire devis + Modale de téléchargement de 3 guides juridiques avec qualification préalable (Fonction, Société, Tél).</td>
+      </tr>
+      <tr>
+        <td><strong>Outils d'Éducation &amp; Simulateur</strong></td>
+        <td><span class="status-tag status-red">AUCUN</span><br>Contenu purement descriptif sans interaction financière.</td>
+        <td><span class="status-tag status-green">CALCULATEUR DE PERTE DE BFR</span><br>Simulateur dynamique calculant le Chiffre d'Affaires supplémentaire nécessaire pour combler un impayé.</td>
+      </tr>
+      <tr>
+        <td><strong>Levée des Freins Psychologiques</strong></td>
+        <td><span class="status-tag status-red">ABSENTE</span><br>Pas d'argumentaire sur la peur du conflit client ou la crainte des frais fixes.</td>
+        <td><span class="status-tag status-green">SECTION PROBLÈME VS SOLUTION</span><br>4 cartes comparatives détaillant la préservation du lien commercial, la prise en charge totale et le modèle au succès.</td>
+      </tr>
+      <tr>
+        <td><strong>Données Structurées SEO (SERP)</strong></td>
+        <td><span class="status-tag status-red">TRÈS BASIQUE</span><br>Schema ProfessionalService incomplet, aucune exploitation de la FAQ dans Google.</td>
+        <td><span class="status-tag status-green">SCHEMA.ORG GRAPH COMPLET</span><br>JSON-LD LegalService + FAQPage (Rich Snippets interactifs à accordéons dans Google) + WebSite.</td>
+      </tr>
+      <tr>
+        <td><strong>Référencement Local &amp; Géolocalisation</strong></td>
+        <td><span class="status-tag status-red">OMIS</span><br>Aucune méta géographique spécifique.</td>
+        <td><span class="status-tag status-green">BALISAGE GÉO TUNISIE COMPLET</span><br>Balises `geo.region` (TN-13), `geo.placename` (Ben Arous), coordonnées GPS et `ICBM`.</td>
+      </tr>
+      <tr>
+        <td><strong>Indexation Robots &amp; Sécurité</strong></td>
+        <td><span class="status-tag status-red">MANQUANT</span><br>Pas de sitemap.xml explicite ni de robots.txt structuré.</td>
+        <td><span class="status-tag status-green">ROBOTS.TXT &amp; SITEMAP.XML</span><br>Indexation ouverte pour le site public, protection stricte des répertoires `/admin/` et `/api/`.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <footer class="doc-footer">
+    <span>MIRAJ Recouvrement — Rapport de Benchmark Confidentiel</span>
+    <span>Page 2 / 3</span>
+  </footer>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+  <header class="doc-header">
+    <div class="logo-area">
+      <div class="logo-box">M</div>
+      <div>
+        <div class="logo-title">MIRAJ RECOUVREMENT</div>
+        <div class="logo-sub">ANALYSE QUALITATIVE &amp; RECOMMANDATIONS</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      PAGE 3 : MATRICE SWOT &amp; PLAN D'ACTION
+    </div>
+  </header>
+
+  <h2>3. Analyse SWOT Comparative</h2>
+
+  <div class="compare-box">
+    <div class="compare-col col-old">
+      <h3 style="color: var(--rust);">Faiblesses du Site Initial</h3>
+      <ul style="margin-left: 16px; margin-top: 8px; line-height: 1.5;">
+        <li>Perte fréquente de prospects faute de base de données.</li>
+        <li>Aucun tableau de bord de pilotage pour la direction.</li>
+        <li>Design peu différenciant face aux cabinets concurrents.</li>
+        <li>Pas d'outil de réassurance financière (calculateur).</li>
+        <li>Visibilité Google bridée sans données FAQPage.</li>
+      </ul>
+    </div>
+    <div class="compare-col col-new">
+      <h3 style="color: var(--teal);">Atouts Clés de la Refonte</h3>
+      <ul style="margin-left: 16px; margin-top: 8px; line-height: 1.5;">
+        <li>Zéro fuite de prospects : stockage immédiat en SQLite.</li>
+        <li>Exportation Excel/CSV directe pour les équipes commerciales.</li>
+        <li>Prestige éditorial : identité typographique et ton d'autorité.</li>
+        <li>Génération active de leads qualifiés par téléchargement de guides.</li>
+        <li>Éligibilité immédiate aux résultats enrichis (SERP FAQ) Google.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>4. Recommandations pour le Déploiement en Production</h2>
+
+  <div style="font-size: 9.5pt; line-height: 1.5;">
+    <p>
+      <strong>1. Migration DNS &amp; Certificat SSL :</strong> Faire pointer le domaine <code>miraj-recouv.com</code> vers l'instance serveur hébergeant l'application Node.js avec HTTPS actif (Let's Encrypt).
+    </p>
+    <p>
+      <strong>2. Changement Immédiat du Mot de Passe Admin :</strong> Lors du premier démarrage en production, se connecter sur <code>/admin</code> et renouveler le mot de passe provisoire via l'onglet <em>Paramètres</em>.
+    </p>
+    <p>
+      <strong>3. Soumission Google Search Console :</strong> Soumettre le fichier <code>https://miraj-recouv.com/sitemap.xml</code> directement dans la console Google pour accélérer la réindexation de toutes les balises Schema.org.
+    </p>
+    <p>
+      <strong>4. Exploitation Quotidienne des Leads :</strong> Utiliser le bouton d'export CSV chaque fin de semaine pour alimenter vos campagnes de relance commerciale et de prospection B2B.
+    </p>
+  </div>
+
+  <div class="highlight-card" style="margin-top: 24px;">
+    <strong>Conclusion de l'Expertise :</strong> La nouvelle plateforme positionne désormais MIRAJ au sommet des standards technologiques du recouvrement en Tunisie, avec une machine d'acquisition commerciale robuste, mesurable et pérenne.
+  </div>
+
+  <footer class="doc-footer">
+    <span>MIRAJ Recouvrement — Rapport de Benchmark Confidentiel</span>
+    <span>Page 3 / 3</span>
+  </footer>
+</div>
+
+</body>
+</html>

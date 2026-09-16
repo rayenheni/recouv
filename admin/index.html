@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIRAJ — Espace Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div>
+        <span class="logo-mark">Miraj <span>•</span></span>
+        <div class="logo-sub">ESPACE ADMIN CRM</div>
+      </div>
+    </div>
+    <h1 class="login-title">Connexion</h1>
+    <div id="loginError" class="alert alert--error" style="display:none"></div>
+    <form id="loginForm">
+      <div class="field">
+        <label for="loginUser">Identifiant</label>
+        <input type="text" id="loginUser" autocomplete="username" placeholder="admin" required>
+      </div>
+      <div class="field">
+        <label for="loginPass">Mot de passe</label>
+        <input type="password" id="loginPass" autocomplete="current-password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn--rust btn--full" id="loginBtn">
+        Se connecter ➔
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ====== ADMIN APP ====== -->
+<div id="adminApp" class="app" style="display:none">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar__logo">
+      <div>
+        <span class="logo-mark">Miraj <span>•</span></span>
+        <div class="logo-sub">ADMIN CRM</div>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <button class="nav-item nav-item--active" data-tab="dashboard">
+        <span class="nav-item__icon">▦</span>
+        <span>Tableau de bord</span>
+      </button>
+      <button class="nav-item" data-tab="contacts">
+        <span class="nav-item__icon">✉</span>
+        <span>Contacts</span>
+        <span class="badge" id="badgeContacts" style="display:none">0</span>
+      </button>
+      <button class="nav-item" data-tab="downloads">
+        <span class="nav-item__icon">↓</span>
+        <span>Téléchargements</span>
+        <span class="badge" id="badgeDownloads" style="display:none">0</span>
+      </button>
+      <button class="nav-item" data-tab="seo">
+        <span class="nav-item__icon">🔍</span>
+        <span>Paramètres SEO</span>
+      </button>
+      <button class="nav-item" data-tab="content">
+        <span class="nav-item__icon">✏️</span>
+        <span>Contenu du site</span>
+      </button>
+    </nav>
+
+    <div class="sidebar__footer">
+      <button class="nav-item" data-tab="settings">
+        <span class="nav-item__icon">⚙</span>
+        <span>Paramètres</span>
+      </button>
+      <button class="nav-item" id="logoutBtn">
+        <span class="nav-item__icon">⎋</span>
+        <span>Déconnexion</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main">
+
+    <!-- Header -->
+    <div class="topbar">
+      <div class="topbar__title" id="topbarTitle">Tableau de bord</div>
+      <div class="topbar__user">
+        <span class="topbar__dot"></span>
+        <span id="topbarUser">admin</span>
+      </div>
+    </div>
+
+    <!-- ── TAB: DASHBOARD ── -->
+    <div id="tab-dashboard" class="tab-content is-active">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-card__label">Contacts reçus</div>
+          <div class="stat-card__value" id="statContacts">—</div>
+          <div class="stat-card__sub" id="statContactsToday">— aujourd'hui</div>
+        </div>
+        <div class="stat-card stat-card--accent">
+          <div class="stat-card__label">Non lus (contacts)</div>
+          <div class="stat-card__value" id="statContactsUnread">—</div>
+          <div class="stat-card__sub">à traiter</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Guides téléchargés</div>
+          <div class="stat-card__value" id="statDownloads">—</div>
+          <div class="stat-card__sub" id="statDownloadsToday">— aujourd'hui</div>
+        </div>
+        <div class="stat-card stat-card--teal">
+          <div class="stat-card__label">Non lus (guides)</div>
+          <div class="stat-card__value" id="statDownloadsUnread">—</div>
+          <div class="stat-card__sub">à traiter</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel__head">
+          <h2 class="panel__title">Derniers contacts</h2>
+          <button class="btn btn--sm btn--outline" onclick="switchTab('contacts')">Voir tous →</button>
+        </div>
+        <div id="dashRecentContacts"><div class="empty">Chargement…</div></div>
+      </div>
+
+      <div class="panel" style="margin-top:24px">
+        <div class="panel__head">
+          <h2 class="panel__title">Derniers téléchargements</h2>
+          <button class="btn btn--sm btn--outline" onclick="switchTab('downloads')">Voir tous →</button>
+        </div>
+        <div id="dashRecentDownloads"><div class="empty">Chargement…</div></div>
+      </div>
+    </div>
+
+    <!-- ── TAB: CONTACTS ── -->
+    <div id="tab-contacts" class="tab-content">
+      <div class="toolbar">
+        <input type="search" class="toolbar__search" id="contactSearch" placeholder="Rechercher par nom, email, message…">
+        <select class="toolbar__filter" id="contactFilter">
+          <option value="">Tous</option>
+          <option value="0">Non lus</option>
+          <option value="1">Lus</option>
+        </select>
+        <a class="btn btn--sm btn--outline" id="exportContacts" href="#">⬇ Export CSV</a>
+      </div>
+      <div id="contactsTable"><div class="empty">Chargement…</div></div>
+    </div>
+
+    <!-- ── TAB: DOWNLOADS ── -->
+    <div id="tab-downloads" class="tab-content">
+      <div class="toolbar">
+        <input type="search" class="toolbar__search" id="downloadSearch" placeholder="Rechercher par nom, email, guide…">
+        <select class="toolbar__filter" id="downloadFilter">
+          <option value="">Tous</option>
+          <option value="0">Non lus</option>
+          <option value="1">Lus</option>
+        </select>
+        <a class="btn btn--sm btn--outline" id="exportDownloads" href="#">⬇ Export CSV</a>
+      </div>
+      <div id="downloadsTable"><div class="empty">Chargement…</div></div>
+    </div>
+
+    <!-- ── TAB: SETTINGS ── -->
+    <div id="tab-settings" class="tab-content">
+      <div class="panel" style="max-width:480px">
+        <div class="panel__head"><h2 class="panel__title">Changer le mot de passe</h2></div>
+        <div id="pwdAlert" class="alert" style="display:none; margin-bottom:16px;"></div>
+        <form id="pwdForm">
+          <div class="field">
+            <label>Mot de passe actuel</label>
+            <input type="password" id="pwdCurrent" required>
+          </div>
+          <div class="field">
+            <label>Nouveau mot de passe</label>
+            <input type="password" id="pwdNew" required minlength="6">
+          </div>
+          <div class="field">
+            <label>Confirmer</label>
+            <input type="password" id="pwdConfirm" required>
+          </div>
+          <button type="submit" class="btn btn--rust">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ── TAB: SEO PARAMETERS ── -->
+    <div id="tab-seo" class="tab-content">
+      <div class="panel" style="max-width: 720px; margin-bottom: 24px;">
+        <div class="panel__head">
+          <h2 class="panel__title">🔍 Balises Méta &amp; Référencement Naturel (SEO)</h2>
+        </div>
+        <div style="padding: 24px;">
+          <div id="seoAlert" class="alert" style="display:none; margin-bottom: 20px;"></div>
+          
+          <form id="seoForm">
+            <div class="field">
+              <label for="seoTitle">Titre Meta (SEO Title)</label>
+              <input type="text" id="seoTitle" value="MIRAJ Recouvrement — Recouvrement de créances en Tunisie &amp; International" required>
+            </div>
+
+            <div class="field">
+              <label for="seoDesc">Description Meta (Meta Description)</label>
+              <textarea id="seoDesc" rows="3" required>Société leader de recouvrement de créances en Tunisie. Recouvrement amiable et judiciaire, relance commerciale, études de solvabilité. Honoraires au résultat (no win, no fee). +15 ans d'expérience.</textarea>
+            </div>
+
+            <div class="field">
+              <label for="seoKeywords">Mots-clés principaux (Keywords)</label>
+              <input type="text" id="seoKeywords" value="recouvrement de creances tunisie, recouvrement amiable tunisie, agence de recouvrement tunisie, impayes entreprise ben arous">
+            </div>
+
+            <div class="field">
+              <label for="seoCanonical">URL Canonique (Canonical URL)</label>
+              <input type="url" id="seoCanonical" value="https://miraj-recouv.com/" required>
+            </div>
+
+            <div class="field">
+              <label for="seoGeo">Géolocalisation Local SEO</label>
+              <input type="text" id="seoGeo" value="Ben Arous, Tunisie (TN-13) — Lat: 36.7531, Long: 10.2189">
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
+              <button type="submit" class="btn btn--rust">Enregistrer les paramètres SEO</button>
+              <a href="/sitemap.xml" target="_blank" class="btn btn--outline">Consulter sitemap.xml ↗</a>
+              <a href="/robots.txt" target="_blank" class="btn btn--outline">Consulter robots.txt ↗</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB: SITE CONTENT CMS ── -->
+    <div id="tab-content" class="tab-content">
+      <div class="panel" style="max-width: 800px; margin-bottom: 24px;">
+        <div class="panel__head">
+          <h2 class="panel__title">✏️ Modificateur de Contenu du Site (CMS)</h2>
+        </div>
+        <div style="padding: 24px;">
+          <div id="contentAlert" class="alert" style="display:none; margin-bottom: 20px;"></div>
+
+          <form id="siteContentForm">
+
+            <!-- Section Hero -->
+            <h3 style="font-size:1.05rem; font-weight:700; color:var(--text-main); margin-bottom:12px; border-bottom:1px solid #EBEAE5; padding-bottom:6px;">
+              🚀 En-tête Principal (Section Hero)
+            </h3>
+            
+            <div class="field">
+              <label for="cms_hero_badge">Badge d'en-tête (Tag Top)</label>
+              <input type="text" id="cms_hero_badge" name="hero_badge" required>
+            </div>
+
+            <div class="field">
+              <label for="cms_hero_title">Titre Principal H1</label>
+              <input type="text" id="cms_hero_title" name="hero_title" required>
+            </div>
+
+            <div class="field">
+              <label for="cms_hero_subtitle">Sous-titre de présentation</label>
+              <textarea id="cms_hero_subtitle" name="hero_subtitle" rows="3" required></textarea>
+            </div>
+
+            <!-- Section Chiffres Clés -->
+            <h3 style="font-size:1.05rem; font-weight:700; color:var(--text-main); margin-top:24px; margin-bottom:12px; border-bottom:1px solid #EBEAE5; padding-bottom:6px;">
+              📈 Chiffres Clés (Statistiques)
+            </h3>
+            
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div class="field">
+                <label for="cms_stat_1_val">Stat 1 : Valeur</label>
+                <input type="text" id="cms_stat_1_val" name="stat_1_val" required>
+              </div>
+              <div class="field">
+                <label for="cms_stat_1_lbl">Stat 1 : Libellé</label>
+                <input type="text" id="cms_stat_1_lbl" name="stat_1_lbl" required>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div class="field">
+                <label for="cms_stat_2_val">Stat 2 : Valeur</label>
+                <input type="text" id="cms_stat_2_val" name="stat_2_val" required>
+              </div>
+              <div class="field">
+                <label for="cms_stat_2_lbl">Stat 2 : Libellé</label>
+                <input type="text" id="cms_stat_2_lbl" name="stat_2_lbl" required>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div class="field">
+                <label for="cms_stat_3_val">Stat 3 : Valeur</label>
+                <input type="text" id="cms_stat_3_val" name="stat_3_val" required>
+              </div>
+              <div class="field">
+                <label for="cms_stat_3_lbl">Stat 3 : Libellé</label>
+                <input type="text" id="cms_stat_3_lbl" name="stat_3_lbl" required>
+              </div>
+            </div>
+
+            <!-- Section À Propos & Contact -->
+            <h3 style="font-size:1.05rem; font-weight:700; color:var(--text-main); margin-top:24px; margin-bottom:12px; border-bottom:1px solid #EBEAE5; padding-bottom:6px;">
+              🏢 Présentation &amp; Coordonnées de Contact
+            </h3>
+
+            <div class="field">
+              <label for="cms_about_text">Texte "À propos du cabinet"</label>
+              <textarea id="cms_about_text" name="about_text" rows="3" required></textarea>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div class="field">
+                <label for="cms_contact_phone">Téléphone</label>
+                <input type="text" id="cms_contact_phone" name="contact_phone" required>
+              </div>
+              <div class="field">
+                <label for="cms_contact_email">Email de contact</label>
+                <input type="email" id="cms_contact_email" name="contact_email" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="cms_contact_address">Adresse physique</label>
+              <input type="text" id="cms_contact_address" name="contact_address" required>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <button type="submit" class="btn btn--rust">Publier &amp; Enregistrer le Contenu</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ── DETAIL MODAL ── -->
+<div id="detailModal" class="modal-backdrop" style="display:none" onclick="if(event.target===this)closeDetail()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeDetail()">✕</button>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<!-- ── CONFIRM MODAL ── -->
+<div id="confirmModal" class="modal-backdrop" style="display:none">
+  <div class="modal modal--sm">
+    <p id="confirmText" style="margin-bottom:24px; font-size:1rem;"></p>
+    <div style="display:flex; gap:12px; justify-content:flex-end;">
+      <button class="btn btn--outline" onclick="closeConfirm(false)">Annuler</button>
+      <button class="btn btn--danger" id="confirmOkBtn" onclick="closeConfirm(true)">Supprimer</button>
+    </div>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
