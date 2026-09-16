@@ -52,9 +52,13 @@ app.get('/admin*', (_req, res) => {
 initDB();
 createDefaultAdmin();
 
-app.listen(PORT, () => {
-  console.log(`\n✅  Serveur MIRAJ démarré`);
-  console.log(`   Site    → http://localhost:${PORT}`);
-  console.log(`   Admin   → http://localhost:${PORT}/admin`);
-  console.log(`   API     → http://localhost:${PORT}/api\n`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`\n✅  Serveur MIRAJ démarré`);
+    console.log(`   Site    → http://localhost:${PORT}`);
+    console.log(`   Admin   → http://localhost:${PORT}/admin`);
+    console.log(`   API     → http://localhost:${PORT}/api\n`);
+  });
+}
+
+module.exports = app;

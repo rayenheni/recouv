@@ -8,8 +8,9 @@ const bcrypt   = require('bcryptjs');
 const path     = require('path');
 const fs       = require('fs');
 
-// Dossier data
-const dataDir = path.join(__dirname, 'data');
+// Dossier data (compatible Vercel & Netlify serverless /tmp)
+const isServerless = Boolean(process.env.VERCEL || process.env.NETLIFY || process.env.NOW_BUILDER);
+const dataDir = isServerless ? '/tmp' : path.join(__dirname, 'data');
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 
 const DB_PATH = path.join(dataDir, 'miraj.db');
