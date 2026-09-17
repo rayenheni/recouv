@@ -1,23 +1,26 @@
 // ============================================================
 //  MIRAJ Recouvrement — routes/admin.js
-//  Routes protégées par JWT
+//  Routes protégées par JWT avec validation stricte
 // ============================================================
 
-const router     = require('express').Router();
-const bcrypt     = require('bcryptjs');
-const { getDB }  = require('../db');
+const router    = require('express').Router();
+const bcrypt    = require('bcryptjs');
+const { getDB } = require('../db');
 const { signToken, requireAuth } = require('../middleware/auth');
+const { loginLimiter }           = require('../middleware/security');
 
 // ── POST /api/admin/login ─────────────────────────────────────
-router.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password)
+router.post('/login', loginLimiter, (req, res) => {
+  const { username, password } = req.body || {};
+  if (typeof username !== 'string' || typeof password !== 'string' || !username.trim() || !password) {
     return res.status(400).json({ error: 'Identifiants requis' });
+  }
 
   const db    = getDB();
   const admin = db.prepare('SELECT * FROM admins WHERE username = ?').get(username.trim());
-  if (!admin || !bcrypt.compareSync(password, admin.password_hash))
+  if (!admin || !bcrypt.compareSync(password, admin.password_hash)) {
     return res.status(401).json({ error: 'Identifiants incorrects' });
+  }
 
   const token = signToken({ id: admin.id, username: admin.username });
   res.json({ token, username: admin.username });
@@ -27,7 +30,7 @@ router.post('/login', (req, res) => {
 router.use(requireAuth);
 
 // ── GET /api/admin/stats ──────────────────────────────────────
-router.get('/stats', (req, res) => {
+router.get('/stats', (_req, res) => {
   const db = getDB();
   const today = new Date().toISOString().slice(0, 10);
 
@@ -44,22 +47,29 @@ router.get('/stats', (req, res) => {
 
 // ── GET /api/admin/contacts ───────────────────────────────────
 router.get('/contacts', (req, res) => {
-  const db      = getDB();
+  const db = getDB();
   const { q, read, limit = 50, offset = 0 } = req.query;
 
-  let sql    = 'SELECT * FROM contacts WHERE 1=1';
+  let limitNum = parseInt(limit, 10);
+  if (isNaN(limitNum) || limitNum < 1) limitNum = 50;
+  if (limitNum > 200) limitNum = 200;
+
+  let offsetNum = parseInt(offset, 10);
+  if (isNaN(offsetNum) || offsetNum < 0) offsetNum = 0;
+
+  let sql = 'SELECT * FROM contacts WHERE 1=1';
   const params = [];
 
-  if (q) {
+  if (q && typeof q === 'string') {
     sql += ' AND (nom LIKE ? OR email LIKE ? OR entreprise LIKE ? OR message LIKE ?)';
-    const like = `%${q}%`;
+    const like = `%${q.trim()}%`;
     params.push(like, like, like, like);
   }
   if (read === '0') { sql += ' AND is_read = 0'; }
   if (read === '1') { sql += ' AND is_read = 1'; }
 
   sql += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
-  params.push(Number(limit), Number(offset));
+  params.push(limitNum, offsetNum);
 
   const rows  = db.prepare(sql).all(...params);
   const total = db.prepare('SELECT COUNT(*) as n FROM contacts').get().n;
@@ -68,22 +78,29 @@ router.get('/contacts', (req, res) => {
 
 // ── GET /api/admin/downloads ──────────────────────────────────
 router.get('/downloads', (req, res) => {
-  const db      = getDB();
+  const db = getDB();
   const { q, read, limit = 50, offset = 0 } = req.query;
 
-  let sql    = 'SELECT * FROM downloads WHERE 1=1';
+  let limitNum = parseInt(limit, 10);
+  if (isNaN(limitNum) || limitNum < 1) limitNum = 50;
+  if (limitNum > 200) limitNum = 200;
+
+  let offsetNum = parseInt(offset, 10);
+  if (isNaN(offsetNum) || offsetNum < 0) offsetNum = 0;
+
+  let sql = 'SELECT * FROM downloads WHERE 1=1';
   const params = [];
 
-  if (q) {
+  if (q && typeof q === 'string') {
     sql += ' AND (nom LIKE ? OR email LIKE ? OR entreprise LIKE ? OR guide LIKE ?)';
-    const like = `%${q}%`;
+    const like = `%${q.trim()}%`;
     params.push(like, like, like, like);
   }
   if (read === '0') { sql += ' AND is_read = 0'; }
   if (read === '1') { sql += ' AND is_read = 1'; }
 
   sql += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
-  params.push(Number(limit), Number(offset));
+  params.push(limitNum, offsetNum);
 
   const rows  = db.prepare(sql).all(...params);
   const total = db.prepare('SELECT COUNT(*) as n FROM downloads').get().n;
@@ -93,7 +110,7 @@ router.get('/downloads', (req, res) => {
 // ── PATCH /api/admin/contacts/:id/read ───────────────────────
 router.patch('/contacts/:id/read', (req, res) => {
   const db  = getDB();
-  const val = req.body.is_read !== undefined ? (req.body.is_read ? 1 : 0) : 1;
+  const val = req.body && req.body.is_read !== undefined ? (req.body.is_read ? 1 : 0) : 1;
   db.prepare('UPDATE contacts SET is_read = ? WHERE id = ?').run(val, req.params.id);
   res.json({ success: true });
 });
@@ -101,7 +118,7 @@ router.patch('/contacts/:id/read', (req, res) => {
 // ── PATCH /api/admin/downloads/:id/read ──────────────────────
 router.patch('/downloads/:id/read', (req, res) => {
   const db  = getDB();
-  const val = req.body.is_read !== undefined ? (req.body.is_read ? 1 : 0) : 1;
+  const val = req.body && req.body.is_read !== undefined ? (req.body.is_read ? 1 : 0) : 1;
   db.prepare('UPDATE downloads SET is_read = ? WHERE id = ?').run(val, req.params.id);
   res.json({ success: true });
 });
@@ -121,7 +138,7 @@ router.delete('/downloads/:id', (req, res) => {
 });
 
 // ── GET /api/admin/export/contacts (CSV) ─────────────────────
-router.get('/export/contacts', (req, res) => {
+router.get('/export/contacts', (_req, res) => {
   const db   = getDB();
   const rows = db.prepare('SELECT * FROM contacts ORDER BY created_at DESC').all();
 
@@ -137,7 +154,7 @@ router.get('/export/contacts', (req, res) => {
 });
 
 // ── GET /api/admin/export/downloads (CSV) ────────────────────
-router.get('/export/downloads', (req, res) => {
+router.get('/export/downloads', (_req, res) => {
   const db   = getDB();
   const rows = db.prepare('SELECT * FROM downloads ORDER BY created_at DESC').all();
 
@@ -148,28 +165,38 @@ router.get('/export/downloads', (req, res) => {
   ).join('\n');
 
   res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-  res.setHeader('Content-Disposition', 'attachment; filename="telechargenements-miraj.csv"');
+  res.setHeader('Content-Disposition', 'attachment; filename="telechargements-miraj.csv"');
   res.send('\uFEFF' + header + csv);
 });
 
 // ── POST /api/admin/change-password ──────────────────────────
 router.post('/change-password', (req, res) => {
-  const { current, newPassword } = req.body;
-  if (!current || !newPassword || newPassword.length < 6)
-    return res.status(400).json({ error: 'Mot de passe trop court (min. 6 caractères)' });
+  const { current, newPassword } = req.body || {};
+  if (typeof current !== 'string' || typeof newPassword !== 'string' || !current || !newPassword) {
+    return res.status(400).json({ error: 'Mots de passe requis' });
+  }
+
+  // Exigence : minimum 10 caractères + 1 majuscule + 1 minuscule + 1 chiffre
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}$/;
+  if (!passwordRegex.test(newPassword)) {
+    return res.status(400).json({
+      error: 'Le mot de passe doit comporter au moins 10 caractères et contenir au moins une lettre majuscule, une lettre minuscule et un chiffre.'
+    });
+  }
 
   const db    = getDB();
   const admin = db.prepare('SELECT * FROM admins WHERE id = ?').get(req.admin.id);
-  if (!bcrypt.compareSync(current, admin.password_hash))
+  if (!admin || !bcrypt.compareSync(current, admin.password_hash)) {
     return res.status(401).json({ error: 'Mot de passe actuel incorrect' });
+  }
 
-  const hash = bcrypt.hashSync(newPassword, 10);
+  const hash = bcrypt.hashSync(newPassword, 12);
   db.prepare('UPDATE admins SET password_hash = ? WHERE id = ?').run(hash, req.admin.id);
   res.json({ success: true });
 });
 
 // ── GET /api/admin/content ────────────────────────────────────
-router.get('/content', (req, res) => {
+router.get('/content', (_req, res) => {
   const db = getDB();
   const rows = db.prepare('SELECT key, value FROM site_content').all();
   const content = {};
@@ -179,15 +206,32 @@ router.get('/content', (req, res) => {
 
 // ── POST /api/admin/content ───────────────────────────────────
 router.post('/content', (req, res) => {
+  if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body)) {
+    return res.status(400).json({ error: 'Format de données invalide' });
+  }
+
+  const ALLOWED_KEYS = [
+    'hero_badge',
+    'hero_subtitle',
+    'about_text',
+    'contact_phone',
+    'contact_email',
+    'contact_address'
+  ];
+
   const db = getDB();
   const stmt = db.prepare('INSERT INTO site_content (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value=excluded.value');
-  const items = req.body;
+
   const updateMany = db.transaction((data) => {
     for (const [k, v] of Object.entries(data)) {
-      stmt.run(k, String(v));
+      if (ALLOWED_KEYS.includes(k)) {
+        const valStr = typeof v === 'string' ? v.slice(0, 2000) : String(v).slice(0, 2000);
+        stmt.run(k, valStr);
+      }
     }
   });
-  updateMany(items);
+
+  updateMany(req.body);
   res.json({ success: true });
 });
 

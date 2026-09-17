@@ -10,7 +10,7 @@
 <meta name="keywords" content="recouvrement de creances tunisie, recouvrement amiable tunisie, recouvrement judiciaire tunis, agence de recouvrement tunisie, impayes entreprise ben arous, relance client tunisie, contentieux recouvrement, societe de recouvrement tunisie, etudes solvabilite, miraj recouvrement">
 <meta name="author" content="MIRAJ Recouvrement">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<meta name="theme-color" content="#262626">
+<meta name="theme-color" content="#F5A623">
 <link rel="canonical" href="https://miraj-recouv.com/">
 
 <!-- Géolocalisation & Local SEO (Tunisie / Ben Arous / Grand Tunis) -->
@@ -47,7 +47,7 @@
       "@id": "https://miraj-recouv.com/#organization",
       "name": "MIRAJ Recouvrement",
       "url": "https://miraj-recouv.com/",
-      "logo": "https://miraj-recouv.com/logomiraj.svg",
+      "logo": "https://miraj-recouv.com/assets/img/logo-miraj.svg",
       "image": "https://miraj-recouv.com/assets/hero-miraj.png",
       "description": "MIRAJ est spécialisé dans le recouvrement de créances amiable et judiciaire en Tunisie et à l'international, la relance commerciale et la formation juridique.",
       "telephone": "+216-20-309-212",
@@ -210,9 +210,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* Palette Officielle MIRAJ Recouvrement (Design 2026 Exact) */
+    /* Palette Officielle MIRAJ Recouvrement */
     --bg-main: #FAF9F6;
-    --bg-dark: #1F2937;
+    --bg-dark: #0F141C;
     --paper: #FAF9F6;
     --paper-soft: #F4F3EF;
     --paper-card: #FFFFFF;
@@ -223,17 +223,17 @@
     --text-secondary: #4B5563;
     --text-muted: #6B7280;
     
-    --emerald: #F6A623; /* Orange logo MIRAJ */
-    --emerald-dark: #D98C0F;
-    --emerald-light: #FFF6E5;
-    --emerald-soft: #FDE9C4;
+    --emerald: #F5A623; /* Orange logo MIRAJ */
+    --emerald-dark: #D48E1A;
+    --emerald-light: #FFF5E3;
+    --emerald-soft: #FCE8C3;
     
-    --btn-black: #262626;
+    --btn-black: #18181B;
     --btn-black-hover: #000000;
     
-    --navy: #1F2937;
-    --orange: #F6A623; /* Dynamic accent matching modern green */
-    --rust: #F6A623;
+    --navy: #0F141C;
+    --orange: #F5A623;
+    --rust: #D48E1A;
     
     --radius-card: 20px;
     --shadow-card: 0 10px 30px rgba(0,0,0,0.05);
@@ -271,6 +271,25 @@
     outline-offset:3px;
   }
 
+  /* Global section sub */
+  .section-sub {
+    font-size: 1rem;
+    color: #4B5563;
+    max-width: 600px;
+    line-height: 1.6;
+    margin-top: 12px;
+  }
+
+  /* Honeypot field (hidden from legitimate users) */
+  .hp-field {
+    position: absolute !important;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+  }
+
   /* ---------- dossier corner-fold device ---------- */
   .fold-corner{position:relative;}
   .fold-corner::after{
@@ -296,15 +315,15 @@
     height: 80px;
   }
 
-  /* Logo Miraj • */
+  /* Logo Vectoriel MIRAJ */
   .brand-lockup {
-    display: flex; align-items: center;
+    display: inline-flex; align-items: center;
     text-decoration: none;
-    font-size: 1.7rem; font-weight: 800; color: #111827;
-    letter-spacing: -0.03em;
   }
-  .brand-dot {
-    color: #F6A623; margin-left: 2px; font-size: 1.8rem; line-height: 1;
+  .brand-logo {
+    height: 58px;
+    width: auto;
+    display: block;
   }
 
   /* Nav Links */
@@ -344,18 +363,18 @@
     text-decoration: none !important;
     transition: background 0.15s;
   }
-  .sub-menu-item:hover { background: #FFF6E5; }
+  .sub-menu-item:hover { background: #FFF5E3; }
   .sub-menu-icon-wrap {
     width: 36px; height: 36px; border-radius: 10px;
-    background: #FDE9C4;
+    background: #FCE8C3;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
-    color: #F6A623;
+    color: #F5A623;
   }
   .sub-menu-content h4 {
     font-size: 0.88rem; font-weight: 700; color: #111827; margin: 0;
   }
-  .sub-menu-item:hover .sub-menu-content h4 { color: #F6A623; }
+  .sub-menu-item:hover .sub-menu-content h4 { color: #F5A623; }
   .sub-menu-content p {
     font-size: 0.76rem; color: #6B7280; margin: 2px 0 0 0; line-height: 1.35;
   }
@@ -365,33 +384,43 @@
   .nav-phone-num {
     font-size: 0.9rem; font-weight: 600; color: #111827; text-decoration: none;
   }
-  .nav-phone-num:hover { color: #F6A623; }
+  .nav-phone-num:hover { color: #F5A623; }
+
+  /* Bouton noir pill avec hover animé */
   .btn-black-pill {
     display: inline-flex; align-items: center; gap: 8px;
-    background: #262626; color: #ffffff;
+    background: #18181B; color: #ffffff;
     font-size: 0.88rem; font-weight: 600;
     padding: 10px 22px; border-radius: 50px;
     text-decoration: none;
-    transition: background 0.2s, transform 0.2s;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     border: none; cursor: pointer;
     white-space: nowrap;
   }
   .btn-black-pill:hover {
     background: #000000;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.22);
   }
+  .btn-black-pill svg {
+    transition: transform 0.2s ease;
+  }
+  .btn-black-pill:hover svg {
+    transform: translateX(3px);
+  }
+
   .btn-white-pill {
     display: inline-flex; align-items: center; gap: 8px;
-    background: #FAF9F6; color: #262626;
+    background: #FAF9F6; color: #18181B;
     font-size: 0.88rem; font-weight: 600;
     padding: 10px 22px; border-radius: 50px;
     text-decoration: none;
     border: 1.5px solid #E4E4E7;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s ease;
     white-space: nowrap;
   }
   .btn-white-pill:hover {
-    border-color: #262626; background: #ffffff;
+    border-color: #18181B; background: #ffffff; transform: translateY(-1px);
   }
 
   .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 6px; }
@@ -402,7 +431,7 @@
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 0.75rem; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase;
-    color: #F6A623;
+    color: #F5A623;
     margin-bottom: 14px;
   }
 
@@ -410,9 +439,10 @@
      HERO SECTION (Image 1 Mockup)
   ================================================================ */
   .hero-v2 {
-    background: #FAF9F6;
+    background: radial-gradient(circle at 80% 20%, rgba(245, 166, 35, 0.08) 0%, transparent 60%), #FAF9F6;
     padding: 60px 0 80px;
     position: relative;
+    overflow: hidden;
   }
   .hero-v2-grid {
     display: grid;
@@ -430,7 +460,7 @@
   }
   .text-emerald-italic {
     font-style: italic;
-    color: #F6A623;
+    color: #F5A623;
     font-weight: 400;
   }
   .hero-v2-sub {
@@ -438,11 +468,33 @@
     line-height: 1.65;
     color: #4B5563;
     max-width: 490px;
-    margin-bottom: 36px;
+    margin-bottom: 32px;
   }
   .hero-v2-sub strong { color: #111827; font-weight: 700; }
   .hero-v2-actions {
     display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+
+  /* Hero Trust points sous les boutons */
+  .hero-trust {
+    list-style: none;
+    margin: 28px 0 0 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .hero-trust li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: #374151;
+  }
+  .hero-trust li svg {
+    flex-shrink: 0;
   }
 
   /* Right Image Card Showcase */
@@ -456,15 +508,20 @@
   }
   .hero-v2-image-wrap img {
     width: 100%; height: 100%; object-fit: cover;
+    transition: transform 8s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .hero-v2-image-wrap:hover img,
+  .hero-v2-image-wrap.is-visible img {
+    transform: scale(1.04);
   }
 
   /* Floating Badge Top Right */
   .hero-badge-float {
     position: absolute; top: 20px; right: 20px;
-    background: #F6A623; color: #ffffff;
+    background: #F5A623; color: #ffffff;
     font-size: 0.78rem; font-weight: 700;
     padding: 10px 18px; border-radius: 14px;
-    box-shadow: 0 8px 24px rgba(246,166,35,0.35);
+    box-shadow: 0 8px 24px rgba(245,166,35,0.35);
     display: flex; align-items: center; gap: 6px;
     z-index: 2;
   }
@@ -491,7 +548,12 @@
     height: 5px; background: #F3F4F6; border-radius: 10px; overflow: hidden;
   }
   .hero-card-float-bar-fill {
-    height: 100%; width: 75%; background: #F6A623; border-radius: 10px;
+    height: 100%; width: 0; background: #F5A623; border-radius: 10px;
+    transition: width 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s;
+  }
+  .hero-v2-image-wrap.is-visible .hero-card-float-bar-fill,
+  .reveal.is-visible .hero-card-float-bar-fill {
+    width: 75%;
   }
 
   /* ================================================================
@@ -530,15 +592,37 @@
     align-items: center;
   }
   .cabinet-image-wrap {
-    position: relative; border-radius: 28px; overflow: hidden; height: 460px;
-    box-shadow: 0 20px 45px rgba(0,0,0,0.06); background: #EBEAE5;
+    position: relative;
   }
-  .cabinet-image-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .cabinet-image-wrap::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: -14px;
+    right: 14px;
+    bottom: 14px;
+    border: 2px solid #FCE8C3;
+    border-radius: 34px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .cabinet-image-inner {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    height: 460px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.06);
+    background: #EBEAE5;
+    z-index: 1;
+  }
+  .cabinet-image-inner img { width: 100%; height: 100%; object-fit: cover; }
   .cabinet-badge-float {
     position: absolute; bottom: 20px; right: 20px;
-    background: #262626; color: #ffffff;
+    background: #18181B; color: #ffffff;
     border-radius: 16px; padding: 18px 24px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    border-left: 4px solid #F5A623;
+    z-index: 2;
   }
   .cabinet-badge-float-num { font-size: 2.2rem; font-weight: 800; line-height: 1; }
   .cabinet-badge-float-text { font-size: 0.76rem; color: #9CA3AF; margin-top: 4px; font-weight: 500; }
@@ -551,6 +635,12 @@
   .cabinet-content p {
     font-size: 0.98rem; color: #4B5563; line-height: 1.65; margin-bottom: 16px;
   }
+  .cabinet-content p:first-of-type {
+    font-size: 1.05rem;
+    color: #111827;
+    font-weight: 500;
+    line-height: 1.7;
+  }
   .cabinet-checks-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px;
     margin-top: 28px;
@@ -561,83 +651,367 @@
   }
   .check-icon-circle {
     width: 20px; height: 20px; border-radius: 50%;
-    background: #FDE9C4; color: #F6A623;
+    background: #FCE8C3; color: #F5A623;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0; font-size: 0.72rem; font-weight: 800; margin-top: 2px;
   }
 
-  /* ================================================================
-     EXPERTISES SECTION (Image 3 Mockup)
-  ================================================================ */
-  .expertises-section {
-    padding: 100px 0; background: #FAF9F6;
+  /* Section Pourquoi faire intervenir MIRAJ (Section 3) */
+  .why-wrap {
+    margin-top: 96px;
+    padding-top: 72px;
+    border-top: 1px solid #EBEAE5;
   }
-  .expertises-header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 48px; gap: 20px; flex-wrap: wrap;
+  .why-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 56px auto;
   }
-  .expertises-header h2 {
-    font-size: clamp(2rem, 3.4vw, 2.6rem); font-weight: 800; color: #111827;
-    margin-top: 10px; max-width: 580px; line-height: 1.18;
+  .why-header h3 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
   }
-  .expertises-header-link {
-    font-size: 0.9rem; font-weight: 600; color: #111827; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 6px;
-    transition: color 0.18s;
+  .why-header h3 em {
+    font-style: italic;
+    color: #F5A623;
   }
-  .expertises-header-link:hover { color: #F6A623; }
-
-  .expertises-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  .why-header-intro {
+    font-size: 1rem;
+    color: #4B5563;
+    line-height: 1.65;
   }
-  .expertise-card-v2 {
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .why-card {
     background: #ffffff;
     border: 1px solid #EBEAE5;
     border-radius: 20px;
-    padding: 36px 32px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .why-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(245, 166, 35, 0.16);
+    border-color: #FCE8C3;
+  }
+  .why-img-wrap {
     position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
+    height: 200px;
+    overflow: hidden;
   }
-  .expertise-card-v2:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 36px rgba(0,0,0,0.06);
+  .why-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  .expertise-card-num {
-    position: absolute; top: 28px; right: 28px;
-    font-size: 0.82rem; font-weight: 700; color: #D1D5DB;
+  .why-card:hover .why-img-wrap img {
+    transform: scale(1.06);
   }
-  .expertise-card-icon {
-    width: 44px; height: 44px; border-radius: 12px;
-    background: #FFF6E5; color: #F6A623;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 24px;
+  .why-img-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(15, 20, 28, 0.65) 100%);
+    pointer-events: none;
   }
-  .expertise-card-v2 h3 {
-    font-size: 1.15rem; font-weight: 700; color: #111827; margin-bottom: 10px;
+  .why-badge-num {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: #ffffff;
+    color: #111827;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    z-index: 2;
   }
-  .expertise-card-v2 p {
-    font-size: 0.88rem; color: #6B7280; line-height: 1.6;
+  .why-icon-badge {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #F5A623 0%, #D48E1A 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -28px;
+    margin-left: 24px;
+    border: 3px solid #ffffff;
+    box-shadow: 0 6px 16px rgba(245, 166, 35, 0.3);
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+  .why-card-body {
+    padding: 16px 26px 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .why-card-body h4 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 12px;
+    position: relative;
+    padding-bottom: 12px;
+  }
+  .why-card-body h4::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 36px;
+    height: 3px;
+    border-radius: 2px;
+    background: #F5A623;
+    transition: width 0.3s ease;
+  }
+  .why-card:hover .why-card-body h4::after {
+    width: 64px;
+  }
+  .why-card-list {
+    list-style: none;
+    margin: 12px 0 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .why-card-list li {
+    position: relative;
+    padding-left: 32px;
+    font-size: 0.92rem;
+    color: #4B5563;
+    line-height: 1.55;
+  }
+  .why-card-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #FFF5E3 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23F5A623" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>') center/11px no-repeat;
+    flex-shrink: 0;
+  }
+  .why-card-list li strong {
+    color: #111827;
   }
 
   /* ================================================================
-     DARK RESULTS SECTION (Image 4 Mockup)
+     EXPERTISES SECTION (Fond grège #F4F3EF, onglets en tuiles)
+  ================================================================ */
+  .expertises-section {
+    padding: 100px 0;
+    background: #F4F3EF;
+  }
+  .expertises-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 20px; flex-wrap: wrap; gap: 24px;
+  }
+  .expertises-header h2 {
+    font-size: clamp(2rem, 3.4vw, 2.6rem); font-weight: 800; color: #111827;
+  }
+  .expertises-sub {
+    font-size: 1.05rem;
+    color: #4B5563;
+    margin-top: 10px;
+    max-width: 620px;
+    line-height: 1.6;
+  }
+  .expertises-header-link {
+    font-size: 0.9rem; font-weight: 600; color: #111827; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 4px; transition: color 0.18s;
+  }
+  .expertises-header-link:hover { color: #F5A623; }
+
+  /* Tuiles 4 colonnes pour les onglets */
+  .domain-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 36px;
+    margin-bottom: 34px;
+  }
+  .tab-btn {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #EBEAE5;
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .tab-btn:hover {
+    border-color: #F5A623;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(245, 166, 35, 0.12);
+  }
+  .tab-btn .tab-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #FFF5E3;
+    color: #F5A623;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+  }
+  .tab-btn .tab-text {
+    display: flex;
+    flex-direction: column;
+  }
+  .tab-btn .tab-num {
+    font-size: 0.76rem;
+    font-weight: 800;
+    color: #9CA3AF;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+    transition: color 0.25s ease;
+  }
+  .tab-btn .tab-title {
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.3;
+    transition: color 0.25s ease;
+  }
+  .tab-btn.active {
+    background: #0F141C;
+    border-color: #0F141C;
+    color: #ffffff;
+    box-shadow: 0 12px 30px rgba(15, 20, 28, 0.2);
+  }
+  .tab-btn.active .tab-icon {
+    background: #F5A623;
+    color: #ffffff;
+  }
+  .tab-btn.active .tab-num {
+    color: #F5A623;
+  }
+  .tab-btn.active .tab-title {
+    color: #ffffff;
+  }
+  /* Petit losange noir pointant vers la carte en dessous */
+  .tab-btn.active::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 16px;
+    height: 16px;
+    background: #0F141C;
+    z-index: 3;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active {
+    display: grid; grid-template-columns: 1.1fr .9fr; gap: 44px; align-items: center;
+    background: #fff; border: 1px solid #EBEAE5; border-radius: 26px; padding: 44px;
+    box-shadow: 0 20px 45px rgba(15,23,42,.05); animation: panel-in .45s ease;
+  }
+  @keyframes panel-in { from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;} }
+  .domain-num { font-size: .82rem; font-weight: 700; color: #F5A623; letter-spacing: .08em; display: block; margin-bottom: 12px; }
+  .domain-text h3 {
+    font-size: 1.5rem; font-weight: 800; color: #111827; margin-bottom: 14px; line-height: 1.25;
+    position: relative; padding-bottom: 14px;
+  }
+  /* Trait orange 44px sous le h3 */
+  .domain-text h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 44px;
+    height: 3px;
+    border-radius: 2px;
+    background: #F5A623;
+  }
+  .domain-text p { font-size: .96rem; color: #4B5563; line-height: 1.7; }
+
+  /* Check-list orange dans les panneaux */
+  .domain-list {
+    list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-direction: column; gap: 14px;
+  }
+  .domain-list li {
+    position: relative; padding-left: 32px; font-size: .93rem; color: #4B5563; line-height: 1.65;
+  }
+  .domain-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #FFF5E3 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23F5A623" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>') center/11px no-repeat;
+    flex-shrink: 0;
+  }
+  .domain-list li strong { color: #111827; }
+  .domain-visual { border-radius: 20px; overflow: hidden; height: 360px; background: #FAF9F6; }
+  .domain-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .tab-panel.active:hover .domain-visual img { transform: scale(1.04); }
+
+  /* ================================================================
+     DARK RESULTS SECTION (Bande sombre #0F141C, halo orange)
   ================================================================ */
   .results-dark-section {
-    background: #1F2937; color: #ffffff;
+    background: radial-gradient(circle at 20% 30%, rgba(245, 166, 35, 0.12) 0%, transparent 60%), #0F141C;
+    color: #ffffff;
     padding: 100px 0;
+    position: relative;
+    overflow: hidden;
   }
   .results-dark-section h2 {
     font-size: clamp(2.2rem, 3.6vw, 2.8rem); font-weight: 800; color: #ffffff;
-    margin: 12px 0 48px 0;
+    margin: 12px 0 14px 0;
+  }
+  .results-sub {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.72);
+    max-width: 620px;
+    margin: 0 0 48px 0;
+    line-height: 1.6;
   }
   .stats-grid-4 {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
     border-top: 1px solid rgba(255,255,255,0.12);
     padding-top: 32px; margin-bottom: 72px;
   }
-  .stat-col-v2 { display: flex; flex-direction: column; }
+  .stat-col-v2 {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    border-left: 2px solid rgba(255, 255, 255, 0.15);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  .stat-col-v2:hover {
+    border-left-color: #F5A623;
+    transform: translateX(4px);
+  }
   .stat-col-v2-num {
-    font-size: clamp(2.8rem, 4vw, 3.6rem); font-weight: 900; color: #F6A623;
+    font-size: clamp(2.8rem, 4vw, 3.6rem); font-weight: 900; color: #F5A623;
     line-height: 1; letter-spacing: -0.03em; margin-bottom: 8px;
   }
   .stat-col-v2-label {
@@ -663,10 +1037,15 @@
     display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%;
   }
   .aging-bar-fill {
-    width: 100%; border-radius: 8px; transition: height 0.4s ease;
+    width: 100%; border-radius: 8px; height: 0; transition: height 1s cubic-bezier(.2,.8,.2,1);
   }
-  .aging-bar-fill.green { background: #F6A623; }
-  .aging-bar-fill.red { background: #E11D48; }
+  .aging-bar-fill.visible { height: var(--h); }
+  .aging-bar-fill.green {
+    background: linear-gradient(180deg, #F5A623 0%, #D48E1A 100%);
+  }
+  .aging-bar-fill.red {
+    background: linear-gradient(180deg, #EF4444 0%, #DC2626 100%);
+  }
   .aging-bar-val {
     font-size: 0.95rem; font-weight: 800; color: #ffffff; margin-top: 10px;
   }
@@ -675,10 +1054,79 @@
   }
 
   /* ================================================================
-     SIMULATOR SECTION (Image 5 Mockup)
+     GARANTIES SECTION (Fond blanc, cartes #FAF9F6 avec icônes)
+  ================================================================ */
+  .methode-section {
+    padding: 100px 0; background: #ffffff;
+    border-top: 1px solid #EBEAE5;
+  }
+  .methode-title {
+    font-size: clamp(2.2rem, 3.6vw, 2.8rem); font-weight: 800; color: #111827;
+    margin: 12px 0 56px 0; line-height: 1.15;
+  }
+  .methode-grid-6 {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  }
+  .methode-card {
+    background: #FAF9F6;
+    border: 1px solid #EBEAE5;
+    border-top: 3px solid #EBEAE5;
+    border-radius: 20px;
+    padding: 30px 26px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-top-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .methode-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+    border-top-color: #F5A623;
+  }
+  .methode-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .methode-icon-wrap {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: #FFF5E3;
+    color: #F5A623;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  }
+  .methode-card:hover .methode-icon-wrap {
+    background: #F5A623;
+    color: #ffffff;
+    transform: scale(1.05);
+  }
+  .methode-num {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #D1D5DB;
+    line-height: 1;
+    transition: color 0.25s ease, transform 0.25s ease;
+  }
+  .methode-card:hover .methode-num {
+    color: #F5A623;
+    transform: translateX(2px);
+  }
+  .methode-card h3 {
+    font-size: 1.18rem; font-weight: 800; color: #111827; margin-bottom: 10px; line-height: 1.3;
+  }
+  .methode-card p {
+    font-size: 0.92rem; color: #4B5563; line-height: 1.6; margin: 0;
+  }
+
+  /* ================================================================
+     SIMULATOR SECTION (Fond grège #F4F3EF)
   ================================================================ */
   .simulator-section {
-    padding: 100px 0; background: #FAF9F6;
+    padding: 100px 0; background: #F4F3EF;
   }
   .simulator-grid {
     display: grid; grid-template-columns: 1fr 480px; gap: 64px;
@@ -692,22 +1140,54 @@
     font-size: 0.96rem; color: #4B5563; line-height: 1.65; margin-bottom: 24px; max-width: 500px;
   }
   .simulator-bullets {
-    list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;
+    list-style: none; padding: 0; margin: 24px 0 0 0; display: flex; flex-direction: column; gap: 12px;
   }
   .simulator-bullets li {
-    font-size: 0.9rem; font-weight: 600; color: #111827;
-    display: flex; align-items: center; gap: 8px;
+    background: #ffffff;
+    border: 1px solid #EBEAE5;
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #111827;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
   }
-  .simulator-bullets li::before {
-    content: "•"; color: #F6A623; font-size: 1.4rem; line-height: 1;
+  .sim-bullet-cross {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #FFF1F2;
+    color: #EF4444;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    flex-shrink: 0;
   }
 
   .simulator-card {
     background: #ffffff;
-    border-radius: 24px;
-    padding: 36px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.06);
     border: 1px solid #EBEAE5;
+    border-radius: 24px;
+    padding: 32px 32px 0;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+  .sim-badge-tag {
+    display: inline-block;
+    background: #F5A623;
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
   }
   .sim-field { margin-bottom: 24px; }
   .sim-field-label {
@@ -719,116 +1199,271 @@
   }
   .sim-slider {
     width: 100%; height: 6px; background: #E5E7EB; border-radius: 10px;
-    outline: none; -webkit-appearance: none; accent-color: #F6A623;
+    outline: none; -webkit-appearance: none; appearance: none;
   }
-
+  .sim-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #F5A623;
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+  .sim-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #F5A623;
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
   .sim-output-box {
-    margin-top: 28px; padding-top: 20px; border-top: 1px solid #F3F4F6;
+    background: #FAF9F6;
+    margin: 28px -32px 0 -32px;
+    padding: 24px 32px 32px;
+    border-top: 1px solid #EBEAE5;
   }
   .sim-output-label {
     font-size: 0.78rem; color: #6B7280; font-weight: 500; margin-bottom: 6px;
   }
   .sim-output-num {
-    font-size: 2.8rem; font-weight: 900; color: #F6A623; line-height: 1;
+    font-size: 2.8rem; font-weight: 900; color: #F5A623; line-height: 1;
     letter-spacing: -0.03em; margin-bottom: 24px;
   }
   .sim-output-num span { font-size: 1.2rem; font-weight: 700; }
 
   /* ================================================================
-     METHODE SECTION (Image 1 Mockup)
-  ================================================================ */
-  .methode-section {
-    padding: 100px 0; background: #FAF9F6;
-    border-top: 1px solid #EBEAE5;
-  }
-  .methode-title {
-    font-size: clamp(2.2rem, 3.6vw, 2.8rem); font-weight: 800; color: #111827;
-    margin: 12px 0 56px 0; line-height: 1.15;
-  }
-  .methode-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
-  }
-  .methode-card {
-    display: flex; flex-direction: column; border-top: 1.5px solid #EBEAE5;
-    padding-top: 24px;
-  }
-  .methode-num {
-    font-size: 0.82rem; font-weight: 700; color: #F6A623; margin-bottom: 20px;
-  }
-  .methode-card h3 {
-    font-size: 1.15rem; font-weight: 700; color: #111827; margin-bottom: 10px; line-height: 1.3;
-  }
-  .methode-card p {
-    font-size: 0.88rem; color: #6B7280; line-height: 1.6; margin: 0;
-  }
-
-  /* ================================================================
-     PHILOSOPHIE QUOTE BANNER (Image 2 Mockup)
+     PHILOSOPHIE QUOTE BANNER (#18181B avec halo orange bas)
   ================================================================ */
   .quote-banner-section {
-    padding: 90px 0; background: #262626; color: #ffffff; text-align: center;
+    padding: 90px 0;
+    background: radial-gradient(circle at 50% 120%, rgba(245, 166, 35, 0.16) 0%, transparent 60%), #18181B;
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
   }
   .quote-banner-inner {
     max-width: 840px; margin: 0 auto; display: flex; flex-direction: column;
     align-items: center; gap: 24px;
   }
   .quote-icon-svg {
-    width: 44px; height: 44px; color: #F6A623;
+    width: 44px; height: 44px; color: #F5A623;
   }
   .quote-banner-inner blockquote {
-    font-size: clamp(1.25rem, 2.2vw, 1.7rem); font-weight: 400; line-height: 1.55;
-    color: #ffffff; margin: 0; font-style: normal; max-width: 780px;
+    font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+    font-weight: 500; font-style: italic; line-height: 1.45;
+    margin: 0; color: #ffffff;
   }
   .quote-author-line {
-    font-size: 0.82rem; font-weight: 600; color: #F6A623; letter-spacing: 0.04em;
-    display: flex; align-items: center; gap: 12px; margin-top: 8px;
+    font-size: 0.88rem; color: rgba(255,255,255,0.7);
+    display: flex; align-items: center; gap: 8px;
   }
-  .quote-author-line::before, .quote-author-line::after {
-    content: ""; display: inline-block; width: 32px; height: 1px; background: rgba(246,166,35,0.45);
-  }
+  .quote-author-line strong { color: #ffffff; }
 
   /* ================================================================
-     RESSOURCES / GUIDES SECTION (Image 1 Mockup)
+     RESSOURCES SECTION (Fond blanc, couverture PDF 4:3 stylisée)
   ================================================================ */
   .ressources-section {
-    padding: 100px 0; background: #FAF9F6;
+    padding: 100px 0;
+    background: #ffffff;
   }
-  .ressources-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px;
+  .ressources-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 56px;
   }
-  .guide-card-v2 {
+  .ressources-header-left h2 {
+    font-size: clamp(2.2rem, 3.6vw, 2.8rem);
+    font-weight: 800;
+    color: #111827;
+    margin-top: 10px;
+    line-height: 1.15;
+  }
+  .ressources-header-right p {
+    font-size: 1rem;
+    color: #4B5563;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .ressources-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 18px;
+  }
+  .ressources-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .ressources-grid-v3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .guide-card-v3 {
     background: #ffffff;
     border: 1px solid #EBEAE5;
     border-radius: 20px;
-    padding: 36px 32px;
-    display: flex; flex-direction: column; justify-content: space-between;
-    min-height: 240px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
-  .guide-card-v2:hover {
-    transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,0,0,0.06);
+  .guide-card-v3:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+    border-color: #FCE8C3;
   }
-  .guide-card-num {
-    font-size: 0.82rem; font-weight: 700; color: #D1D5DB; margin-bottom: 24px;
+  .guide-cover-wrap {
+    padding: 24px 24px 0;
+    perspective: 600px;
   }
-  .guide-card-v2 h3 {
-    font-size: 1.15rem; font-weight: 700; color: #111827; margin-bottom: 8px; line-height: 1.3;
+  .guide-cover {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: radial-gradient(circle at 85% 15%, rgba(245, 166, 35, 0.25) 0%, transparent 60%), linear-gradient(145deg, #1F2530 0%, #0F141C 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(15, 20, 28, 0.3);
+    display: flex;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  .guide-card-v2 p {
-    font-size: 0.88rem; color: #6B7280; line-height: 1.5; margin-bottom: 24px;
+  .guide-card-v3:hover .guide-cover {
+    transform: rotate(-1deg) scale(1.02);
   }
-  .guide-card-btn {
-    color: #F6A623; font-weight: 700; font-size: 0.9rem; text-decoration: none;
-    background: none; border: none; padding: 0; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 4px; transition: color 0.18s;
+  .guide-spine {
+    width: 10px;
+    background: #F5A623;
+    flex-shrink: 0;
   }
-  .guide-card-btn:hover { color: #D98C0F; }
+  .guide-cover-inner {
+    flex: 1;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .guide-cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .guide-cover-num {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #F5A623;
+    line-height: 1;
+  }
+  .guide-cover-brand {
+    text-align: right;
+    line-height: 1.15;
+  }
+  .guide-cover-brand .brand-m {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.08em;
+    display: block;
+  }
+  .guide-cover-brand .brand-sub {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #7A8895;
+    letter-spacing: 0.04em;
+  }
+  .guide-cover-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .guide-cover-tag {
+    align-self: flex-start;
+    background: #F5A623;
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .guide-cover-title {
+    color: #ffffff;
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .guide-card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .guide-card-body h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 8px;
+  }
+  .guide-card-desc {
+    font-size: 0.9rem;
+    color: #4B5563;
+    line-height: 1.55;
+    margin-bottom: 24px;
+  }
+  .guide-card-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .guide-btn-dl {
+    width: 100%;
+    padding: 13px 20px;
+    background: #18181B;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
+  }
+  .guide-btn-dl:hover {
+    background: #F5A623;
+    transform: translateY(-2px);
+  }
+  .guide-meta-sub {
+    font-size: 0.76rem;
+    color: #9CA3AF;
+    text-align: center;
+    font-weight: 500;
+  }
 
   /* ================================================================
-     FAQ SECTION (Image 2 Mockup)
+     FAQ SECTION (Fond grège #F4F3EF, détails cartes blanches)
   ================================================================ */
   .faq-section-v2 {
-    padding: 100px 0; background: #FAF9F6;
+    padding: 100px 0; background: #F4F3EF;
   }
   .faq-grid-v2 {
     display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items: start;
@@ -838,11 +1473,19 @@
     margin: 12px 0 16px 0; line-height: 1.16;
   }
   .faq-left p { font-size: 0.96rem; color: #4B5563; }
-  .faq-left a { color: #F6A623; font-weight: 700; text-decoration: underline; }
+  .faq-left a { color: #F5A623; font-weight: 700; text-decoration: underline; }
 
-  .faq-list-v2 { display: flex; flex-direction: column; }
+  .faq-list-v2 { display: flex; flex-direction: column; gap: 12px; }
   .faq-item-v2 {
-    border-bottom: 1px solid #EBEAE5; padding: 22px 0;
+    background: #ffffff;
+    border: 1px solid #EBEAE5;
+    border-radius: 16px;
+    padding: 20px 24px;
+    transition: all 0.25s ease;
+  }
+  .faq-item-v2[open] {
+    border-color: #FCE8C3;
+    box-shadow: 0 12px 30px rgba(245, 166, 35, 0.1);
   }
   .faq-item-v2 summary {
     list-style: none; font-size: 1.05rem; font-weight: 700; color: #111827;
@@ -854,14 +1497,14 @@
     width: 32px; height: 32px; border-radius: 50%;
     border: 1.5px solid #E5E7EB; color: #6B7280;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; font-weight: 400; flex-shrink: 0; transition: all 0.2s;
+    font-size: 1.1rem; font-weight: 500; flex-shrink: 0; transition: all 0.2s ease;
   }
   .faq-item-v2[open] .faq-icon-circle {
-    border-color: #111827; color: #111827;
+    background: #F5A623; border-color: #F5A623; color: #ffffff;
   }
   .faq-body-v2 {
     font-size: 0.94rem; color: #4B5563; line-height: 1.65; margin-top: 14px;
-    padding-right: 48px;
+    padding-right: 20px;
   }
 
   /* ================================================================
@@ -877,63 +1520,75 @@
     border: 1px solid #EBEAE5; background: #ffffff;
   }
   .contact-dark-side {
-    background: #1F2937; color: #ffffff; padding: 56px 48px;
+    background: radial-gradient(circle at 80% 20%, rgba(245, 166, 35, 0.16) 0%, transparent 60%), #0F141C;
+    color: #ffffff; padding: 56px 48px;
     display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
   }
   .contact-dark-side h2 {
-    font-size: clamp(2.2rem, 3.4vw, 2.7rem); font-weight: 800; color: #ffffff;
-    margin: 14px 0 20px 0; line-height: 1.15;
+    font-size: clamp(2rem, 3vw, 2.4rem); font-weight: 800; color: #ffffff; line-height: 1.2;
+    margin-bottom: 20px;
   }
   .contact-dark-side p {
-    font-size: 0.96rem; color: rgba(255,255,255,0.72); line-height: 1.65; margin-bottom: 36px;
+    font-size: 0.96rem; color: rgba(255,255,255,0.7); line-height: 1.65; margin-bottom: 40px;
   }
-  .contact-info-list {
-    display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px;
-  }
-  .contact-info-row {
-    display: flex; align-items: center; gap: 14px; font-size: 0.92rem; font-weight: 600;
-  }
+  .contact-info-list { display: flex; flex-direction: column; gap: 24px; }
+  .contact-info-row { display: flex; align-items: flex-start; gap: 16px; }
   .contact-info-icon {
-    width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.08);
-    display: flex; align-items: center; justify-content: center; color: #F6A623;
-    flex-shrink: 0;
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(245, 166, 35, 0.12);
+    display: flex; align-items: center; justify-content: center;
+    color: #F5A623; flex-shrink: 0;
   }
+  .contact-info-text h4 {
+    font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.5);
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px;
+  }
+  .contact-info-text a, .contact-info-text span {
+    font-size: 0.96rem; font-weight: 600; color: #ffffff; text-decoration: none;
+  }
+  .contact-info-text a:hover { color: #F5A623; }
   .contact-dark-footer {
-    font-size: 0.8rem; color: rgba(255,255,255,0.5); font-weight: 500;
-    display: flex; align-items: center; gap: 8px; border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; margin-top: 48px;
+    display: flex; align-items: center; gap: 12px; font-size: 0.82rem; color: rgba(255,255,255,0.6);
   }
 
   .contact-light-side { padding: 56px 48px; }
-  .contact-form-v2 { display: flex; flex-direction: column; gap: 24px; }
+  .contact-form-v2 { display: flex; flex-direction: column; gap: 20px; }
   .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .form-group-v2 { display: flex; flex-direction: column; gap: 6px; }
   .form-group-v2 label {
-    font-size: 0.8rem; font-weight: 600; color: #4B5563;
+    font-size: 0.82rem; font-weight: 600; color: #4B5563;
   }
   .form-group-v2 input, .form-group-v2 select, .form-group-v2 textarea {
-    border: none; border-bottom: 1.5px solid #E5E7EB; border-radius: 0;
+    border: none; border-bottom: 1.5px solid #E5E7EB;
     padding: 10px 0; font-size: 0.94rem; color: #111827; outline: none;
     font-family: inherit; background: transparent; transition: border-color 0.2s;
   }
   .form-group-v2 input:focus, .form-group-v2 select:focus, .form-group-v2 textarea:focus {
-    border-color: #F6A623;
+    border-bottom-color: #F5A623;
   }
   .form-group-v2 textarea { resize: vertical; min-height: 80px; }
+  .form-checkbox-v2 {
+    display: flex; align-items: flex-start; gap: 10px; font-size: 0.78rem; color: #6B7280;
+  }
+  .form-checkbox-v2 input { margin-top: 3px; accent-color: #F5A623; }
 
   /* ================================================================
-     FOOTER SECTION (Image 4 Mockup)
+     FOOTER SECTION (Fond blanc, liens hover orange + padding-left)
   ================================================================ */
   footer.footer-v2 {
-    padding: 80px 0 40px; background: #FAF9F6;
+    padding: 80px 0 40px; background: #ffffff;
     border-top: 1px solid #EBEAE5;
   }
   .footer-v2-grid {
     display: grid; grid-template-columns: 1.4fr 0.8fr 1fr; gap: 48px; margin-bottom: 48px;
   }
   .footer-v2-brand {
-    font-size: 1.8rem; font-weight: 800; color: #111827; text-decoration: none;
-    display: inline-block; margin-bottom: 16px;
+    display: inline-block; text-decoration: none; margin-bottom: 16px;
+  }
+  .footer-logo {
+    height: 84px; width: auto; display: block; margin-bottom: 20px;
   }
   .footer-v2 p {
     font-size: 0.88rem; color: #6B7280; line-height: 1.6; max-width: 340px;
@@ -943,9 +1598,74 @@
   }
   .footer-v2 ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
   .footer-v2 ul li a, .footer-v2 ul li {
-    font-size: 0.88rem; color: #6B7280; text-decoration: none; transition: color 0.18s;
+    font-size: 0.88rem; color: #6B7280; text-decoration: none;
   }
-  .footer-v2 ul li a:hover { color: #111827; }
+  .footer-v2 ul li a {
+    transition: color 0.18s ease, padding-left 0.18s ease;
+    display: inline-block;
+  }
+  .footer-v2 ul li a:hover {
+    color: #F5A623;
+    padding-left: 4px;
+  }
+
+  /* ================================================================
+     MODALE TÉLÉCHARGEMENT
+  ================================================================ */
+  .modal-backdrop{ position:fixed; inset:0; background:rgba(15,23,42,.6); backdrop-filter:blur(4px); z-index:300; display:none; align-items:center; justify-content:center; padding:20px; animation:modal-fade .2s ease; }
+  .modal-backdrop.is-open{ display:flex; }
+  @keyframes modal-fade{ from{opacity:0;} to{opacity:1;} }
+  .modal{ background:#fff; border-radius:24px; padding:36px; max-width:520px; width:100%; box-shadow:0 30px 60px rgba(0,0,0,.2); position:relative; }
+  .modal-close{ position:absolute; top:20px; right:20px; background:none; border:none; font-size:1.3rem; color:#6B7280; cursor:pointer; padding:6px; line-height:1; }
+  .modal h3{ font-size:1.5rem; font-weight:800; color:#111827; margin-bottom:6px; }
+  .modal-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .modal-field{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .modal-field label{ font-size:.8rem; font-weight:600; color:#4B5563; }
+  .modal-field input, .modal-field select{ border:1px solid #D1D5DB; border-radius:10px; padding:10px 14px; font-size:.9rem; font-family:inherit; outline:none; transition:border-color .2s; }
+  .modal-field input:focus, .modal-field select:focus{ border-color:#F5A623; }
+  .modal-field input.error, .modal-field select.error{ border-color:#EF4444; }
+  .modal-submit{ width:100%; background:#18181B; color:#fff; border:none; border-radius:12px; padding:14px; font-size:.95rem; font-weight:700; cursor:pointer; font-family:inherit; transition:background .2s; margin-top:8px; }
+  .modal-submit:hover{ background:#F5A623; }
+  .modal-submit.success{ background:#F5A623; }
+
+  /* ================================================================
+     STICKY MOBILE ACTION BAR
+  ================================================================ */
+  .mobile-sticky-bar {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0;
+    background: #ffffff; border-top: 1px solid #EBEAE5;
+    padding: 10px 18px; z-index: 150;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+    gap: 12px;
+  }
+  .mobile-sticky-btn {
+    flex: 1; padding: 12px; border-radius: 50px; text-align: center;
+    font-size: 0.88rem; font-weight: 700; text-decoration: none;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .mobile-sticky-call { background: #FAF9F6; color: #111827; border: 1.5px solid #E4E4E7; }
+  .mobile-sticky-quote { background: #18181B; color: #ffffff; }
+
+  /* ================================================================
+     ANIMATIONS REVEAL & LOGOS STRIP
+  ================================================================ */
+  .reveal{opacity:0; transform:translateY(26px); transition:opacity .7s ease var(--d,0s), transform .7s cubic-bezier(.2,.8,.2,1) var(--d,0s);}
+  .reveal--left{transform:translateX(-30px);} .reveal--right{transform:translateX(30px);}
+  .reveal.is-visible{opacity:1; transform:none;}
+  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none;} }
+
+  .hero-v2 h1 em, .expertises-header h2 em { font-style: italic; color: #F5A623; font-weight: 400; }
+
+  .logos-strip .logos-strip-label{ max-width:none; text-align:center; font-size:.78rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#F5A623; margin-bottom:22px; }
+  .logos-marquee{ overflow:hidden; position:relative; -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); }
+  .logos-track{ display:flex; gap:56px; width:max-content; animation:logos-scroll 32s linear infinite; }
+  .logos-marquee:hover .logos-track{ animation-play-state:paused; }
+  .logos-track .logo-item{ display:flex; align-items:center; justify-content:center; height:64px; min-width:170px; padding:0 22px; border:1px dashed #E5E7EB; border-radius:14px; background:#fff; font-size:.8rem; letter-spacing:.06em; color:#9CA3AF; transition:filter .3s, color .3s, border-color .3s; }
+  .logos-track .logo-item:hover{ border-color:#F5A623; color:#111827; }
+  @keyframes logos-scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  .faq-image-wrap{ margin-top:32px; border-radius:24px; overflow:hidden; height:380px; box-shadow:0 20px 45px rgba(0,0,0,.06); }
+  .faq-image-wrap img{ width:100%; height:100%; object-fit:cover; }
 
   /* ================================================================
      RESPONSIVE BREAKPOINTS (320px to 960px)
@@ -958,10 +1678,8 @@
       flex-direction: column; align-items: flex-start;
       padding: 32px 28px; gap: 28px;
       transform: translateX(100%);
-      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-      overflow-y: auto; border-top: 1px solid #EBEAE5;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-      z-index: 199;
+      transition: transform 0.25s ease;
+      overflow-y: auto;
     }
     nav.primary-nav.open { transform: translateX(0); }
     nav.primary-nav ul { flex-direction: column; align-items: flex-start; gap: 20px; width: 100%; }
@@ -976,26 +1694,27 @@
     .has-sub.open .sub-menu { display: block; }
 
     /* Hero */
-    .hero-v2 { padding: 40px 0 60px; }
     .hero-v2-grid { grid-template-columns: 1fr; gap: 40px; }
-    .hero-v2 h1 { font-size: clamp(2.2rem, 7vw, 3.2rem); }
-    .hero-v2-image-wrap { height: 380px; border-radius: 20px; }
-    .hero-card-float { width: 200px; padding: 16px; bottom: 16px; left: 16px; }
-    .hero-card-float-num { font-size: 2.2rem; }
-    .hero-badge-float { font-size: 0.72rem; padding: 8px 14px; top: 14px; right: 14px; }
+    .hero-v2-image-wrap { height: 400px; }
 
     /* Sections */
     .logos-strip-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
     .logos-grid { gap: 24px 36px; }
     .cabinet-section { padding: 60px 0; }
     .cabinet-grid { grid-template-columns: 1fr; gap: 40px; }
-    .cabinet-image-wrap { height: 320px; border-radius: 20px; }
+    .cabinet-image-inner { height: 320px; border-radius: 20px; }
+    .cabinet-image-wrap::before { display: none; }
     .cabinet-badge-float { padding: 14px 18px; bottom: 14px; right: 14px; }
     .cabinet-badge-float-num { font-size: 1.8rem; }
     .cabinet-checks-grid { grid-template-columns: 1fr; gap: 12px; }
 
+    .why-grid { grid-template-columns: 1fr; }
+
     .expertises-section { padding: 60px 0; }
-    .expertises-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .domain-tabs { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .tab-panel.active { grid-template-columns: 1fr; padding: 26px 22px; gap: 26px; }
+    .domain-visual { height: 240px; order: -1; }
+
     .results-dark-section { padding: 60px 0; }
     .stats-grid-4 { grid-template-columns: repeat(2, 1fr); gap: 24px; }
     .aging-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -1003,16 +1722,24 @@
 
     .simulator-section { padding: 60px 0; }
     .simulator-grid { grid-template-columns: 1fr; gap: 40px; }
-    .simulator-card { padding: 24px; border-radius: 20px; }
+    .simulator-card { padding: 24px 24px 0; border-radius: 20px; }
+    .sim-output-box { margin: 24px -24px 0 -24px; padding: 20px 24px 24px; }
     .sim-output-num { font-size: 2.2rem; }
+
     .methode-section { padding: 60px 0; }
-    .methode-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .methode-grid-6 { grid-template-columns: repeat(2, 1fr); }
+
     .quote-banner-section { padding: 60px 0; }
     .quote-banner-inner blockquote { font-size: 1.15rem; }
+
     .ressources-section { padding: 60px 0; }
-    .ressources-grid { grid-template-columns: 1fr; gap: 20px; }
+    .ressources-header { grid-template-columns: 1fr; gap: 24px; }
+    .ressources-grid-v3 { grid-template-columns: 1fr; gap: 24px; }
+
     .faq-section-v2 { padding: 60px 0; }
     .faq-grid-v2 { grid-template-columns: 1fr; gap: 36px; }
+    .faq-image-wrap { height: 260px; }
+
     .contact-section-v2 { padding: 60px 0; }
     .contact-card-v2 { grid-template-columns: 1fr; border-radius: 20px; }
     .contact-dark-side, .contact-light-side { padding: 36px 24px; }
@@ -1022,209 +1749,20 @@
   @media(max-width: 600px) {
     .container { padding: 0 18px; }
     .nav-row { padding: 0 18px; }
-    .expertises-grid { grid-template-columns: 1fr; }
+    .brand-logo { height: 46px; }
     .stats-grid-4 { grid-template-columns: 1fr; }
-    .methode-grid { grid-template-columns: 1fr; }
+    .domain-tabs { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .tab-btn { padding: 12px 14px; gap: 10px; }
+    .tab-btn .tab-icon { width: 36px; height: 36px; border-radius: 10px; }
+    .tab-btn .tab-title { font-size: 0.82rem; }
+    .methode-grid-6 { grid-template-columns: 1fr; }
     .hero-v2-actions { flex-direction: column; width: 100%; }
     .hero-v2-actions a { width: 100%; justify-content: center; }
+    .hero-trust { flex-direction: column; align-items: flex-start; gap: 10px; }
     .hero-v2-image-wrap { height: 280px; }
     .form-row-2 { grid-template-columns: 1fr; }
-  }
-
-
-
-
-
-
-
-
-  /* ================================================================
-     STICKY MOBILE ACTION BAR (Image 4 Mockup)
-  ================================================================ */
-  .mobile-sticky-bar {
-    display: none;
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
-    background: #ffffff; padding: 12px 16px;
-    box-shadow: 0 -8px 24px rgba(0,0,0,0.12);
-    border-top: 1px solid #EBEAE5;
-    gap: 12px; align-items: center; justify-content: center;
-  }
-  .mobile-sticky-btn {
-    flex: 1; text-align: center; padding: 12px 16px; border-radius: 50px;
-    font-weight: 700; font-size: 0.88rem; text-decoration: none;
-    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-    transition: transform 0.15s, background 0.15s;
-  }
-  .mobile-sticky-call {
-    background: #FAF9F6; color: #111827; border: 1.5px solid #E4E4E7;
-  }
-  .mobile-sticky-call:hover {
-    background: #ffffff; border-color: #111827;
-  }
-  .mobile-sticky-quote {
-    background: #262626; color: #ffffff; border: none;
-  }
-  .mobile-sticky-quote:hover {
-    background: #000000;
-  }
-  @media(max-width: 768px) {
     .mobile-sticky-bar { display: flex; }
-    body { padding-bottom: 72px; }
-  }
-
-  /* ---------- modal téléchargement ---------- */
-  .modal-backdrop{
-    position:fixed; inset:0; z-index:200;
-    background:rgba(21,23,28,0.55);
-    backdrop-filter:blur(3px);
-    display:flex; align-items:center; justify-content:center;
-    padding:24px;
-    opacity:0; pointer-events:none;
-    transition:opacity 0.25s ease;
-  }
-  .modal-backdrop.is-open{
-    opacity:1; pointer-events:auto;
-  }
-  .modal{
-    background:#fff;
-    border-radius:24px;
-    width:100%; max-width:580px;
-    padding:44px 44px 38px;
-    position:relative;
-    box-shadow:0 30px 80px rgba(11,37,69,0.28);
-    transform:translateY(18px) scale(0.98);
-    transition:transform 0.28s cubic-bezier(.2,.8,.2,1);
-  }
-  .modal-backdrop.is-open .modal{
-    transform:none;
-  }
-  .modal-close{
-    position:absolute; top:20px; right:20px;
-    width:36px; height:36px; border:none; background:#F8FAFC; cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    color:var(--navy); font-size:1.3rem;
-    border-radius:50%;
-    transition:background 0.2s, color 0.2s;
-  }
-  .modal-close:hover{background:var(--orange-light); color:var(--orange);}
-  .modal h3{
-    font-family:'Poppins', sans-serif; font-size:1.55rem; font-weight:800;
-    margin-bottom:28px; color:var(--navy); text-align:center;
-  }
-  .modal-field{margin-bottom:18px;}
-  .modal-field label{
-    display:block; font-family:'Poppins', sans-serif; font-weight:600; font-size:0.82rem;
-    color:var(--navy); margin-bottom:7px;
-  }
-  .modal-field select,
-  .modal-field input{
-    width:100%; padding:13px 20px;
-    border:1.5px solid var(--paper-line);
-    border-radius:50px;
-    font-family:'Poppins', sans-serif; font-size:0.95rem;
-    color:var(--text-paper); background:#ffffff;
-    transition:border-color 0.2s, box-shadow 0.2s;
-    box-sizing:border-box;
-  }
-  .modal-field select:focus,
-  .modal-field input:focus{
-    border-color:var(--orange); outline:none; background:#fff;
-    box-shadow:0 0 0 4px rgba(232,128,36,0.12);
-  }
-  .modal-field select.error,
-  .modal-field input.error{border-color:#c0392b;}
-  .modal-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  .modal-submit{
-    margin-top:26px;
-    width:100%;
-    display:flex; align-items:center; justify-content:center; gap:10px;
-    background:linear-gradient(135deg, #F2994A 0%, #E88024 100%);
-    color:#ffffff;
-    font-family:'Poppins', sans-serif; font-weight:600; font-size:1rem;
-    padding:15px 30px; border:none; border-radius:50px; cursor:pointer;
-    box-shadow:0 6px 22px rgba(232,128,36,0.38);
-    transition:all 0.25s ease;
-  }
-
-
-  /* ================================================================
-     AJOUTS V3 — charte logo (orange) / 3 colonnes / onglets / animations
-  ================================================================ */
-  .reveal{opacity:0; transform:translateY(26px); transition:opacity .7s ease var(--d,0s), transform .7s cubic-bezier(.2,.8,.2,1) var(--d,0s);}
-  .reveal--left{transform:translateX(-30px);} .reveal--right{transform:translateX(30px);}
-  .reveal.is-visible{opacity:1; transform:none;}
-  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none;} }
-
-  .hero-v2 h1 em, .expertises-header h2 em { font-style: italic; color: #F6A623; font-weight: 400; }
-
-  /* 3 colonnes cabinet (ancien site : Équipe / Démarche / Objectif) */
-  .why-title{ text-align:center; font-size:clamp(1.5rem,2.6vw,2rem); font-weight:800; color:#111827; margin:80px 0 40px; letter-spacing:-0.02em; }
-  .why-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-  .why-card{ background:#fff; border:1px solid #EBEAE5; border-radius:20px; padding:34px 30px; transition:transform .25s, box-shadow .25s, border-color .25s; }
-  .why-card:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(246,166,35,0.14); border-color:#FDE9C4; }
-  .why-icon{ width:48px; height:48px; border-radius:14px; background:#FFF6E5; color:#F6A623; display:flex; align-items:center; justify-content:center; margin-bottom:20px; }
-  .why-card h4{ font-size:1.2rem; font-weight:800; color:#F6A623; margin-bottom:16px; }
-  .why-card ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
-  .why-card li{ position:relative; padding-left:20px; font-size:.92rem; color:#4B5563; line-height:1.6; }
-  .why-card li::before{ content:""; position:absolute; left:0; top:10px; width:8px; height:8px; border-radius:50%; background:#F6A623; }
-  .why-card li strong{ color:#111827; }
-
-  /* Logos défilants */
-  .logos-strip .logos-strip-label{ max-width:none; text-align:center; font-size:.78rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#F6A623; margin-bottom:22px; }
-  .logos-marquee{ overflow:hidden; position:relative; -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); }
-  .logos-track{ display:flex; gap:56px; width:max-content; animation:logos-scroll 32s linear infinite; }
-  .logos-marquee:hover .logos-track{ animation-play-state:paused; }
-  .logos-track .logo-item{ display:flex; align-items:center; justify-content:center; height:64px; min-width:170px; padding:0 22px; border:1px dashed #E5E7EB; border-radius:14px; background:#fff; font-size:.8rem; letter-spacing:.06em; color:#9CA3AF; transition:filter .3s, color .3s, border-color .3s; }
-  .logos-track .logo-item img{ max-height:40px; width:auto; filter:grayscale(1); opacity:.7; transition:filter .3s, opacity .3s; }
-  .logos-track .logo-item:hover{ border-color:#F6A623; color:#111827; }
-  .logos-track .logo-item:hover img{ filter:none; opacity:1; }
-  @keyframes logos-scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
-
-  /* Onglets domaines d'expertise (ancienne conception) */
-  .domain-tabs{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-bottom:34px; }
-  .tab-btn{ border-radius:999px; border:1px solid #D1D5DB; padding:11px 24px; font-size:.9rem; font-weight:600; background:#fff; color:#111827; cursor:pointer; font-family:inherit; transition:all .2s ease; }
-  .tab-btn:hover{ border-color:#F6A623; color:#D98C0F; }
-  .tab-btn.active{ color:#fff; border-color:transparent; background:linear-gradient(90deg,#262626,#F6A623); box-shadow:0 8px 22px rgba(246,166,35,.28); }
-  .tab-panel{ display:none; }
-  .tab-panel.active{ display:grid; grid-template-columns:1.1fr .9fr; gap:44px; align-items:center; background:#fff; border:1px solid #EBEAE5; border-radius:26px; padding:44px; box-shadow:0 20px 45px rgba(15,23,42,.05); animation:panel-in .45s ease; }
-  @keyframes panel-in{ from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;} }
-  .domain-num{ font-size:.82rem; font-weight:700; color:#F6A623; letter-spacing:.08em; display:block; margin-bottom:12px; }
-  .domain-text h3{ font-size:1.5rem; font-weight:800; color:#111827; margin-bottom:14px; line-height:1.25; }
-  .domain-text p{ font-size:.96rem; color:#4B5563; line-height:1.7; }
-  .domain-list{ list-style:none; padding:0; margin:16px 0 0; display:flex; flex-direction:column; gap:10px; }
-  .domain-list li{ position:relative; padding-left:20px; font-size:.93rem; color:#4B5563; line-height:1.65; }
-  .domain-list li::before{ content:""; position:absolute; left:0; top:10px; width:8px; height:8px; border-radius:50%; background:#F6A623; }
-  .domain-list li strong{ color:#111827; }
-  .domain-visual{ border-radius:20px; overflow:hidden; height:360px; background:#F4F3EF; }
-  .domain-visual img{ width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
-  .tab-panel.active:hover .domain-visual img{ transform:scale(1.04); }
-
-  /* Garanties : 6 cartes (même conception que "Notre méthode") */
-  .methode-grid-6{ grid-template-columns:repeat(3,1fr); row-gap:44px; }
-  .methode-card{ transition:border-color .3s; }
-  .methode-card:hover{ border-top-color:#F6A623; }
-  .methode-card:hover .methode-num{ transform:translateX(4px); }
-  .methode-num{ transition:transform .3s; }
-
-  /* Bande sombre : barres animées */
-  .aging-bar-fill{ height:0; transition:height 1s cubic-bezier(.2,.8,.2,1); }
-  .aging-bar-fill.visible{ height:var(--h); }
-
-  /* FAQ : image */
-  .faq-image-wrap{ margin-top:32px; border-radius:24px; overflow:hidden; height:380px; box-shadow:0 20px 45px rgba(0,0,0,.06); }
-  .faq-image-wrap img{ width:100%; height:100%; object-fit:cover; }
-
-  @media(max-width:960px){
-    .why-grid{ grid-template-columns:1fr; }
-    .why-title{ margin:48px 0 28px; }
-    .tab-panel.active{ grid-template-columns:1fr; padding:26px 22px; gap:26px; }
-    .domain-visual{ height:240px; order:-1; }
-    .methode-grid-6{ grid-template-columns:repeat(2,1fr); }
-    .faq-image-wrap{ height:260px; }
-  }
-  @media(max-width:600px){
-    .methode-grid-6{ grid-template-columns:1fr; }
-    .tab-btn{ font-size:.82rem; padding:9px 16px; }
+    body { padding-bottom: 60px; }
   }
 
 </style>
@@ -1234,8 +1772,8 @@
 <!-- ========== MAIN STICKY NAVIGATION ========== -->
 <header>
   <div class="nav-row">
-    <a href="#top" class="brand-lockup">
-      <span>Miraj</span><span class="brand-dot">•</span>
+    <a href="#top" class="brand-lockup" aria-label="MIRAJ Recouvrement">
+      <img src="assets/img/logo-miraj.svg" alt="MIRAJ Recouvrement" class="brand-logo">
     </a>
 
     <nav class="primary-nav" id="primaryNav">
@@ -1379,44 +1917,79 @@
 
   <!-- 3 colonnes : Pourquoi faire intervenir MIRAJ ? -->
   <div class="container">
-    <h3 class="why-title reveal">Pourquoi faire intervenir MIRAJ ?</h3>
-    <div class="why-grid">
-      <div class="why-card reveal" style="--d:0s">
-        <div class="why-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+    <div class="why-wrap">
+      <div class="why-header reveal">
+        <div class="section-eyebrow">
+          <span>— POURQUOI MIRAJ ?</span>
         </div>
-        <h4>Notre Équipe</h4>
-        <ul>
-          <li><strong>Spécialisée</strong> dans le recouvrement amiable et judiciaire</li>
-          <li><strong>Expérimentée</strong> dans la gestion des dossiers</li>
-          <li><strong>Attentive</strong> au maintien des bonnes relations avec les débiteurs</li>
-          <li><strong>Soucieuse</strong> d'adapter ses stratégies de recouvrement en fonction de la typologie de vos débiteurs</li>
-        </ul>
+        <h3>Pourquoi faire intervenir <em>MIRAJ</em> ?</h3>
+        <p class="why-header-intro">Trois piliers qui structurent chacune de nos interventions : une équipe spécialisée, une démarche complémentaire à vos services et des objectifs mesurables.</p>
       </div>
-      <div class="why-card reveal" style="--d:.12s">
-        <div class="why-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-        </div>
-        <h4>Notre Démarche</h4>
-        <ul>
-          <li>Une intervention en <strong>complémentarité</strong> des actions menées par vos services</li>
-          <li>Une gestion de poste client <strong>efficace</strong></li>
-          <li>Une stratégie de recouvrement <strong>ciblée</strong> selon le profil du débiteur</li>
-          <li>Un <strong>interlocuteur privilégié</strong> pour un suivi optimisé</li>
-        </ul>
-      </div>
-      <div class="why-card reveal" style="--d:.24s">
-        <div class="why-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-        </div>
-        <h4>Notre Objectif</h4>
-        <ul>
-          <li><strong>Sécuriser</strong> vos ventes</li>
-          <li><strong>Agir dans le respect</strong> de vos intérêts commerciaux et de votre image</li>
-          <li><strong>Améliorer</strong> votre taux de recouvrement de créances</li>
-          <li><strong>Optimiser</strong> vos encaissements et maîtriser les coûts</li>
-          <li><strong>Réduire</strong> les risques d'impayés</li>
-        </ul>
+
+      <div class="why-grid">
+        <!-- 01 : Notre Équipe -->
+        <article class="why-card reveal" style="--d:0s">
+          <div class="why-img-wrap">
+            <span class="why-badge-num">01</span>
+            <img src="assets/img/why-equipe.jpg" alt="Notre Équipe en réunion" loading="lazy">
+            <div class="why-img-gradient"></div>
+          </div>
+          <div class="why-icon-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="why-card-body">
+            <h4>Notre Équipe</h4>
+            <ul class="why-card-list">
+              <li><strong>Spécialisée</strong> dans le recouvrement amiable et judiciaire</li>
+              <li><strong>Expérimentée</strong> dans la gestion des dossiers</li>
+              <li><strong>Attentive</strong> au maintien des bonnes relations avec les débiteurs</li>
+              <li><strong>Soucieuse</strong> d'adapter ses stratégies de recouvrement en fonction de la typologie de vos débiteurs</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 02 : Notre Démarche -->
+        <article class="why-card reveal" style="--d:.12s">
+          <div class="why-img-wrap">
+            <span class="why-badge-num">02</span>
+            <img src="assets/img/why-demarche.jpg" alt="Notre Démarche consultant" loading="lazy">
+            <div class="why-img-gradient"></div>
+          </div>
+          <div class="why-icon-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M6 9v3a4 4 0 0 0 4 4h4a4 4 0 0 1 4 4"/></svg>
+          </div>
+          <div class="why-card-body">
+            <h4>Notre Démarche</h4>
+            <ul class="why-card-list">
+              <li>Une intervention en <strong>complémentarité</strong> des actions menées par vos services</li>
+              <li>Une gestion de poste client <strong>efficace</strong></li>
+              <li>Une stratégie de recouvrement <strong>ciblée</strong> selon le profil du débiteur</li>
+              <li>Un <strong>interlocuteur privilégié</strong> pour un suivi optimisé</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 03 : Notre Objectif -->
+        <article class="why-card reveal" style="--d:.24s">
+          <div class="why-img-wrap">
+            <span class="why-badge-num">03</span>
+            <img src="assets/img/why-objectif.jpg" alt="Notre Objectif performance" loading="lazy">
+            <div class="why-img-gradient"></div>
+          </div>
+          <div class="why-icon-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <div class="why-card-body">
+            <h4>Notre Objectif</h4>
+            <ul class="why-card-list">
+              <li><strong>Sécuriser</strong> vos ventes</li>
+              <li><strong>Agir dans le respect</strong> de vos intérêts commerciaux et de votre image</li>
+              <li><strong>Améliorer</strong> votre taux de recouvrement de créances</li>
+              <li><strong>Optimiser</strong> vos encaissements et maîtriser les coûts</li>
+              <li><strong>Réduire</strong> les risques d'impayés</li>
+            </ul>
+          </div>
+        </article>
       </div>
     </div>
   </div>
@@ -1455,15 +2028,51 @@
           <span>— EXPERTISES</span>
         </div>
         <h2>Nos domaines <em>d'expertise</em>.</h2>
+        <p class="expertises-sub">Quatre métiers complémentaires pour sécuriser votre poste client, de l'analyse préalable jusqu'à l'encaissement.</p>
       </div>
       <a href="#contact" class="expertises-header-link">Discuter de mon besoin ↗</a>
     </div>
 
     <div class="domain-tabs reveal" role="tablist">
-      <button class="tab-btn active" role="tab" aria-selected="true" data-tab="etudes" id="tab-etudes">Études commerciales et financières</button>
-      <button class="tab-btn" role="tab" aria-selected="false" data-tab="recouvrement" id="tab-recouvrement">Recouvrement de créances</button>
-      <button class="tab-btn" role="tab" aria-selected="false" data-tab="relance" id="tab-relance">Externalisation de la relance commerciale</button>
-      <button class="tab-btn" role="tab" aria-selected="false" data-tab="formation" id="tab-formation">Formation et consultations juridiques</button>
+      <button class="tab-btn active" role="tab" aria-selected="true" data-tab="etudes" id="tab-etudes">
+        <span class="tab-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </span>
+        <span class="tab-text">
+          <span class="tab-num">01</span>
+          <span class="tab-title">Études commerciales<br>&amp; financières</span>
+        </span>
+      </button>
+
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="recouvrement" id="tab-recouvrement">
+        <span class="tab-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </span>
+        <span class="tab-text">
+          <span class="tab-num">02</span>
+          <span class="tab-title">Recouvrement<br>de créances</span>
+        </span>
+      </button>
+
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="relance" id="tab-relance">
+        <span class="tab-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </span>
+        <span class="tab-text">
+          <span class="tab-num">03</span>
+          <span class="tab-title">Externalisation<br>de la relance</span>
+        </span>
+      </button>
+
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="formation" id="tab-formation">
+        <span class="tab-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/></svg>
+        </span>
+        <span class="tab-text">
+          <span class="tab-num">04</span>
+          <span class="tab-title">Formation &amp;<br>conseil juridique</span>
+        </span>
+      </button>
     </div>
 
     <div class="domain-panels reveal">
@@ -1529,6 +2138,7 @@
     </div>
 
     <h2>Des chiffres, pas des promesses.</h2>
+    <p class="results-sub reveal">Des indicateurs suivis dossier par dossier, partagés en toute transparence avec nos clients.</p>
 
     <div class="stats-grid-4" id="statsGrid">
       <div class="stat-col-v2 reveal">
@@ -1595,33 +2205,74 @@
     </h2>
 
     <div class="methode-grid methode-grid-6">
+      <!-- 01 : Sur-mesure (Crayon) -->
       <div class="methode-card reveal" style="--d:0s">
-        <div class="methode-num">01</div>
+        <div class="methode-head">
+          <div class="methode-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <span class="methode-num">01</span>
+        </div>
         <h3>Sur-mesure</h3>
         <p>PMI – PME, Groupe, quelle que soit votre organisation ou votre taille, nos experts sont en capacité de recouvrer avec la même efficacité vos créances commerciales.</p>
       </div>
+
+      <!-- 02 : Qualité (Médaille) -->
       <div class="methode-card reveal" style="--d:.08s">
-        <div class="methode-num">02</div>
+        <div class="methode-head">
+          <div class="methode-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          </div>
+          <span class="methode-num">02</span>
+        </div>
         <h3>Qualité</h3>
         <p>Nous visons l'excellence par l'amélioration continue de nos process. Notre objectif est la satisfaction pleine et entière de tous nos clients.</p>
       </div>
+
+      <!-- 03 : Pilotage en temps réel (Horloge) -->
       <div class="methode-card reveal" style="--d:.16s">
-        <div class="methode-num">03</div>
+        <div class="methode-head">
+          <div class="methode-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span class="methode-num">03</span>
+        </div>
         <h3>Pilotage en temps réel</h3>
         <p>Suivre l'état de vos impayés en temps réel, c'est avoir une visibilité claire sur les dossiers à recouvrer et l'assurance d'agir rapidement pour les prises de décisions stratégiques.</p>
       </div>
+
+      <!-- 04 : Honoraires au succès (Dollar / Pièce) -->
       <div class="methode-card reveal" style="--d:.24s">
-        <div class="methode-num">04</div>
+        <div class="methode-head">
+          <div class="methode-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <span class="methode-num">04</span>
+        </div>
         <h3>Honoraires au succès</h3>
         <p>C'est seulement à compter de l'encaissement effectif de vos créances que vous réglez nos honoraires.</p>
       </div>
+
+      <!-- 05 : Tact dans la négociation (Poignée de main) -->
       <div class="methode-card reveal" style="--d:.32s">
-        <div class="methode-num">05</div>
+        <div class="methode-head">
+          <div class="methode-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/><path d="M12 5.5l3.5 3.5"/></svg>
+          </div>
+          <span class="methode-num">05</span>
+        </div>
         <h3>Tact dans la négociation</h3>
         <p>Des actions ciblées, menées en bonne intelligence et avec fermeté, permettant d'assurer le maintien des bonnes relations commerciales avec le débiteur tout en sauvegardant vos intérêts.</p>
       </div>
+
+      <!-- 06 : Expertise (Bouclier-check) -->
       <div class="methode-card reveal" style="--d:.4s">
-        <div class="methode-num">06</div>
+        <div class="methode-head">
+          <div class="methode-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <span class="methode-num">06</span>
+        </div>
         <h3>Expertise</h3>
         <p>Des années d'expérience dans le domaine du recouvrement des créances et de la médiation. Une bonne connaissance des lois et des procédures judiciaires.</p>
       </div>
@@ -1644,13 +2295,23 @@
       </p>
 
       <ul class="simulator-bullets">
-        <li>Perte de temps de gestion</li>
-        <li>Détérioration de la trésorerie</li>
-        <li>Hausse du besoin en fonds de roulement</li>
+        <li>
+          <span class="sim-bullet-cross">✕</span>
+          <span>Perte de temps de gestion</span>
+        </li>
+        <li>
+          <span class="sim-bullet-cross">✕</span>
+          <span>Détérioration de la trésorerie</span>
+        </li>
+        <li>
+          <span class="sim-bullet-cross">✕</span>
+          <span>Hausse du besoin en fonds de roulement</span>
+        </li>
       </ul>
     </div>
 
     <div class="simulator-card reveal">
+      <div class="sim-badge-tag">SIMULATEUR</div>
       <div class="sim-field">
         <div class="sim-field-label">
           <span>Montant des impayés</span>
@@ -1681,8 +2342,11 @@
 </section>
 
 <!-- ========== PHILOSOPHIE QUOTE BANNER (Image 2 Mockup) ========== -->
-<section class="quote-banner-section">
-  <div class="container quote-banner-inner">
+<section class="quote-banner-section" id="philosophie">
+  <div class="container quote-banner-inner reveal">
+    <div class="section-eyebrow" style="color: #F5A623; margin-bottom: 0;">
+      <span>— LA PHILOSOPHIE MIRAJ</span>
+    </div>
     <svg class="quote-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2h3c0 4-2 6-4 7.5L3 21zm13 0c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2h3c0 4-2 6-4 7.5l1 1.5z"></path>
     </svg>
@@ -1690,7 +2354,7 @@
       « Une stratégie efficace repose sur l'équilibre entre fermeté et flexibilité. Comprendre les enjeux du débiteur tout en restant ferme permet un résultat gagnant-gagnant. »
     </blockquote>
     <div class="quote-author-line">
-      <span>La philosophie Miraj</span>
+      <span>La philosophie MIRAJ</span>
     </div>
   </div>
 </section>
@@ -1698,50 +2362,135 @@
 <!-- ========== RESSOURCES / GUIDES SECTION (Image 1 Mockup) ========== -->
 <section class="ressources-section" id="documentation">
   <div class="container">
-    <div class="section-eyebrow">
-      <span>— RESSOURCES</span>
+    <div class="ressources-header reveal">
+      <div class="ressources-header-left">
+        <div class="section-eyebrow">
+          <span>— RESSOURCES</span>
+        </div>
+        <h2>Nos guides, gratuits et<br>téléchargeables.</h2>
+      </div>
+      <div class="ressources-header-right">
+        <p>L'équipe MIRAJ vous invite à découvrir ses guides pratiques, téléchargeables gratuitement. Apprenez comment :</p>
+        <ul class="ressources-checklist">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Vous protéger des impayés</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Réagir en cas d'impayé</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Réussir votre relance interne</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Optimiser votre gestion des créances</span>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <h2 style="font-size: clamp(2.2rem, 3.6vw, 2.8rem); font-weight: 800; color: #111827; margin-top: 12px; line-height: 1.15;">
-      Nos guides, gratuits et<br>téléchargeables.
-    </h2>
-
-    <div class="ressources-grid">
-      <!-- Card 01 -->
-      <div class="guide-card-v2 reveal">
-        <div>
-          <div class="guide-card-num">01</div>
+    <div class="ressources-grid-v3">
+      <!-- Card 01 : Amiable -->
+      <article class="guide-card-v3 reveal" style="--d:0s">
+        <div class="guide-cover-wrap">
+          <div class="guide-cover">
+            <div class="guide-spine"></div>
+            <div class="guide-cover-inner">
+              <div class="guide-cover-top">
+                <span class="guide-cover-num">01</span>
+                <div class="guide-cover-brand">
+                  <span class="brand-m">MIRAJ</span>
+                  <span class="brand-sub">Recouvrement</span>
+                </div>
+              </div>
+              <div class="guide-cover-bottom">
+                <span class="guide-cover-tag">Amiable</span>
+                <div class="guide-cover-title">Guide du recouvrement amiable</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="guide-card-body">
           <h3>Guide du recouvrement amiable</h3>
-          <p>Maîtriser la relance et la négociation.</p>
+          <p class="guide-card-desc">Maîtriser les étapes, la posture et les leviers de négociation pour encaisser rapidement sans conflit.</p>
+          <div class="guide-card-footer">
+            <button class="guide-btn-dl" onclick="openDownloadModal('amiable')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Télécharger le guide</span>
+            </button>
+            <span class="guide-meta-sub">PDF · Gratuit · Accès immédiat</span>
+          </div>
         </div>
-        <button class="guide-card-btn" onclick="openDownloadModal('amiable')">
-          <span>Télécharger</span> ↗
-        </button>
-      </div>
+      </article>
 
-      <!-- Card 02 -->
-      <div class="guide-card-v2 reveal">
-        <div>
-          <div class="guide-card-num">02</div>
+      <!-- Card 02 : Psychologie -->
+      <article class="guide-card-v3 reveal" style="--d:.1s">
+        <div class="guide-cover-wrap">
+          <div class="guide-cover">
+            <div class="guide-spine"></div>
+            <div class="guide-cover-inner">
+              <div class="guide-cover-top">
+                <span class="guide-cover-num">02</span>
+                <div class="guide-cover-brand">
+                  <span class="brand-m">MIRAJ</span>
+                  <span class="brand-sub">Recouvrement</span>
+                </div>
+              </div>
+              <div class="guide-cover-bottom">
+                <span class="guide-cover-tag">Psychologie</span>
+                <div class="guide-cover-title">Psychologie du recouvrement</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="guide-card-body">
           <h3>Psychologie du recouvrement</h3>
-          <p>Comprendre le débiteur pour mieux agir.</p>
+          <p class="guide-card-desc">Comprendre les profils débiteurs, désamorcer les objections et transformer la tension en accord ferme.</p>
+          <div class="guide-card-footer">
+            <button class="guide-btn-dl" onclick="openDownloadModal('psychologie')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Télécharger le guide</span>
+            </button>
+            <span class="guide-meta-sub">PDF · Gratuit · Accès immédiat</span>
+          </div>
         </div>
-        <button class="guide-card-btn" onclick="openDownloadModal('psychologie')">
-          <span>Télécharger</span> ↗
-        </button>
-      </div>
+      </article>
 
-      <!-- Card 03 -->
-      <div class="guide-card-v2 reveal">
-        <div>
-          <div class="guide-card-num">03</div>
-          <h3>Le recouvrement juridique</h3>
-          <p>Les procédures légales, expliquées simplement.</p>
+      <!-- Card 03 : Juridique -->
+      <article class="guide-card-v3 reveal" style="--d:.2s">
+        <div class="guide-cover-wrap">
+          <div class="guide-cover">
+            <div class="guide-spine"></div>
+            <div class="guide-cover-inner">
+              <div class="guide-cover-top">
+                <span class="guide-cover-num">03</span>
+                <div class="guide-cover-brand">
+                  <span class="brand-m">MIRAJ</span>
+                  <span class="brand-sub">Recouvrement</span>
+                </div>
+              </div>
+              <div class="guide-cover-bottom">
+                <span class="guide-cover-tag">Juridique</span>
+                <div class="guide-cover-title">Le recouvrement juridique</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <button class="guide-card-btn" onclick="openDownloadModal('juridique')">
-          <span>Télécharger</span> ↗
-        </button>
-      </div>
+        <div class="guide-card-body">
+          <h3>Le recouvrement juridique</h3>
+          <p class="guide-card-desc">Les procédures légales en Tunisie, de l'injonction de payer aux voies d'exécution, décryptées pour les dirigeants.</p>
+          <div class="guide-card-footer">
+            <button class="guide-btn-dl" onclick="openDownloadModal('juridique')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Télécharger le guide</span>
+            </button>
+            <span class="guide-meta-sub">PDF · Gratuit · Accès immédiat</span>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -1854,7 +2603,7 @@
         </div>
 
         <div class="contact-dark-footer">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F6A623" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
           <span>Confidentialité garantie — Honoraires 100% au résultat</span>
         </div>
       </div>
@@ -1862,6 +2611,7 @@
       <!-- Right Light Form Column -->
       <div class="contact-light-side">
         <form class="contact-form-v2" id="contactForm">
+          <div class="hp-field" aria-hidden="true"><label>Site web<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
           <div class="form-row-2">
             <div class="form-group-v2">
               <label for="cName">Nom complet</label>
@@ -1907,8 +2657,8 @@
 <footer class="footer-v2">
   <div class="container footer-v2-grid">
     <div>
-      <a href="#top" class="footer-v2-brand">
-        Miraj <span style="color:#F6A623;">•</span>
+      <a href="#top" class="footer-v2-brand" aria-label="MIRAJ Recouvrement">
+        <img src="assets/img/logo-miraj.svg" alt="MIRAJ Recouvrement" class="brand-logo footer-logo">
       </a>
       <p data-content-key="about_text">
         Cabinet de recouvrement &amp; contentieux en Tunisie et à l'international. Honoraires 100% au résultat.
@@ -1947,6 +2697,7 @@
 </footer>
 
 <script>
+  const PAGE_LOADED_AT = Date.now();
   // mobile menu
   const menuToggle = document.getElementById('menuToggle');
   const primaryNav = document.getElementById('primaryNav');
@@ -2194,6 +2945,8 @@
           fonction:   document.getElementById('modalFonction').value,
           entreprise: document.getElementById('modalEntreprise').value,
           email:      document.getElementById('modalEmail').value,
+          website:    (document.querySelector('#modalForm [name="website"]') ? document.querySelector('#modalForm [name="website"]').value : ''),
+          _t:         PAGE_LOADED_AT
         })
       });
       const data = await res.json();
@@ -2231,13 +2984,15 @@
             telephone: telEl ? telEl.value : '',
             service:   document.getElementById('cSubject') ? document.getElementById('cSubject').value : '',
             message:   document.getElementById('cMessage') ? document.getElementById('cMessage').value : '',
+            website:   (document.querySelector('#contactForm [name="website"]') ? document.querySelector('#contactForm [name="website"]').value : ''),
+            _t:        PAGE_LOADED_AT
           })
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Erreur serveur');
 
         btn.innerHTML = '<span>✓ Message envoyé !</span>';
-        btn.style.background = '#F6A623';
+        btn.style.background = '#F5A623';
         this.reset();
         setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.disabled = false; }, 4000);
       } catch (err) {
@@ -2255,6 +3010,7 @@
     <h3 id="modalTitle">Télécharger le guide</h3>
 
     <form id="modalForm" novalidate>
+      <div class="hp-field" aria-hidden="true"><label>Site web<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
       <div class="modal-field">
         <label for="modalGuide">Guide *</label>
         <select id="modalGuide" name="guide" required>
