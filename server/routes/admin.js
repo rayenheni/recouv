@@ -212,7 +212,14 @@ router.post('/content', (req, res) => {
 
   const ALLOWED_KEYS = [
     'hero_badge',
+    'hero_title',
     'hero_subtitle',
+    'stat_1_val',
+    'stat_1_lbl',
+    'stat_2_val',
+    'stat_2_lbl',
+    'stat_3_val',
+    'stat_3_lbl',
     'about_text',
     'contact_phone',
     'contact_email',
