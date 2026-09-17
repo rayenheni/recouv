@@ -93,13 +93,19 @@ function initDB() {
 
 // ── Créer l'admin par défaut si inexistant ─────────────────────
 function createDefaultAdmin() {
-  const db   = getDB();
-  const existing = db.prepare('SELECT id FROM admins WHERE username = ?').get('admin');
+  const db = getDB();
+  const username = process.env.ADMIN_USERNAME || 'admin';
+  const password = process.env.ADMIN_PASSWORD || 'miraj2025';
+
+  if (!process.env.ADMIN_PASSWORD) {
+    console.warn('⚠️  AVERTISSEMENT : ADMIN_PASSWORD non défini. Utilisation du mot de passe par défaut. À définir impérativement en production !');
+  }
+
+  const existing = db.prepare('SELECT id FROM admins WHERE username = ?').get(username);
   if (!existing) {
-    const hash = bcrypt.hashSync('miraj2025', 10);
-    db.prepare('INSERT INTO admins (username, password_hash) VALUES (?, ?)').run('admin', hash);
-    console.log('👤  Compte admin créé  →  admin / miraj2025');
-    console.log('⚠️   Changez le mot de passe en production !');
+    const hash = bcrypt.hashSync(password, 12);
+    db.prepare('INSERT INTO admins (username, password_hash) VALUES (?, ?)').run(username, hash);
+    console.log(`👤  Compte admin créé  →  ${username}`);
   }
 }
 
