@@ -68,19 +68,19 @@ function initDB() {
   const count = db.prepare('SELECT COUNT(*) as n FROM site_content').get().n;
   if (count === 0) {
     const defaultContent = {
-      hero_badge: "Solution Leader en Tunisie & International",
-      hero_title: "Transformez Vos Créances en Trésorerie Disponibles",
-      hero_subtitle: "Cabinet spécialisé dans le recouvrement de créances commercial & civil. Relance amiable, procédure judiciaire, étude de solvabilité.",
-      stat_1_val: "92%",
-      stat_1_lbl: "Taux de réussite amiable",
-      stat_2_val: "15 000+",
-      stat_2_lbl: "Dossiers traités avec succès",
-      stat_3_val: "14 Jours",
-      stat_3_lbl: "Délai moyen de paiement",
+      hero_badge: "— CABINET DE RECOUVREMENT — TUNISIE & INTERNATIONAL",
+      hero_title: "Vos impayés, recouvrés. Votre trésorerie, protégée.",
+      hero_subtitle: "Nous gérons l'intégralité de vos créances — de la relance amiable à l'exécution judiciaire. Honoraires uniquement au résultat.",
+      stat_1_val: "75%",
+      stat_1_lbl: "Taux de recouvrement moyen",
+      stat_2_val: "48h",
+      stat_2_lbl: "Prise en charge des dossiers",
+      stat_3_val: "+15",
+      stat_3_lbl: "Années d'expérience",
       contact_phone: "+216 20 309 212",
       contact_email: "info@miraj-recouv.com",
       contact_address: "62, Avenue de France, Ben Arous, Tunisie",
-      about_text: "MIRAJ Recouvrement est le cabinet de référence en Tunisie dédié à la gestion globale du poste client et au recouvrement de créances stratégiques. Notre équipe d'experts juridiques et négociateurs garantit la préservation de vos relations commerciales."
+      about_text: "Cabinet de recouvrement & contentieux en Tunisie et à l'international. Honoraires 100% au résultat."
     };
     const stmt = db.prepare('INSERT INTO site_content (key, value) VALUES (?, ?)');
     for (const [k, v] of Object.entries(defaultContent)) {

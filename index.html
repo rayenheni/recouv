@@ -144,15 +144,15 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Quels sont les avantages de faire appel à un service de recouvrement de créances ?",
+          "name": "Pourquoi externaliser le recouvrement ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Externaliser le recouvrement permet de gagner du temps, de bénéficier d'une expertise juridique et de préserver la relation commerciale en confiant les relances à un tiers spécialisé."
+            "text": "Vous gagnez du temps, bénéficiez d'une expertise juridique pointue et préservez la relation commerciale en confiant les relances à un tiers spécialisé et neutre."
           }
         },
         {
           "@type": "Question",
-          "name": "Comment fonctionne le processus de recouvrement ?",
+          "name": "Comment se déroule le processus ?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Nous commençons par un recouvrement amiable (relances, négociation), puis, si nécessaire, nous vous accompagnons vers les procédures judiciaires adaptées."
@@ -160,42 +160,42 @@
         },
         {
           "@type": "Question",
-          "name": "Quels sont les tarifs pour les services de recouvrement ?",
+          "name": "Quels sont vos honoraires ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Les honoraires sont généralement calculés au succès en fonction du montant des créances recouvrées et du mode d'intervention (amiable, judiciaire). Vous ne payez qu'à l'encaissement effectif."
+            "text": "Les honoraires sont 100% au résultat (No Cure, No Pay) sous forme de pourcentage des sommes réellement encaissées sur votre compte bancaire. Vous ne payez qu'à l'encaissement effectif."
           }
         },
         {
           "@type": "Question",
-          "name": "Quelle est la durée moyenne pour récupérer une créance ?",
+          "name": "Quel est le délai moyen ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Elle dépend de l'ancienneté de la créance, du profil du débiteur et du mode de recouvrement. Certaines créances se règlent en quelques semaines, d'autres nécessitent plusieurs mois."
+            "text": "La prise en charge est effectuée sous 48h. La durée dépend ensuite de l'ancienneté de la créance. Certaines créances se règlent en quelques semaines."
           }
         },
         {
           "@type": "Question",
-          "name": "Que se passe-t-il si la créance n'est pas récupérée ?",
+          "name": "Que se passe-t-il si le débiteur refuse de payer ou conteste la créance ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nous vous conseillons sur les suites à donner (procédure judiciaire, classement, provision) et vous accompagnons dans l'analyse de vos risques sans facturation d'honoraires de résultat."
+            "text": "Nous réalisons d'abord une analyse de solvabilité du débiteur, puis basculons vers le recouvrement judiciaire — injonction de payer, saisie conservatoire puis exécution forcée — avec nos avocats et huissiers partenaires, dans le strict respect du droit tunisien."
           }
         },
         {
           "@type": "Question",
-          "name": "Quelles informations sont nécessaires pour engager une procédure ?",
+          "name": "Intervenez-vous sur toute la Tunisie et à l'international ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Les factures, les bons de commande/livraison, les contrats, les échanges avec le débiteur et ses coordonnées complètes sont indispensables pour constituer un dossier solide."
+            "text": "Oui, nous intervenons dans tous les gouvernorats tunisiens et traitons vos créances à l'export et à l'international, conformément aux directives de la Banque Centrale de Tunisie (BCT)."
           }
         },
         {
           "@type": "Question",
-          "name": "Le client débiteur est-il informé qu'un service de recouvrement intervient ?",
+          "name": "Quels documents fournir ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Oui, chaque démarche est faite en toute transparence, dans le respect de la réglementation et de votre image de marque."
+            "text": "Les factures, bons de commande/livraison, contrats, échanges avec le débiteur et ses coordonnées complètes sont indispensables pour constituer un dossier solide."
           }
         }
       ]
@@ -447,9 +447,28 @@
   .hero-v2-grid {
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
-    gap: 56px;
+    grid-template-areas:
+      "text image"
+      "cta image";
+    gap: 0 56px;
     align-items: center;
   }
+  .hero-v2-text { grid-area: text; min-width: 0; }
+  .hero-v2-cta { grid-area: cta; min-width: 0; }
+  .hero-v2-image-wrap { grid-area: image; }
+  /* Ligne de réassurance sous les boutons hero */
+  .hero-reassurance {
+    margin: 18px 0 0 0;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #6B7280;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .hero-reassurance svg { color: #F5A623; flex-shrink: 0; }
+  .hero-reassurance .dot-sep { color: #D1D5DB; font-weight: 400; }
   .hero-v2 h1 {
     font-size: clamp(2.8rem, 5.2vw, 4.2rem);
     font-weight: 800;
@@ -588,9 +607,17 @@
     padding: 100px 0; background: #FAF9F6;
   }
   .cabinet-grid {
-    display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 64px;
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    grid-template-areas:
+      "image head"
+      "image body";
+    gap: 0 64px;
     align-items: center;
   }
+  .cabinet-image-wrap { grid-area: image; min-width: 0; }
+  .cabinet-content-head { grid-area: head; min-width: 0; }
+  .cabinet-content-body { grid-area: body; min-width: 0; }
   .cabinet-image-wrap {
     position: relative;
   }
@@ -627,20 +654,47 @@
   .cabinet-badge-float-num { font-size: 2.2rem; font-weight: 800; line-height: 1; }
   .cabinet-badge-float-text { font-size: 0.76rem; color: #9CA3AF; margin-top: 4px; font-weight: 500; }
 
-  .cabinet-content h2 {
+  .cabinet-content-head h2 {
     font-size: clamp(2rem, 3.4vw, 2.6rem);
     font-weight: 800; line-height: 1.18;
     color: #111827; margin: 12px 0 20px 0;
   }
-  .cabinet-content p {
-    font-size: 0.98rem; color: #4B5563; line-height: 1.65; margin-bottom: 16px;
-  }
-  .cabinet-content p:first-of-type {
+  .cabinet-content-body .cabinet-lead {
     font-size: 1.05rem;
     color: #111827;
     font-weight: 500;
     line-height: 1.7;
+    margin-bottom: 16px;
   }
+  .cabinet-content-body p {
+    font-size: 0.98rem; color: #4B5563; line-height: 1.65; margin-bottom: 16px;
+  }
+  /* Cartes d'autorité du cabinet (4 piliers) */
+  .cabinet-authority-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    margin-top: 26px;
+  }
+  .cabinet-authority-card {
+    background: #FFFFFF;
+    border: 1px solid #EBEAE5;
+    border-radius: 16px;
+    padding: 18px;
+    display: flex; gap: 14px; align-items: flex-start;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .cabinet-authority-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(245, 166, 35, 0.12);
+    border-color: #FCE8C3;
+  }
+  .cabinet-authority-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: #FFF5E3; color: #F5A623;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .cabinet-authority-card h3 { font-size: 0.95rem; font-weight: 800; color: #111827; margin-bottom: 4px; line-height: 1.3; }
+  .cabinet-authority-card p { font-size: 0.82rem; color: #6B7280; line-height: 1.5; margin: 0; }
   .cabinet-checks-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px;
     margin-top: 28px;
@@ -1241,7 +1295,7 @@
   ================================================================ */
   .quote-banner-section {
     padding: 90px 0;
-    background: radial-gradient(circle at 50% 120%, rgba(245, 166, 35, 0.16) 0%, transparent 60%), #18181B;
+    background: radial-gradient(circle at 50% 120%, rgba(245, 166, 35, 0.16) 0%, transparent 60%), #0F141C;
     color: #ffffff;
     text-align: center;
     position: relative;
@@ -1259,11 +1313,23 @@
     font-weight: 500; font-style: italic; line-height: 1.45;
     margin: 0; color: #ffffff;
   }
-  .quote-author-line {
-    font-size: 0.88rem; color: rgba(255,255,255,0.7);
-    display: flex; align-items: center; gap: 8px;
+  /* Signature institutionnelle encadrée de filets dorés */
+  .philo-signature {
+    display: flex; align-items: center; justify-content: center;
+    gap: 18px; width: 100%;
   }
-  .quote-author-line strong { color: #ffffff; }
+  .philo-signature-line {
+    height: 1px; width: 72px;
+    background: linear-gradient(90deg, transparent, #F5A623);
+    flex-shrink: 0;
+  }
+  .philo-signature-line--right {
+    background: linear-gradient(90deg, #F5A623, transparent);
+  }
+  .philo-signature-text {
+    color: #F5A623; font-weight: 800; font-size: 0.82rem;
+    letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap;
+  }
 
   /* ================================================================
      RESSOURCES SECTION (Fond blanc, couverture PDF 4:3 stylisée)
@@ -1658,11 +1724,14 @@
 
   .logos-strip .logos-strip-label{ max-width:none; text-align:center; font-size:.78rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#F5A623; margin-bottom:22px; }
   .logos-marquee{ overflow:hidden; position:relative; -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); }
-  .logos-track{ display:flex; gap:56px; width:max-content; animation:logos-scroll 32s linear infinite; }
+  .logos-track{ display:flex; width:max-content; animation:logos-scroll 38s linear infinite; }
   .logos-marquee:hover .logos-track{ animation-play-state:paused; }
-  .logos-track .logo-item{ display:flex; align-items:center; justify-content:center; height:64px; min-width:170px; padding:0 22px; border:1px dashed #E5E7EB; border-radius:14px; background:#fff; font-size:.8rem; letter-spacing:.06em; color:#9CA3AF; transition:filter .3s, color .3s, border-color .3s; }
-  .logos-track .logo-item:hover{ border-color:#F5A623; color:#111827; }
+  .logos-track .logo-item{ display:flex; align-items:center; justify-content:center; height:72px; min-width:180px; margin-right:56px; padding:10px 22px; border:1px solid #EBEAE5; border-radius:14px; background:#fff; transition:border-color .3s, box-shadow .3s, transform .3s; }
+  .logos-track .logo-item img{ max-height:44px; max-width:140px; width:auto; height:auto; object-fit:contain; filter:grayscale(1); opacity:.65; transition:filter .3s ease, opacity .3s ease, transform .3s ease; }
+  .logos-track .logo-item:hover{ border-color:#F5A623; box-shadow:0 8px 20px rgba(245,166,35,.12); transform:translateY(-2px); }
+  .logos-track .logo-item:hover img{ filter:grayscale(0); opacity:1; transform:scale(1.04); }
   @keyframes logos-scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  @media (prefers-reduced-motion: reduce){ .logos-track{ animation:none; flex-wrap:wrap; width:auto; } .logos-track .logo-item img{ filter:none; opacity:1; } }
 
   .faq-image-wrap{ margin-top:32px; border-radius:24px; overflow:hidden; height:380px; box-shadow:0 20px 45px rgba(0,0,0,.06); }
   .faq-image-wrap img{ width:100%; height:100%; object-fit:cover; }
@@ -1693,15 +1762,36 @@
     }
     .has-sub.open .sub-menu { display: block; }
 
-    /* Hero */
-    .hero-v2-grid { grid-template-columns: 1fr; gap: 40px; }
+    /* Hero — ordre mobile : texte → photo → boutons */
+    .hero-v2 { padding: 44px 0 60px; }
+    .hero-v2-grid {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "text"
+        "image"
+        "cta";
+      gap: 28px;
+    }
+    .hero-v2 h1 { font-size: clamp(2.1rem, 8vw, 2.8rem); margin-bottom: 18px; }
+    .hero-v2-sub { margin-bottom: 0; }
     .hero-v2-image-wrap { height: 400px; }
+    .hero-v2-actions { flex-direction: column; width: 100%; align-items: stretch; }
+    .hero-v2-actions a { width: 100%; justify-content: center; }
+    .hero-reassurance { justify-content: center; text-align: center; }
 
     /* Sections */
     .logos-strip-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
     .logos-grid { gap: 24px 36px; }
     .cabinet-section { padding: 60px 0; }
-    .cabinet-grid { grid-template-columns: 1fr; gap: 40px; }
+    .cabinet-grid {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "head"
+        "image"
+        "body";
+      gap: 28px;
+    }
+    .cabinet-content-head h2 { margin-bottom: 0; }
     .cabinet-image-inner { height: 320px; border-radius: 20px; }
     .cabinet-image-wrap::before { display: none; }
     .cabinet-badge-float { padding: 14px 18px; bottom: 14px; right: 14px; }
@@ -1756,6 +1846,7 @@
     .tab-btn .tab-icon { width: 36px; height: 36px; border-radius: 10px; }
     .tab-btn .tab-title { font-size: 0.82rem; }
     .methode-grid-6 { grid-template-columns: 1fr; }
+    .cabinet-authority-grid { grid-template-columns: 1fr; }
     .hero-v2-actions { flex-direction: column; width: 100%; }
     .hero-v2-actions a { width: 100%; justify-content: center; }
     .hero-trust { flex-direction: column; align-items: flex-start; gap: 10px; }
@@ -1841,9 +1932,10 @@
 <!-- ========== HERO SECTION (Image 1 Mockup) ========== -->
 <section class="hero-v2" id="top">
   <div class="container hero-v2-grid">
-    <div class="reveal reveal--left">
+    <!-- 1) Surtitre + H1 + sous-titre -->
+    <div class="hero-v2-text reveal reveal--left">
       <div class="section-eyebrow">
-        <span data-content-key="hero_badge">— CABINET DE RECOUVRABLEMENT — TUNISIE &amp; INTERNATIONAL</span>
+        <span data-content-key="hero_badge">— CABINET DE RECOUVREMENT — TUNISIE &amp; INTERNATIONAL</span>
       </div>
 
       <h1>
@@ -1857,21 +1949,11 @@
         Nous gérons l'intégralité de vos créances — de la relance amiable à l'exécution judiciaire. <strong>Honoraires uniquement au résultat.</strong>
       </p>
 
-      <div class="hero-v2-actions">
-        <a href="#contact" class="btn-black-pill" style="padding: 14px 28px; font-size: 0.92rem;">
-          <span>Demander un audit gratuit</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </a>
-        <a href="tel:+21620309212" class="btn-white-pill" style="padding: 14px 26px; font-size: 0.92rem;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          <span>Parler à un juriste</span>
-        </a>
-      </div>
     </div>
 
-    <!-- Right Image Showcase -->
+    <!-- 2) Photo du cabinet + badge flottant 75% -->
     <div class="hero-v2-image-wrap reveal">
-      <img src="assets/img/hero.jpg" alt="MIRAJ Recouvrement Cabinet" fetchpriority="high">
+      <img src="assets/img/hero.jpg" alt="Négociation et signature d'un accord de recouvrement B2B au cabinet MIRAJ — dossier scellé, statistiques de recouvrement et drapeau tunisien" fetchpriority="high">
       
       <div class="hero-badge-float">
         <span>Prise en charge sous 48h</span>
@@ -1885,33 +1967,98 @@
         </div>
       </div>
     </div>
+
+    <!-- 3) Boutons d'action + ligne de réassurance -->
+    <div class="hero-v2-cta reveal">
+      <div class="hero-v2-actions">
+        <a href="#contact" class="btn-black-pill" style="padding: 14px 28px; font-size: 0.92rem;">
+          <span>Demander un audit gratuit</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="tel:+21620309212" class="btn-white-pill" style="padding: 14px 26px; font-size: 0.92rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span>Parler à un juriste</span>
+        </a>
+      </div>
+      <p class="hero-reassurance">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <span>100% au résultat</span>
+        <span class="dot-sep">·</span>
+        <span>Prise en charge 48h</span>
+        <span class="dot-sep">·</span>
+        <span>Conforme BCT</span>
+      </p>
+    </div>
   </div>
 </section>
 
 <!-- ========== CABINET / ABOUT SECTION ========== -->
 <section class="cabinet-section" id="apropos">
   <div class="container cabinet-grid">
+    <div class="cabinet-content-head reveal reveal--right">
+      <div class="section-eyebrow">
+        <span>— LE CABINET</span>
+      </div>
+
+      <h2>Une exigence : le paiement, dans le respect de vos relations.</h2>
+    </div>
+
     <div class="cabinet-image-wrap reveal reveal--left">
-      <img src="assets/img/cabinet.jpg" alt="L'équipe MIRAJ Recouvrement" loading="lazy">
+      <div class="cabinet-image-inner">
+        <img src="assets/img/cabinet.jpg" alt="L'équipe MIRAJ Recouvrement" loading="lazy">
+      </div>
       <div class="cabinet-badge-float">
         <div class="cabinet-badge-float-num"><span class="counter" data-target="15" data-prefix="+">+15</span></div>
         <div class="cabinet-badge-float-text">ans d'expertise terrain</div>
       </div>
     </div>
 
-    <div class="cabinet-content reveal reveal--right">
-      <div class="section-eyebrow">
-        <span>— LE CABINET</span>
+    <div class="cabinet-content-body reveal reveal--right">
+      <p class="cabinet-lead">
+        Depuis plus de 15 ans, MIRAJ transforme vos impayés en trésorerie : relance diplomatique d'abord, exécution légale ensuite — sans jamais abîmer vos relations commerciales.
+      </p>
+      <p>
+        Cabinet tunisien de référence, nous intervenons sur l'ensemble du processus de recouvrement : relance commerciale, recouvrement amiable, contentieux, conseil juridique, études de solvabilité et formation de vos équipes.
+      </p>
+
+      <div class="cabinet-authority-grid">
+        <div class="cabinet-authority-card">
+          <div class="cabinet-authority-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M5 7l-3 7a3.5 3.5 0 0 0 6 0L5 7z"/><path d="M19 7l-3 7a3.5 3.5 0 0 0 6 0l-3-7z"/><path d="M8 21h8"/></svg>
+          </div>
+          <div>
+            <h3>Amiable &amp; Judiciaire</h3>
+            <p>Relance diplomatique prioritaire &amp; exécution légale.</p>
+          </div>
+        </div>
+        <div class="cabinet-authority-card">
+          <div class="cabinet-authority-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <div>
+            <h3>B2B &amp; B2C</h3>
+            <p>PME, grands comptes &amp; institutions financières.</p>
+          </div>
+        </div>
+        <div class="cabinet-authority-card">
+          <div class="cabinet-authority-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div>
+            <h3>Tunisie &amp; Export</h3>
+            <p>Gestion locale sur tout le territoire et créances internationales.</p>
+          </div>
+        </div>
+        <div class="cabinet-authority-card">
+          <div class="cabinet-authority-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <div>
+            <h3>Conformité &amp; Déontologie</h3>
+            <p>Strict respect des normes légales BCT et du secret bancaire.</p>
+          </div>
+        </div>
       </div>
-
-      <h2>Une exigence : le paiement, dans le respect de vos relations.</h2>
-
-      <p>
-        MIRAJ est spécialisé dans le recouvrement des créances en Tunisie et à l'international. Nous intervenons avec efficacité et rigueur sur l'ensemble du processus de recouvrement : relance commerciale, recouvrement amiable, contentieux, conseil juridique, études et formation pour les dirigeants et leurs salariés.
-      </p>
-      <p>
-        Nous agissons aussi bien dans le B2C, avec les sociétés de financement, que dans le B2B dans l'ensemble des secteurs d'activité, dans le strict respect des normes légales et déontologiques du recouvrement.
-      </p>
     </div>
   </div>
 
@@ -2000,21 +2147,22 @@
   <div class="container">
     <div class="logos-strip-label reveal">Ils nous font confiance</div>
   </div>
-  <!-- TODO : remplacer les placeholders par les logos clients (fichiers à fournir) -->
   <div class="logos-marquee" aria-label="Références clients">
     <div class="logos-track">
-      <span class="logo-item">Logo client 1</span>
-      <span class="logo-item">Logo client 2</span>
-      <span class="logo-item">Logo client 3</span>
-      <span class="logo-item">Logo client 4</span>
-      <span class="logo-item">Logo client 5</span>
-      <span class="logo-item">Logo client 6</span>
-      <span class="logo-item">Logo client 1</span>
-      <span class="logo-item">Logo client 2</span>
-      <span class="logo-item">Logo client 3</span>
-      <span class="logo-item">Logo client 4</span>
-      <span class="logo-item">Logo client 5</span>
-      <span class="logo-item">Logo client 6</span>
+      <span class="logo-item"><img src="assets/img/client%20ref%201.png" alt="Client référence 1 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/client%20ref%202.png" alt="Client référence 2 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/client%20ref%203.png" alt="Client référence 3 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/client%20ref%204.png" alt="Client référence 4 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/client%20ref%205.png" alt="Client référence 5 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/client%20ref%206.png" alt="Client référence 6 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/client%20ref%207.png" alt="Client référence 7 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%201.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%202.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%203.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%204.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%205.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%206.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%207.png" alt="" loading="lazy"></span>
     </div>
   </div>
 </section>
@@ -2201,11 +2349,11 @@
     </div>
 
     <h2 class="methode-title reveal">
-      Six engagements, du premier<br>appel à l'encaissement.
+      Trois engagements, du premier<br>appel à l'encaissement.
     </h2>
 
     <div class="methode-grid methode-grid-6">
-      <!-- 01 : Sur-mesure (Crayon) -->
+      <!-- 01 : Sur-mesure & Expertise -->
       <div class="methode-card reveal" style="--d:0s">
         <div class="methode-head">
           <div class="methode-icon-wrap">
@@ -2213,68 +2361,32 @@
           </div>
           <span class="methode-num">01</span>
         </div>
-        <h3>Sur-mesure</h3>
-        <p>PMI – PME, Groupe, quelle que soit votre organisation ou votre taille, nos experts sont en capacité de recouvrer avec la même efficacité vos créances commerciales.</p>
+        <h3>Sur-mesure & Expertise</h3>
+        <p>PME, groupe ou institution : +15 ans d'expertise en recouvrement et médiation. Stratégie adaptée à votre organisation et au profil de chaque débiteur, dans le strict respect du droit tunisien.</p>
       </div>
 
-      <!-- 02 : Qualité (Médaille) -->
-      <div class="methode-card reveal" style="--d:.08s">
-        <div class="methode-head">
-          <div class="methode-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-          </div>
-          <span class="methode-num">02</span>
-        </div>
-        <h3>Qualité</h3>
-        <p>Nous visons l'excellence par l'amélioration continue de nos process. Notre objectif est la satisfaction pleine et entière de tous nos clients.</p>
-      </div>
-
-      <!-- 03 : Pilotage en temps réel (Horloge) -->
-      <div class="methode-card reveal" style="--d:.16s">
-        <div class="methode-head">
-          <div class="methode-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <span class="methode-num">03</span>
-        </div>
-        <h3>Pilotage en temps réel</h3>
-        <p>Suivre l'état de vos impayés en temps réel, c'est avoir une visibilité claire sur les dossiers à recouvrer et l'assurance d'agir rapidement pour les prises de décisions stratégiques.</p>
-      </div>
-
-      <!-- 04 : Honoraires au succès (Dollar / Pièce) -->
-      <div class="methode-card reveal" style="--d:.24s">
+      <!-- 02 : Honoraires au succès -->
+      <div class="methode-card reveal" style="--d:.12s">
         <div class="methode-head">
           <div class="methode-icon-wrap">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
-          <span class="methode-num">04</span>
+          <span class="methode-num">02</span>
         </div>
         <h3>Honoraires au succès</h3>
-        <p>C'est seulement à compter de l'encaissement effectif de vos créances que vous réglez nos honoraires.</p>
+        <p>100% au résultat : vous ne réglez nos honoraires qu'à l'encaissement effectif. Pilotage en temps réel de vos dossiers et visibilité totale pour décider vite.</p>
       </div>
 
-      <!-- 05 : Tact dans la négociation (Poignée de main) -->
-      <div class="methode-card reveal" style="--d:.32s">
-        <div class="methode-head">
-          <div class="methode-icon-wrap">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/><path d="M12 5.5l3.5 3.5"/></svg>
-          </div>
-          <span class="methode-num">05</span>
-        </div>
-        <h3>Tact dans la négociation</h3>
-        <p>Des actions ciblées, menées en bonne intelligence et avec fermeté, permettant d'assurer le maintien des bonnes relations commerciales avec le débiteur tout en sauvegardant vos intérêts.</p>
-      </div>
-
-      <!-- 06 : Expertise (Bouclier-check) -->
-      <div class="methode-card reveal" style="--d:.4s">
+      <!-- 03 : Tact & Qualité -->
+      <div class="methode-card reveal" style="--d:.24s">
         <div class="methode-head">
           <div class="methode-icon-wrap">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
           </div>
-          <span class="methode-num">06</span>
+          <span class="methode-num">03</span>
         </div>
-        <h3>Expertise</h3>
-        <p>Des années d'expérience dans le domaine du recouvrement des créances et de la médiation. Une bonne connaissance des lois et des procédures judiciaires.</p>
+        <h3>Tact & Qualité</h3>
+        <p>Négociation ferme mais diplomatique : nous préservons vos relations commerciales tout en sécurisant vos intérêts, avec une exigence qualité à chaque étape.</p>
       </div>
     </div>
   </div>
@@ -2344,17 +2456,16 @@
 <!-- ========== PHILOSOPHIE QUOTE BANNER (Image 2 Mockup) ========== -->
 <section class="quote-banner-section" id="philosophie">
   <div class="container quote-banner-inner reveal">
-    <div class="section-eyebrow" style="color: #F5A623; margin-bottom: 0;">
-      <span>— LA PHILOSOPHIE MIRAJ</span>
-    </div>
-    <svg class="quote-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <svg class="quote-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
       <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2h3c0 4-2 6-4 7.5L3 21zm13 0c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2h3c0 4-2 6-4 7.5l1 1.5z"></path>
     </svg>
     <blockquote>
       « Une stratégie efficace repose sur l'équilibre entre fermeté et flexibilité. Comprendre les enjeux du débiteur tout en restant ferme permet un résultat gagnant-gagnant. »
     </blockquote>
-    <div class="quote-author-line">
-      <span>La philosophie MIRAJ</span>
+    <div class="philo-signature">
+      <span class="philo-signature-line" aria-hidden="true"></span>
+      <span class="philo-signature-text">La Philosophie Miraj</span>
+      <span class="philo-signature-line philo-signature-line--right" aria-hidden="true"></span>
     </div>
   </div>
 </section>
@@ -2505,7 +2616,7 @@
       <h2>Tout ce qu'il faut savoir.</h2>
       <p>Une autre question ? <a href="#contact">Écrivez-nous.</a></p>
       <div class="faq-image-wrap">
-        <img src="assets/img/faq.jpg" alt="Un conseiller MIRAJ répond à vos questions" loading="lazy">
+        <img src="assets/img/faq.jpg" alt="Conseillère juridique MIRAJ avec micro-casque à son bureau, drapeau tunisien et silhouette de l'horloge de l'Avenue Habib Bourguiba" loading="lazy">
       </div>
     </div>
 
@@ -2547,6 +2658,26 @@
         </summary>
         <div class="faq-body-v2">
           La prise en charge est effectuée sous 48h. La durée dépend ensuite de l'ancienneté de la créance. Certaines créances se règlent en quelques semaines.
+        </div>
+      </details>
+
+      <details class="faq-item-v2">
+        <summary>
+          <span>Que se passe-t-il si le débiteur refuse de payer ou conteste la créance ?</span>
+          <span class="faq-icon-circle">+</span>
+        </summary>
+        <div class="faq-body-v2">
+          En cas de refus ou de contestation, nous réalisons d'abord une analyse de solvabilité du débiteur pour évaluer sa capacité réelle de paiement. Si la voie amiable est épuisée, nous basculons vers le recouvrement judiciaire — injonction de payer, saisie conservatoire puis exécution forcée — en lien avec nos avocats et huissiers partenaires, dans le strict respect du droit tunisien.
+        </div>
+      </details>
+
+      <details class="faq-item-v2">
+        <summary>
+          <span>Intervenez-vous sur toute la Tunisie et à l'international ?</span>
+          <span class="faq-icon-circle">+</span>
+        </summary>
+        <div class="faq-body-v2">
+          Oui. Nous intervenons dans tous les gouvernorats tunisiens grâce à notre réseau de correspondants locaux, et nous traitons également vos créances à l'export et à l'international, conformément aux directives de la Banque Centrale de Tunisie (BCT) en matière de change et de rapatriement des fonds.
         </div>
       </details>
 
@@ -2741,6 +2872,14 @@
       btn.classList.add('active');
       btn.setAttribute('aria-selected','true');
       document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // FAQ accordéon : bascule dynamique des icônes + / −
+  document.querySelectorAll('.faq-item-v2').forEach((item) => {
+    item.addEventListener('toggle', () => {
+      const icon = item.querySelector('.faq-icon-circle');
+      if (icon) icon.textContent = item.open ? '−' : '+';
     });
   });
 
@@ -3001,6 +3140,32 @@
       }
     });
   }
+
+  // ---------- Contenu dynamique CMS (/api/content) ----------
+  async function loadDynamicContent() {
+    try {
+      const res = await fetch('/api/content');
+      if (!res.ok) return;
+      const content = await res.json();
+      for (const [key, val] of Object.entries(content)) {
+        if (!val) continue;
+        document.querySelectorAll('[data-content-key="' + key + '"]').forEach((el) => {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.value = val;
+          } else if (el.tagName === 'A' && el.getAttribute('href') && el.getAttribute('href').indexOf('tel:') === 0) {
+            el.setAttribute('href', 'tel:' + String(val).replace(/\s+/g, ''));
+            el.textContent = val;
+          } else if (el.tagName === 'A' && el.getAttribute('href') && el.getAttribute('href').indexOf('mailto:') === 0) {
+            el.setAttribute('href', 'mailto:' + val);
+            el.textContent = val;
+          } else {
+            el.textContent = val;
+          }
+        });
+      }
+    } catch (e) { /* mode statique : on conserve le contenu par défaut */ }
+  }
+  loadDynamicContent();
 </script>
 
 <!-- ========== MODALE TÉLÉCHARGEMENT ========== -->
