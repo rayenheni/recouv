@@ -223,6 +223,7 @@ router.post('/content', (req, res) => {
     'about_text',
     'contact_phone',
     'contact_email',
+    'contact_whatsapp',
     'contact_address'
   ];
 
