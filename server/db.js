@@ -64,9 +64,8 @@ function initDB() {
     );
   `);
 
-  // Seed default content if empty
-  const count = db.prepare('SELECT COUNT(*) as n FROM site_content').get().n;
-  if (count === 0) {
+  // Seed default content (idempotent : ajoute aussi les nouvelles clés aux bases existantes)
+  {
     const defaultContent = {
       hero_badge: "— CABINET DE RECOUVREMENT — TUNISIE & INTERNATIONAL",
       hero_title: "Vos impayés, recouvrés. Votre trésorerie, protégée.",
@@ -79,10 +78,11 @@ function initDB() {
       stat_3_lbl: "Années d'expérience",
       contact_phone: "+216 20 309 212",
       contact_email: "info@miraj-recouv.com",
+      contact_whatsapp: "+216 20 309 212",
       contact_address: "62, Avenue de France, Ben Arous, Tunisie",
       about_text: "Cabinet de recouvrement & contentieux en Tunisie et à l'international. Honoraires 100% au résultat."
     };
-    const stmt = db.prepare('INSERT INTO site_content (key, value) VALUES (?, ?)');
+    const stmt = db.prepare('INSERT OR IGNORE INTO site_content (key, value) VALUES (?, ?)');
     for (const [k, v] of Object.entries(defaultContent)) {
       stmt.run(k, v);
     }
