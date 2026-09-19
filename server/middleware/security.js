@@ -32,25 +32,41 @@ const corsOptions = {
 };
 
 // ── Helmet Security Headers ──────────────────────────────────
-const securityHeaders = helmet({
+// NOTE preview : en dehors de la production, l'embedding en iframe est
+// autorisé (X-Frame-Options / CSP frame-ancestors désactivés) pour
+// permettre l'aperçu intégré. En production, la protection reste stricte.
+const cspDirectives = {
+  defaultSrc: ["'self'"],
+  scriptSrc: ["'self'", "'unsafe-inline'"],
+  styleSrc: ["'self'", "'unsafe-inline'", "fonts.googleapis.com"],
+  fontSrc: ["'self'", "fonts.gstatic.com", "data:"],
+  imgSrc: ["'self'", "data:", "https:"],
+  connectSrc: ["'self'"],
+  objectSrc: ["'none'"],
+  baseUri: ["'self'"],
+  formAction: ["'self'"],
+};
+if (isProd) {
+  cspDirectives.frameAncestors = ["'self'"];
+}
+
+const helmetOptions = {
   contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "fonts.googleapis.com"],
-      fontSrc: ["'self'", "fonts.gstatic.com", "data:"],
-      imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'"],
-      frameAncestors: ["'self'"],
-      objectSrc: ["'none'"],
-      baseUri: ["'self'"],
-      formAction: ["'self'"],
-    },
+    // useDefaults:false en dev : les directives par défaut de Helmet
+    // incluent frame-ancestors 'self', ce qui bloquerait la preview.
+    useDefaults: isProd,
+    directives: cspDirectives,
   },
   crossOriginEmbedderPolicy: false,
   referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
   hsts: isProd ? { maxAge: 180 * 24 * 60 * 60, includeSubDomains: true } : false
-});
+};
+if (!isProd) {
+  // Autorise l'affichage dans l'iframe de preview (dev uniquement)
+  helmetOptions.frameguard = false;
+}
+
+const securityHeaders = helmet(helmetOptions);
 
 // ── Rate Limiters ─────────────────────────────────────────────
 const apiLimiter = rateLimit({
