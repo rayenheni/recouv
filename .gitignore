@@ -6,3 +6,8 @@ server/data/miraj.db
 .env
 .env.local
 
+
+# Fichiers de travail / références visuelles (ne pas publier sur le site)
+image-search/
+refs-images*/
+apercu-*.jpg
