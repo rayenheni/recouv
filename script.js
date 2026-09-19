@@ -320,6 +320,16 @@ document.addEventListener('DOMContentLoaded', () => {
   sections.forEach(s => spyObserver.observe(s));
 
   /* ==================== DYNAMIC CONTENT LOADING FROM CMS ==================== */
+
+  // Normalise un numéro saisi dans l'admin vers un format exploitable par wa.me
+  // (+216 20 309 212 → 21620309212, 20309212 → 21620309212)
+  function waDigits(val) {
+    let n = String(val || '').replace(/[^\d]/g, '');
+    if (n.indexOf('00') === 0) n = n.slice(2);
+    if (n.length === 8) n = '216' + n; // numéro local tunisien
+    return n;
+  }
+
   async function loadDynamicContent() {
     try {
       const res = await fetch('/api/content');
@@ -336,6 +346,13 @@ document.addEventListener('DOMContentLoaded', () => {
           } else if (el.tagName === 'A' && el.href.startsWith('mailto:')) {
             el.href = `mailto:${val}`;
             el.textContent = val;
+          } else if (el.tagName === 'A' && /^https?:\/\/wa\.me\//i.test(el.href)) {
+            // WhatsApp : conserve le message pré-rempli et remplace le numéro
+            const q = el.href.indexOf('?') > -1 ? el.href.slice(el.href.indexOf('?')) : '';
+            el.href = `https://wa.me/${waDigits(val)}${q}`;
+            const label = el.querySelector('[data-wa-label]');
+            if (label) label.textContent = val;
+            else if (!el.children.length) el.textContent = val;
           } else {
             el.textContent = val;
           }
