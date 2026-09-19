@@ -31,8 +31,11 @@ app.use('/api', sec.apiLimiter);
 app.use('/api', sec.sanitizeBody);
 
 // ── Static files ─────────────────────────────────────────────
-// Serve frontend (root)
-app.use(express.static(path.join(__dirname, '..')));
+// Serve frontend (root) — en dev, pas de cache navigateur (preview toujours à jour)
+const isDevStatic = process.env.NODE_ENV !== 'production';
+app.use(express.static(path.join(__dirname, '..'), {
+  setHeaders(res) { if (isDevStatic) res.setHeader('Cache-Control', 'no-store'); }
+}));
 // Serve admin panel
 app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
 
