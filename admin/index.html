@@ -92,12 +92,14 @@
 
     <!-- Header -->
     <div class="topbar">
+      <button type="button" class="sidebar-toggle" id="sidebarToggle" aria-label="Ouvrir le menu">☰</button>
       <div class="topbar__title" id="topbarTitle">Tableau de bord</div>
       <div class="topbar__user">
         <span class="topbar__dot"></span>
         <span id="topbarUser">admin</span>
       </div>
     </div>
+    <div class="sidebar-backdrop" id="sidebarBackdrop" hidden></div>
 
     <!-- ── TAB: DASHBOARD ── -->
     <div id="tab-dashboard" class="tab-content is-active">
@@ -181,11 +183,12 @@
           </div>
           <div class="field">
             <label>Nouveau mot de passe</label>
-            <input type="password" id="pwdNew" required minlength="6">
+            <input type="password" id="pwdNew" required minlength="10" autocomplete="new-password">
+            <small style="display:block;margin-top:6px;color:#6B7280;font-size:0.78rem;">Au moins 10 caractères, avec une majuscule, une minuscule et un chiffre.</small>
           </div>
           <div class="field">
             <label>Confirmer</label>
-            <input type="password" id="pwdConfirm" required>
+            <input type="password" id="pwdConfirm" required minlength="10" autocomplete="new-password">
           </div>
           <button type="submit" class="btn btn--rust">Enregistrer</button>
         </form>
@@ -203,28 +206,28 @@
           
           <form id="seoForm">
             <div class="field">
-              <label for="seoTitle">Titre Meta (SEO Title)</label>
-              <input type="text" id="seoTitle" value="MIRAJ Recouvrement — Recouvrement de créances en Tunisie &amp; International" required>
+              <label for="cms_seo_title">Titre Meta (SEO Title)</label>
+              <input type="text" id="cms_seo_title" name="seo_title" required>
             </div>
 
             <div class="field">
-              <label for="seoDesc">Description Meta (Meta Description)</label>
-              <textarea id="seoDesc" rows="3" required>Société leader de recouvrement de créances en Tunisie. Recouvrement amiable et judiciaire, relance commerciale, études de solvabilité. Honoraires au résultat (no win, no fee). +15 ans d'expérience.</textarea>
+              <label for="cms_seo_desc">Description Meta (Meta Description)</label>
+              <textarea id="cms_seo_desc" name="seo_desc" rows="3" required></textarea>
             </div>
 
             <div class="field">
-              <label for="seoKeywords">Mots-clés principaux (Keywords)</label>
-              <input type="text" id="seoKeywords" value="recouvrement de creances tunisie, recouvrement amiable tunisie, agence de recouvrement tunisie, impayes entreprise ben arous">
+              <label for="cms_seo_keywords">Mots-clés principaux (Keywords)</label>
+              <input type="text" id="cms_seo_keywords" name="seo_keywords">
             </div>
 
             <div class="field">
-              <label for="seoCanonical">URL Canonique (Canonical URL)</label>
-              <input type="url" id="seoCanonical" value="https://miraj-recouv.com/" required>
+              <label for="cms_seo_canonical">URL Canonique (Canonical URL)</label>
+              <input type="url" id="cms_seo_canonical" name="seo_canonical" required>
             </div>
 
             <div class="field">
-              <label for="seoGeo">Géolocalisation Local SEO</label>
-              <input type="text" id="seoGeo" value="Ben Arous, Tunisie (TN-13) — Lat: 36.7531, Long: 10.2189">
+              <label for="cms_seo_geo">Géolocalisation Local SEO</label>
+              <input type="text" id="cms_seo_geo" name="seo_geo">
             </div>
 
             <div style="display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
@@ -247,6 +250,21 @@
           <div id="contentAlert" class="alert" style="display:none; margin-bottom: 20px;"></div>
 
           <form id="siteContentForm">
+
+            <h3 style="font-size:1.05rem; font-weight:700; color:var(--text-main); margin-bottom:12px; border-bottom:1px solid #EBEAE5; padding-bottom:6px;">
+              🖼 Logo du site
+            </h3>
+            <p style="font-size:0.85rem; color:#6B7280; margin-bottom:14px;">
+              Ce logo s’affiche dans l’en-tête et le pied de page du site public. PNG, JPG, WEBP ou SVG — 1,5&nbsp;Mo max.
+            </p>
+            <div class="logo-upload">
+              <img id="logoPreview" src="/assets/img/logo-miraj.svg" alt="Aperçu du logo">
+              <div>
+                <input type="file" id="logoFile" accept="image/png,image/jpeg,image/webp,image/svg+xml">
+                <button type="button" class="btn btn--outline btn--sm" id="logoUploadBtn">Téléverser le logo</button>
+                <div id="logoUploadHint" style="font-size:0.78rem; color:#6B7280; margin-top:8px;"></div>
+              </div>
+            </div>
 
             <!-- Section Hero -->
             <h3 style="font-size:1.05rem; font-weight:700; color:var(--text-main); margin-bottom:12px; border-bottom:1px solid #EBEAE5; padding-bottom:6px;">
@@ -328,8 +346,9 @@
             </div>
 
             <div class="field">
-              <label for="cms_contact_whatsapp">Numéro WhatsApp (indicatif international inclus, ex : +216 20 309 212)</label>
-              <input type="text" id="cms_contact_whatsapp" name="contact_whatsapp" placeholder="+216 20 309 212" required>
+              <label for="cms_contact_whatsapp">Numéro WhatsApp (affiché sur tout le site : bouton flottant, contact, barre mobile)</label>
+              <input type="tel" id="cms_contact_whatsapp" name="contact_whatsapp" placeholder="+216 20 309 212" required>
+              <small style="display:block; margin-top:6px; color:#6B7280; font-size:0.78rem;">Indiquez l’indicatif pays, ex. +216 20 309 212. Le lien wa.me est mis à jour automatiquement.</small>
             </div>
 
             <div class="field">
