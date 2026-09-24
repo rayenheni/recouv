@@ -23,29 +23,18 @@ app.disable('x-powered-by');
 app.use(sec.securityHeaders);
 app.use(cors(sec.corsOptions));
 
-// ── Parsing JSON (2 Mo pour l'upload du logo admin) ──────────
-app.use(express.json({ limit: '2mb' }));
+// ── Parsing JSON limité ──────────────────────────────────────
+app.use(express.json({ limit: '50kb' }));
 
 // ── Sécurité globale sur l'API ───────────────────────────────
 app.use('/api', sec.apiLimiter);
-app.use('/api', (req, res, next) => {
-  // Ne pas tronquer les payloads admin (CMS, logo, SEO)
-  if (req.path.startsWith('/admin') && req.path !== '/admin/login') return next();
-  return sec.sanitizeBody(req, res, next);
-});
+app.use('/api', sec.sanitizeBody);
 
 // ── Static files ─────────────────────────────────────────────
 // Serve frontend (root) — en dev, pas de cache navigateur (preview toujours à jour)
 const isDevStatic = process.env.NODE_ENV !== 'production';
 app.use(express.static(path.join(__dirname, '..'), {
-  setHeaders(res, filePath) {
-    const ext = path.extname(filePath).toLowerCase();
-    if (['.jpg', '.jpeg', '.png', '.webp', '.svg', '.woff2', '.woff'].includes(ext)) {
-      res.setHeader('Cache-Control', 'public, max-age=604800, immutable');
-    } else if (isDevStatic) {
-      res.setHeader('Cache-Control', 'no-store');
-    }
-  }
+  setHeaders(res) { if (isDevStatic) res.setHeader('Cache-Control', 'no-store'); }
 }));
 // Serve admin panel
 app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
@@ -101,7 +90,7 @@ initDB();
 createDefaultAdmin();
 
 if (require.main === module) {
-  app.listen(PORT, '0.0.0.0', () => {
+  app.listen(PORT, () => {
     console.log(`\n✅  Serveur MIRAJ démarré`);
     console.log(`   Site    → http://localhost:${PORT}`);
     console.log(`   Admin   → http://localhost:${PORT}/admin`);

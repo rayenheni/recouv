@@ -1,6 +1,7 @@
 node_modules/
 server/node_modules/
 server/data/miraj.db
+server/data/miraj.json
 *.log
 .DS_Store
 .env

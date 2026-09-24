@@ -8,8 +8,6 @@
 const API = '/api';
 let token = localStorage.getItem('miraj_token');
 let currentTab = 'dashboard';
-let contactsData = [];
-let downloadsData = [];
 
 // ── Debounce ──────────────────────────────────────────────────
 function debounce(fn, ms = 350) {
@@ -18,14 +16,6 @@ function debounce(fn, ms = 350) {
 }
 
 // ── API helper ────────────────────────────────────────────────
-function decodeJwtPayload(tok) {
-  try {
-    const part = tok.split('.')[1] || '';
-    const b64 = part.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((part.length + 3) % 4);
-    return JSON.parse(atob(b64));
-  } catch { return null; }
-}
-
 async function api(path, opts = {}) {
   const res = await fetch(API + path, {
     headers: {
@@ -35,10 +25,6 @@ async function api(path, opts = {}) {
     ...opts,
     body: opts.body ? JSON.stringify(opts.body) : undefined
   });
-  if (res.status === 401 && path !== '/admin/login') {
-    showLogin();
-    throw new Error('Session expirée, veuillez vous reconnecter.');
-  }
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data.error || `Erreur ${res.status}`);
   return data;
@@ -47,10 +33,7 @@ async function api(path, opts = {}) {
 // ── Format date ───────────────────────────────────────────────
 function fmtDate(str) {
   if (!str) return '—';
-  const normalized = String(str).replace(' ', 'T');
-  const d = new Date(normalized);
-  if (isNaN(d.getTime())) return String(str);
-  return d.toLocaleString('fr-FR', {
+  return new Date(str).toLocaleString('fr-FR', {
     day: '2-digit', month: '2-digit', year: 'numeric',
     hour: '2-digit', minute: '2-digit'
   });
@@ -122,9 +105,6 @@ function showLogin() {
   localStorage.removeItem('miraj_token');
   document.getElementById('adminApp').style.display   = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
-  const form = document.getElementById('loginForm');
-  if (form) form.reset();
-  closeSidebar();
 }
 
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -175,12 +155,10 @@ function switchTab(tab) {
   });
   document.getElementById('topbarTitle').textContent = TAB_TITLES[tab] || tab;
   // load data
-  closeSidebar();
   if (tab === 'dashboard') loadDashboard();
   if (tab === 'contacts')  loadContacts();
   if (tab === 'downloads') loadDownloads();
   if (tab === 'content')   loadSiteContent();
-  if (tab === 'seo')       loadSiteContent();
 }
 
 document.querySelectorAll('.nav-item[data-tab]').forEach(btn => {
@@ -204,13 +182,13 @@ async function loadDashboard() {
     setBadge('badgeContacts',  s.contacts_unread);
     setBadge('badgeDownloads', s.downloads_unread);
 
+    // Recent contacts (5)
     const dc = await api('/admin/contacts?limit=5');
-    contactsData = dc.rows || [];
     document.getElementById('dashRecentContacts').innerHTML =
       dc.rows.length ? miniContactTable(dc.rows) : '<div class="empty"><div class="empty-icon">✉</div>Aucun contact</div>';
 
+    // Recent downloads (5)
     const dd = await api('/admin/downloads?limit=5');
-    downloadsData = dd.rows || [];
     document.getElementById('dashRecentDownloads').innerHTML =
       dd.rows.length ? miniDownloadTable(dd.rows) : '<div class="empty"><div class="empty-icon">↓</div>Aucun téléchargement</div>';
 
@@ -327,12 +305,15 @@ document.getElementById('contactFilter').addEventListener('change', loadContacts
 // Export CSV link
 document.getElementById('exportContacts').addEventListener('click', (e) => {
   e.preventDefault();
+  window.location.href = `${API}/admin/export/contacts?token=${token}`;
+  // Use header auth instead for real download
   fetchExport('/admin/export/contacts', 'contacts-miraj.csv');
 });
 
 // ============================================================
 //  DOWNLOADS
 // ============================================================
+let downloadsData = [];
 
 async function loadDownloads() {
   const q    = document.getElementById('downloadSearch').value;
@@ -532,12 +513,6 @@ document.getElementById('pwdForm').addEventListener('submit', async (e) => {
     alert.style.display = 'block';
     return;
   }
-  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}$/.test(newPwd)) {
-    alert.className = 'alert alert--error';
-    alert.textContent = 'Le mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule et un chiffre.';
-    alert.style.display = 'block';
-    return;
-  }
   try {
     await api('/admin/change-password', {
       method: 'POST',
@@ -581,48 +556,9 @@ async function loadSiteContent() {
       const field = document.getElementById(`cms_${key}`);
       if (field) field.value = val;
     }
-    if (content.site_logo) {
-      const preview = document.getElementById('logoPreview');
-      if (preview) preview.src = content.site_logo;
-    }
   } catch (ex) {
     console.error('Erreur chargement contenu:', ex);
   }
-}
-
-const logoUploadBtn = document.getElementById('logoUploadBtn');
-if (logoUploadBtn) {
-  logoUploadBtn.addEventListener('click', async () => {
-    const fileEl = document.getElementById('logoFile');
-    const hint = document.getElementById('logoUploadHint');
-    const file = fileEl && fileEl.files && fileEl.files[0];
-    if (!file) {
-      if (hint) hint.textContent = 'Choisissez d’abord un fichier image.';
-      return;
-    }
-    if (file.size > 1.5 * 1024 * 1024) {
-      if (hint) hint.textContent = 'Fichier trop volumineux (max. 1,5 Mo).';
-      return;
-    }
-    logoUploadBtn.disabled = true;
-    if (hint) hint.textContent = 'Envoi…';
-    try {
-      const data = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = () => reject(new Error('Lecture impossible'));
-        reader.readAsDataURL(file);
-      });
-      const res = await api('/admin/logo', { method: 'POST', body: { data } });
-      const preview = document.getElementById('logoPreview');
-      if (preview && res.url) preview.src = res.url;
-      if (hint) hint.textContent = '✓ Logo publié sur le site.';
-    } catch (ex) {
-      if (hint) hint.textContent = ex.message || 'Erreur lors de l’envoi';
-    } finally {
-      logoUploadBtn.disabled = false;
-    }
-  });
 }
 
 const siteContentForm = document.getElementById('siteContentForm');
@@ -675,39 +611,18 @@ async function updateStats() {
 // ============================================================
 //  INIT
 // ============================================================
-function closeSidebar() {
-  const sb = document.querySelector('.sidebar');
-  const bd = document.getElementById('sidebarBackdrop');
-  if (sb) sb.classList.remove('is-open');
-  if (bd) { bd.classList.remove('is-visible'); bd.hidden = true; }
-}
-function openSidebar() {
-  const sb = document.querySelector('.sidebar');
-  const bd = document.getElementById('sidebarBackdrop');
-  if (sb) sb.classList.add('is-open');
-  if (bd) { bd.classList.add('is-visible'); bd.hidden = false; }
-}
-const sidebarToggle = document.getElementById('sidebarToggle');
-if (sidebarToggle) sidebarToggle.addEventListener('click', () => {
-  const sb = document.querySelector('.sidebar');
-  if (sb && sb.classList.contains('is-open')) closeSidebar();
-  else openSidebar();
-});
-const sidebarBackdrop = document.getElementById('sidebarBackdrop');
-if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeSidebar);
-
-let statsTimer = null;
 function initApp() {
   switchTab('dashboard');
-  if (statsTimer) clearInterval(statsTimer);
-  statsTimer = setInterval(updateStats, 60000);
+  // Auto-refresh stats every 60s
+  setInterval(updateStats, 60000);
 }
 
+// ── Check if already logged in ────────────────────────────────
 (async () => {
   if (token) {
     try {
-      await api('/admin/stats');
-      const u = decodeJwtPayload(token) || {};
+      await api('/admin/stats'); // verify token validity
+      const u = JSON.parse(atob(token.split('.')[1]));
       showApp(u.username);
     } catch {
       showLogin();

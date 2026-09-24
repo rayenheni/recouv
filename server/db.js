@@ -84,13 +84,7 @@ function initDB() {
       contact_email: "info@miraj-recouv.com",
       contact_whatsapp: "+216 20 309 212",
       contact_address: "62, Avenue de France, Ben Arous, Tunisie",
-      about_text: "Cabinet de recouvrement & contentieux en Tunisie et à l'international. Honoraires 100% au résultat.",
-      site_logo: "/assets/img/logo-miraj.svg",
-      seo_title: "MIRAJ Recouvrement — Recouvrement de créances en Tunisie & International",
-      seo_desc: "Société leader de recouvrement de créances en Tunisie. Recouvrement amiable et judiciaire, relance commerciale, études de solvabilité. Honoraires au résultat (no win, no fee). +15 ans d'expérience.",
-      seo_keywords: "recouvrement de creances tunisie, recouvrement amiable tunisie, recouvrement judiciaire tunis, agence de recouvrement tunisie",
-      seo_canonical: "https://miraj-recouv.com/",
-      seo_geo: "Ben Arous, Tunisie (TN-13) — Lat: 36.7531, Long: 10.2189"
+      about_text: "Cabinet de recouvrement & contentieux en Tunisie et à l'international. Honoraires 100% au résultat."
     };
     const stmt = db.prepare('INSERT OR IGNORE INTO site_content (key, value) VALUES (?, ?)');
     for (const [k, v] of Object.entries(defaultContent)) {

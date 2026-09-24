@@ -402,20 +402,20 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* Slide backgrounds — using gradient placeholders (images from original site) */
 .hero__bg--1 {
   background-image:
-    linear-gradient(160deg, rgba(13,43,85,.15) 0%, rgba(8,27,56,.25) 100%),
-    url('assets/img/hero.jpg');
+    linear-gradient(160deg, rgba(13,43,85,.1) 0%, rgba(8,27,56,.2) 100%),
+    url('https://miraj-recouv.com/assets/Strategique.webp');
   background-color: #1a3f73;
 }
 .hero__bg--2 {
   background-image:
-    linear-gradient(160deg, rgba(13,43,85,.15) 0%, rgba(8,27,56,.25) 100%),
-    url('assets/img/cabinet.jpg');
+    linear-gradient(160deg, rgba(13,43,85,.1) 0%, rgba(8,27,56,.2) 100%),
+    url('https://miraj-recouv.com/assets/Strategique.webp');
   background-color: #0d3550;
 }
 .hero__bg--3 {
   background-image:
-    linear-gradient(160deg, rgba(13,43,85,.15) 0%, rgba(8,27,56,.25) 100%),
-    url('assets/img/why-objectif.jpg');
+    linear-gradient(160deg, rgba(13,43,85,.1) 0%, rgba(8,27,56,.2) 100%),
+    url('https://miraj-recouv.com/assets/Strategique.webp');
   background-color: #0d2b55;
 }
 
