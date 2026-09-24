@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Titre & Description SEO -->
-<title data-seo="seo_title">MIRAJ Recouvrement — Recouvrement de créances en Tunisie & International</title>
-<meta name="description" data-seo="seo_desc" content="Société leader de recouvrement de créances en Tunisie. Recouvrement amiable et judiciaire, relance commerciale, études de solvabilité. Honoraires au résultat (no win, no fee). +15 ans d'expérience.">
-<meta name="keywords" data-seo="seo_keywords" content="recouvrement de creances tunisie, recouvrement amiable tunisie, recouvrement judiciaire tunis, agence de recouvrement tunisie, impayes entreprise ben arous, relance client tunisie, contentieux recouvrement, societe de recouvrement tunisie, etudes solvabilite, miraj recouvrement">
+<title>MIRAJ Recouvrement — Recouvrement de créances en Tunisie & International</title>
+<meta name="description" content="Société leader de recouvrement de créances en Tunisie. Recouvrement amiable et judiciaire, relance commerciale, études de solvabilité. Honoraires au résultat (no win, no fee). +15 ans d'expérience.">
+<meta name="keywords" content="recouvrement de creances tunisie, recouvrement amiable tunisie, recouvrement judiciaire tunis, agence de recouvrement tunisie, impayes entreprise ben arous, relance client tunisie, contentieux recouvrement, societe de recouvrement tunisie, etudes solvabilite, miraj recouvrement">
 <meta name="author" content="MIRAJ Recouvrement">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#F5A623">
-<link rel="canonical" data-seo="seo_canonical" href="https://miraj-recouv.com/">
+<link rel="canonical" href="https://miraj-recouv.com/">
 
 <!-- Géolocalisation & Local SEO (Tunisie / Ben Arous / Grand Tunis) -->
 <meta name="geo.region" content="TN-13">
@@ -218,7 +218,6 @@
 </script>
 
 <!-- Polices Plus Jakarta Sans & Poppins -->
-<link rel="preload" as="image" href="assets/img/hero.webp" type="image/webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -277,7 +276,7 @@
   }
   p{margin:0;}
   a{color:inherit;}
-  img{max-width:100%; height:auto; display:block;}
+  img{max-width:100%; display:block;}
   .container{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
   ::selection{background:var(--emerald-soft); color:var(--emerald-dark);}
   a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
@@ -397,9 +396,7 @@
   .nav-cta-group { display: flex; align-items: center; gap: 20px; }
   .nav-phone-num {
     font-size: 0.9rem; font-weight: 600; color: #111827; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 8px;
   }
-  .nav-phone-num svg { color: #F5A623; flex-shrink: 0; }
   .nav-phone-num:hover { color: #F5A623; }
 
   /* Bouton noir pill avec hover animé */
@@ -541,13 +538,6 @@
     box-shadow: 0 20px 50px rgba(0,0,0,0.07);
     background: #EBEAE5;
   }
-  .hero-v2-image-wrap picture,
-  .cabinet-image-inner picture,
-  .why-img-wrap picture,
-  .domain-visual picture,
-  .faq-image-wrap picture {
-    display: block; width: 100%; height: 100%;
-  }
   .hero-v2-image-wrap img {
     width: 100%; height: 100%; object-fit: cover;
     transition: transform 8s cubic-bezier(0.25, 1, 0.5, 1);
@@ -644,7 +634,18 @@
   .cabinet-image-wrap {
     position: relative;
   }
-  .cabinet-image-wrap::before { display: none; }
+  .cabinet-image-wrap::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: -14px;
+    right: 14px;
+    bottom: 14px;
+    border: 2px solid #FCE8C3;
+    border-radius: 34px;
+    pointer-events: none;
+    z-index: 0;
+  }
   .cabinet-image-inner {
     position: relative;
     border-radius: 28px;
@@ -1467,37 +1468,27 @@
     gap: 10px;
   }
   .guide-btn-dl {
-    width: 44px; height: 44px; padding: 0;
-    background: transparent;
-    color: #F5A623;
-    border: 1.5px solid #F5A623;
-    border-radius: 50%;
+    width: 100%;
+    padding: 13px 20px;
+    background: #F5A623;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
     font-size: 0.9rem;
     font-weight: 700;
     font-family: inherit;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0;
+    gap: 8px;
     cursor: pointer;
-    box-shadow: none;
-    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
-    align-self: flex-end;
+    box-shadow: 0 6px 16px rgba(245, 166, 35, 0.28);
+    transition: background 0.25s ease, transform 0.2s ease;
   }
   .guide-btn-dl:hover {
-    background: #F5A623;
-    color: #ffffff;
-    transform: translateX(3px);
+    background: #DD8F0A;
+    transform: translateY(-2px);
   }
-  .guide-card-footer {
-    margin-top: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  .guide-card-footer .guide-meta-sub { text-align: left; }
   .guide-meta-sub {
     font-size: 0.76rem;
     color: #9CA3AF;
@@ -1600,44 +1591,25 @@
   }
 
   .contact-light-side { padding: 56px 48px; }
-  .contact-form-v2 { display: flex; flex-direction: column; gap: 16px; }
-  .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-group-v2 { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .contact-form-v2 { display: flex; flex-direction: column; gap: 20px; }
+  .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-group-v2 { display: flex; flex-direction: column; gap: 6px; }
   .form-group-v2 label {
-    font-size: 0.8rem; font-weight: 700; color: #374151; letter-spacing: 0.01em;
+    font-size: 0.82rem; font-weight: 600; color: #4B5563;
   }
   .form-group-v2 input, .form-group-v2 select, .form-group-v2 textarea {
-    width: 100%;
-    border: 1.5px solid #E5E7EB;
-    border-radius: 12px;
-    padding: 12px 14px;
-    font-size: 0.94rem; color: #111827; outline: none;
-    font-family: inherit; background: #FAF9F6;
-    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-    appearance: none; -webkit-appearance: none;
-  }
-  .form-group-v2 select {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2.2'><polyline points='6 9 12 15 18 9'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    padding-right: 36px;
+    border: none; border-bottom: 1.5px solid #E5E7EB;
+    padding: 10px 0; font-size: 0.94rem; color: #111827; outline: none;
+    font-family: inherit; background: transparent; transition: border-color 0.2s;
   }
   .form-group-v2 input:focus, .form-group-v2 select:focus, .form-group-v2 textarea:focus {
-    border-color: #F5A623;
-    background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(245,166,35,0.15);
+    border-bottom-color: #F5A623;
   }
-  .form-group-v2 textarea { resize: vertical; min-height: 110px; }
+  .form-group-v2 textarea { resize: vertical; min-height: 80px; }
   .form-checkbox-v2 {
     display: flex; align-items: flex-start; gap: 10px; font-size: 0.78rem; color: #6B7280;
   }
   .form-checkbox-v2 input { margin-top: 3px; accent-color: #F5A623; }
-  .form-error-v2 {
-    margin: 0; font-size: 0.84rem; font-weight: 600; color: #DC2626;
-  }
-  .form-group-v2 input.error, .form-group-v2 select.error, .form-group-v2 textarea.error {
-    border-bottom-color: #DC2626;
-  }
 
   /* ================================================================
      FOOTER SECTION (Fond blanc, liens hover orange + padding-left)
@@ -1647,14 +1619,8 @@
     border-top: 1px solid #EBEAE5;
   }
   .footer-v2-grid {
-    display: grid; grid-template-columns: 1.3fr 0.7fr 0.8fr 1fr; gap: 40px; margin-bottom: 48px;
+    display: grid; grid-template-columns: 1.4fr 0.8fr 1fr; gap: 48px; margin-bottom: 48px;
   }
-  .footer-hours { margin: 0; }
-  .footer-social { display: flex; gap: 10px; }
-  .footer-social a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid #EBEAE5; display: inline-flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; color: #6B7280; }
-  .footer-social a:hover { color: #F5A623; border-color: #F5A623; }
-  .footer-map-link { color: #F5A623 !important; font-weight: 600; }
-  .footer-wa-item svg { color: #9CA3AF !important; }
   .footer-v2-brand {
     display: inline-block; text-decoration: none; margin-bottom: 16px;
   }
@@ -1765,11 +1731,8 @@
   .wa-inline-link svg { width: 16px; height: 16px; color: var(--wa-green); flex-shrink: 0; }
 
   /* Icône WhatsApp dans la colonne sombre de contact */
-  .contact-info-icon--wa { background: rgba(255,255,255,0.08); color: #9CA3AF; }
-  .contact-info-row--wa .contact-info-text a,
-  .contact-info-row--wa .contact-info-text span { color: #9CA3AF; font-weight: 500; }
-  .contact-info-row--wa .contact-info-text h4 { color: rgba(255,255,255,0.4); }
-  .contact-wa-cta { display: none; }
+  .contact-info-icon--wa { background: rgba(37, 211, 102, 0.16); color: var(--wa-green); }
+  .contact-wa-cta { margin-top: 28px; }
 
   /* Pied de page */
   .footer-wa-prefix { color: #F5A623; font-weight: 700; }
@@ -2009,10 +1972,7 @@
       </ul>
 
       <div class="nav-cta-group">
-        <a href="tel:+21620309212" class="nav-phone-num" aria-label="Appeler MIRAJ">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          <span data-content-key="contact_phone">+216 20 309 212</span>
-        </a>
+        <a href="tel:+21620309212" class="nav-phone-num" data-content-key="contact_phone">+216 20 309 212</a>
         <a href="#contact" class="btn-black-pill">Confier un dossier <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
       </div>
     </nav>
@@ -2029,23 +1989,25 @@
     <!-- 1) Surtitre + H1 + sous-titre -->
     <div class="hero-v2-text reveal reveal--left">
       <div class="section-eyebrow">
-        <span data-content-key="hero_badge">Cabinet de recouvrement et d'assistance juridique</span>
+        <span data-content-key="hero_badge">— CABINET DE RECOUVREMENT — TUNISIE &amp; INTERNATIONAL</span>
       </div>
 
       <h1>
-        Prenez une longueur d'avance<br>
-        <em class="text-emerald-italic">sur vos créances impayées</em>
+        Vos impayés,<br>
+        <em class="text-emerald-italic">recouvrés.</em><br>
+        Votre trésorerie,<br>
+        protégée.
       </h1>
 
       <p class="hero-v2-sub" data-content-key="hero_subtitle">
-        En période de tension économique, booster votre niveau de cash disponible est vital. <strong>Honoraires uniquement au résultat.</strong>
+        Nous gérons l'intégralité de vos créances — de la relance amiable à l'exécution judiciaire. <strong>Honoraires uniquement au résultat.</strong>
       </p>
 
     </div>
 
     <!-- 2) Photo du cabinet + badge flottant 75% -->
     <div class="hero-v2-image-wrap reveal">
-      <picture><source type="image/webp" srcset="assets/img/hero.webp"><img src="assets/img/hero.jpg" alt="Signature d'un accord de recouvrement au cabinet MIRAJ — stylo, contrat, marteau de justice et balance dorée sur un bureau en bois" fetchpriority="high" decoding="async" width="1200" height="655"></picture>
+      <img src="assets/img/hero.jpg" alt="Signature d'un accord de recouvrement au cabinet MIRAJ — stylo, contrat, marteau de justice et balance dorée sur un bureau en bois" fetchpriority="high">
       
       <div class="hero-badge-float">
         <span>Prise en charge sous 48h</span>
@@ -2096,15 +2058,8 @@
     </div>
 
     <div class="cabinet-image-wrap reveal reveal--left">
-      <div class="cabinet-image-inner cabinet-carousel" id="cabinetCarousel">
-        <picture><source type="image/webp" srcset="assets/img/cabinet-1.webp"><img class="cabinet-slide is-active" src="assets/img/cabinet-1.jpg" alt="Consultation au cabinet : marteau de justice, contrat et signature" loading="lazy" decoding="async" width="1200" height="655"></picture>
-        <picture><source type="image/webp" srcset="assets/img/cabinet-2.webp"><img class="cabinet-slide" src="assets/img/cabinet-2.jpg" alt="Réunion d'équipe autour d'un dossier de recouvrement" loading="lazy" decoding="async" width="1200" height="655"></picture>
-        <picture><source type="image/webp" srcset="assets/img/cabinet-3.webp"><img class="cabinet-slide" src="assets/img/cabinet-3.jpg" alt="Bureau juridique MIRAJ — dossiers, balance et marteau" loading="lazy" decoding="async" width="1200" height="655"></picture>
-        <div class="cabinet-carousel-dots" role="tablist" aria-label="Photos du cabinet">
-          <button type="button" class="is-active" aria-label="Photo 1"></button>
-          <button type="button" aria-label="Photo 2"></button>
-          <button type="button" aria-label="Photo 3"></button>
-        </div>
+      <div class="cabinet-image-inner">
+        <img src="assets/img/cabinet.jpg" alt="L'équipe MIRAJ Recouvrement en réunion de travail autour d'un dossier" loading="lazy">
       </div>
       <div class="cabinet-badge-float">
         <div class="cabinet-badge-float-num"><span class="counter" data-target="15" data-prefix="+">+15</span></div>
@@ -2114,7 +2069,7 @@
 
     <div class="cabinet-content-body reveal reveal--right">
       <p class="cabinet-lead">
-        Fort d'une expertise de plus de 15 ans, MIRAJ transforme vos impayés en trésorerie : relance diplomatique d'abord, exécution légale ensuite — sans jamais abîmer vos relations commerciales.
+        Depuis plus de 15 ans, MIRAJ transforme vos impayés en trésorerie : relance diplomatique d'abord, exécution légale ensuite — sans jamais abîmer vos relations commerciales.
       </p>
       <p>
         Cabinet tunisien de référence, nous intervenons sur l'ensemble du processus de recouvrement : relance commerciale, recouvrement amiable, contentieux, conseil juridique, études de solvabilité et formation de vos équipes.
@@ -2126,8 +2081,8 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M5 7l-3 7a3.5 3.5 0 0 0 6 0L5 7z"/><path d="M19 7l-3 7a3.5 3.5 0 0 0 6 0l-3-7z"/><path d="M8 21h8"/></svg>
           </div>
           <div>
-            <h3>Objet social</h3>
-            <p>Consulting, Recouvrement, Formation et assistance juridique.</p>
+            <h3>Amiable &amp; Judiciaire</h3>
+            <p>Relance diplomatique prioritaire &amp; exécution légale.</p>
           </div>
         </div>
         <div class="cabinet-authority-card">
@@ -2135,8 +2090,8 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
           </div>
           <div>
-            <h3>Champ d'application</h3>
-            <p>PME, grands comptes, profession libérale et institutions financières.</p>
+            <h3>B2B &amp; B2C</h3>
+            <p>PME, grands comptes &amp; institutions financières.</p>
           </div>
         </div>
         <div class="cabinet-authority-card">
@@ -2144,8 +2099,8 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <div>
-            <h3>Territoire</h3>
-            <p>Gestion locale sur tout le territoire tunisien et créances internationales.</p>
+            <h3>Tunisie &amp; Export</h3>
+            <p>Gestion locale sur tout le territoire et créances internationales.</p>
           </div>
         </div>
         <div class="cabinet-authority-card">
@@ -2154,7 +2109,7 @@
           </div>
           <div>
             <h3>Conformité &amp; Déontologie</h3>
-            <p>Strict respect des normes légales et confidentialité des secrets professionnels.</p>
+            <p>Strict respect des normes légales BCT et du secret bancaire.</p>
           </div>
         </div>
       </div>
@@ -2176,7 +2131,7 @@
         <!-- 01 : Notre Équipe -->
         <article class="why-card reveal" style="--d:0s">
           <div class="why-img-wrap">
-            <picture><source type="image/webp" srcset="assets/img/why-equipe.webp"><img src="assets/img/why-equipe.jpg" alt="Nos consultants analysant ensemble les pièces d'un dossier client" loading="lazy" decoding="async" width="1200" height="655"></picture>
+            <img src="assets/img/why-equipe.jpg" alt="Nos consultants analysant ensemble les pièces d'un dossier client" loading="lazy">
             <div class="why-img-gradient"></div>
           </div>
           <div class="why-icon-badge">
@@ -2196,7 +2151,7 @@
         <!-- 02 : Notre Démarche -->
         <article class="why-card reveal" style="--d:.12s">
           <div class="why-img-wrap">
-            <picture><source type="image/webp" srcset="assets/img/why-demarche.webp"><img src="assets/img/why-demarche.jpg" alt="Consultant MIRAJ expliquant au client le rapport financier d'un dossier" loading="lazy" decoding="async" width="1200" height="655"></picture>
+            <img src="assets/img/why-demarche.jpg" alt="Consultant MIRAJ expliquant au client le rapport financier d'un dossier" loading="lazy">
             <div class="why-img-gradient"></div>
           </div>
           <div class="why-icon-badge">
@@ -2216,7 +2171,7 @@
         <!-- 03 : Notre Objectif -->
         <article class="why-card reveal" style="--d:.24s">
           <div class="why-img-wrap">
-            <picture><source type="image/webp" srcset="assets/img/why-objectif.webp"><img src="assets/img/why-objectif.jpg" alt="Bureau de travail MIRAJ — documents financiers, tableau de bord et outils d'analyse" loading="lazy" decoding="async" width="1200" height="655"></picture>
+            <img src="assets/img/why-objectif.jpg" alt="Bureau de travail MIRAJ — documents financiers, tableau de bord et outils d'analyse" loading="lazy">
             <div class="why-img-gradient"></div>
           </div>
           <div class="why-icon-badge">
@@ -2245,22 +2200,22 @@
   </div>
   <div class="logos-marquee" aria-label="Références clients">
     <div class="logos-track">
-      <span class="logo-item"><picture><source type="image/webp" srcset="assets/img/client%20ref%201.webp"><img src="assets/img/client%20ref%201.png" alt="Client référence 1 — Ils nous font confiance" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item"><picture><source type="image/webp" srcset="assets/img/client%20ref%202.webp"><img src="assets/img/client%20ref%202.png" alt="Client référence 2 — Ils nous font confiance" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item"><picture><source type="image/webp" srcset="assets/img/client%20ref%203.webp"><img src="assets/img/client%20ref%203.png" alt="Client référence 3 — Ils nous font confiance" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item"><picture><source type="image/webp" srcset="assets/img/csm-gias.webp"><img src="assets/img/csm-gias.png" alt="CSM GIAS — Ils nous font confiance" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item"><picture><source type="image/webp" srcset="assets/img/satem.webp"><img src="assets/img/satem.png" alt="Satem — Ils nous font confiance" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item"><picture><source type="image/webp" srcset="assets/img/client%20ref%205.webp"><img src="assets/img/client%20ref%205.png" alt="Client référence 5 — Ils nous font confiance" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item"><picture><source type="image/webp" srcset="assets/img/client%20ref%206.webp"><img src="assets/img/client%20ref%206.png" alt="Client référence 6 — Ils nous font confiance" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item"><picture><source type="image/webp" srcset="assets/img/client%20ref%207.webp"><img src="assets/img/client%20ref%207.png" alt="Client référence 7 — Ils nous font confiance" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/client%20ref%201.webp"><img src="assets/img/client%20ref%201.png" alt="" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/client%20ref%202.webp"><img src="assets/img/client%20ref%202.png" alt="" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/client%20ref%203.webp"><img src="assets/img/client%20ref%203.png" alt="" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/csm-gias.webp"><img src="assets/img/csm-gias.png" alt="" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/satem.webp"><img src="assets/img/satem.png" alt="" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/client%20ref%205.webp"><img src="assets/img/client%20ref%205.png" alt="" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/client%20ref%206.webp"><img src="assets/img/client%20ref%206.png" alt="" loading="lazy" decoding="async" width="280" height="88"></picture></span>
-      <span class="logo-item" aria-hidden="true"><picture><source type="image/webp" srcset="assets/img/client%20ref%207.webp"><img src="assets/img/client%20ref%207.png" alt="" loading="lazy" decoding="async" width="280" height="88"></picture></span>
+      <span class="logo-item"><img src="assets/img/client%20ref%201.png" alt="Client référence 1 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/client%20ref%202.png" alt="Client référence 2 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/client%20ref%203.png" alt="Client référence 3 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/csm-gias.png" alt="CSM GIAS — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/satem.png" alt="Satem — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/client%20ref%205.png" alt="Client référence 5 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/client%20ref%206.png" alt="Client référence 6 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item"><img src="assets/img/client%20ref%207.png" alt="Client référence 7 — Ils nous font confiance" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%201.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%202.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%203.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/csm-gias.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/satem.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%205.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%206.png" alt="" loading="lazy"></span>
+      <span class="logo-item" aria-hidden="true"><img src="assets/img/client%20ref%207.png" alt="" loading="lazy"></span>
     </div>
   </div>
 </section>
@@ -2359,7 +2314,7 @@
           <h3>Études commerciales et financières</h3>
           <p>Avant toute procédure, nos études suivies de nos analyses vous permettent de choisir la meilleure stratégie de recouvrement, vous évitant des démarches coûteuses et hasardeuses. Il est aussi possible de prévenir en amont le risque client en évaluant, grâce à nos outils d'étude, la santé financière de votre clientèle.</p>
         </div>
-        <div class="domain-visual"><picture><source type="image/webp" srcset="assets/img/service-etudes.webp"><img src="assets/img/service-etudes.jpg" alt="Étude financière d'un dossier : notes de synthèse, calculatrice et tableaux d'analyse" loading="lazy" decoding="async" width="1200" height="655"></picture></div>
+        <div class="domain-visual"><img src="assets/img/service-etudes.jpg" alt="Étude financière d'un dossier : notes de synthèse, calculatrice et tableaux d'analyse" loading="lazy"></div>
       </div>
 
       <div class="tab-panel" id="panel-recouvrement" role="tabpanel">
@@ -2373,7 +2328,7 @@
             <li><strong>Suivi &amp; reporting</strong> — un interlocuteur dédié vous informe à chaque étape de l'avancement de votre dossier.</li>
           </ul>
         </div>
-        <div class="domain-visual"><picture><source type="image/webp" srcset="assets/img/service-recouvrement.webp"><img src="assets/img/service-recouvrement.jpg" alt="Recouvrement de créances : marteau de justice, balance et dossier de contentieux sur un bureau" loading="lazy" decoding="async" width="1200" height="655"></picture></div>
+        <div class="domain-visual"><img src="assets/img/service-recouvrement.jpg" alt="Recouvrement de créances : marteau de justice, balance et dossier de contentieux sur un bureau" loading="lazy"></div>
       </div>
 
       <div class="tab-panel" id="panel-relance" role="tabpanel">
@@ -2387,7 +2342,7 @@
             <li><strong>Reporting régulier</strong> — tableaux de bord et comptes-rendus sur l'état de votre portefeuille créances pour une visibilité totale.</li>
           </ul>
         </div>
-        <div class="domain-visual"><picture><source type="image/webp" srcset="assets/img/service-relance.webp"><img src="assets/img/service-relance.jpg" alt="Poste de relance commerciale : casque téléphonique, appels et suivi des impayés" loading="lazy" decoding="async" width="1200" height="655"></picture></div>
+        <div class="domain-visual"><img src="assets/img/service-relance.jpg" alt="Poste de relance commerciale : casque téléphonique, appels et suivi des impayés" loading="lazy"></div>
       </div>
 
       <div class="tab-panel" id="panel-formation" role="tabpanel">
@@ -2401,7 +2356,7 @@
             <li><strong>Accompagnement contentieux</strong> — orientation et suivi dans les procédures judiciaires en lien avec nos partenaires avocats.</li>
           </ul>
         </div>
-        <div class="domain-visual"><picture><source type="image/webp" srcset="assets/img/service-formation.webp"><img src="assets/img/service-formation.jpg" alt="Formation MIRAJ : conseil juridique et analyse d'un contrat avec les équipes clientes" loading="lazy" decoding="async" width="1200" height="655"></picture></div>
+        <div class="domain-visual"><img src="assets/img/service-formation.jpg" alt="Formation MIRAJ : conseil juridique et analyse d'un contrat avec les équipes clientes" loading="lazy"></div>
       </div>
     </div>
   </div>
@@ -2607,17 +2562,18 @@
               </div>
               <div class="guide-cover-bottom">
                 <span class="guide-cover-tag">Amiable</span>
-                <div class="guide-cover-title">Recouvrement amiable</div>
+                <div class="guide-cover-title">Guide du recouvrement amiable</div>
                 <p class="guide-cover-desc">Maîtriser les étapes, la posture et les leviers de négociation pour encaisser rapidement sans conflit.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="guide-card-body">
-          <h3>Recouvrement amiable</h3>
+          <h3>Guide du recouvrement amiable</h3>
           <div class="guide-card-footer">
-                        <button class="guide-btn-dl" onclick="openDownloadModal('amiable')" aria-label="Télécharger">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            <button class="guide-btn-dl" onclick="openDownloadModal('amiable')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Télécharger le guide</span>
             </button>
             <span class="guide-meta-sub">PDF · Gratuit · Accès immédiat</span>
           </div>
@@ -2648,8 +2604,9 @@
         <div class="guide-card-body">
           <h3>Psychologie du recouvrement</h3>
           <div class="guide-card-footer">
-                        <button class="guide-btn-dl" onclick="openDownloadModal('psychologie')" aria-label="Télécharger">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            <button class="guide-btn-dl" onclick="openDownloadModal('psychologie')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Télécharger le guide</span>
             </button>
             <span class="guide-meta-sub">PDF · Gratuit · Accès immédiat</span>
           </div>
@@ -2680,8 +2637,9 @@
         <div class="guide-card-body">
           <h3>Le recouvrement juridique</h3>
           <div class="guide-card-footer">
-                        <button class="guide-btn-dl" onclick="openDownloadModal('juridique')" aria-label="Télécharger">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            <button class="guide-btn-dl" onclick="openDownloadModal('juridique')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Télécharger le guide</span>
             </button>
             <span class="guide-meta-sub">PDF · Gratuit · Accès immédiat</span>
           </div>
@@ -2703,7 +2661,7 @@
         <a href="https://wa.me/21620309212?text=Bonjour%20MIRAJ%20Recouvrement%2C%20j%27ai%20une%20question%20sur%20le%20recouvrement%20de%20mes%20cr%C3%A9ances."
            data-content-key="contact_whatsapp" target="_blank" rel="noopener noreferrer">discutez sur WhatsApp.</a></p>
       <div class="faq-image-wrap">
-        <picture><source type="image/webp" srcset="assets/img/faq.webp"><img src="assets/img/faq.jpg" alt="Conseillère juridique MIRAJ avec micro-casque à son bureau, en pleine conversation téléphonique avec un client" loading="lazy" decoding="async" width="1200" height="655"></picture>
+        <img src="assets/img/faq.jpg" alt="Conseillère juridique MIRAJ avec micro-casque à son bureau, en pleine conversation téléphonique avec un client" loading="lazy">
       </div>
     </div>
 
@@ -2785,6 +2743,7 @@
 <section class="contact-section-v2" id="contact">
   <div class="container">
     <div class="contact-card-v2 reveal">
+      <!-- Left Dark Column -->
       <div class="contact-dark-side">
         <div>
           <div class="section-eyebrow">
@@ -2800,13 +2759,24 @@
               <div class="contact-info-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
               </div>
-              <div class="contact-info-text">
-                <h4>Téléphone</h4>
-                <a href="tel:+21620309212"><span data-content-key="contact_phone">(+216) 20 309 212</span></a>
-              </div>
+              <span data-content-key="contact_phone">(+216) 20 309 212</span>
             </div>
 
-            <div class="contact-info-row contact-info-row--wa">
+            <div class="contact-info-row">
+              <div class="contact-info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </div>
+              <span data-content-key="contact_email">info@miraj-recouv.com</span>
+            </div>
+
+            <div class="contact-info-row">
+              <div class="contact-info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </div>
+              <span data-content-key="contact_address">62, Avenue de France, Ben Arous</span>
+            </div>
+
+            <div class="contact-info-row">
               <div class="contact-info-icon contact-info-icon--wa">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.347-.347.52-.52.174-.174.232-.297.347-.495.115-.198.057-.371-.03-.52-.086-.148-.66-1.59-.904-2.176-.239-.578-.482-.5-.66-.51-.172-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               </div>
@@ -2817,26 +2787,15 @@
                    target="_blank" rel="noopener noreferrer">+216 20 309 212</a>
               </div>
             </div>
+          </div>
 
-            <div class="contact-info-row">
-              <div class="contact-info-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              </div>
-              <div class="contact-info-text">
-                <h4>Email</h4>
-                <a href="mailto:info@miraj-recouv.com"><span data-content-key="contact_email">info@miraj-recouv.com</span></a>
-              </div>
-            </div>
-
-            <div class="contact-info-row">
-              <div class="contact-info-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              </div>
-              <div class="contact-info-text">
-                <h4>Adresse</h4>
-                <span data-content-key="contact_address">62, Avenue de France, Ben Arous</span>
-              </div>
-            </div>
+          <div class="contact-wa-cta">
+            <a href="https://wa.me/21620309212?text=Bonjour%20MIRAJ%20Recouvrement%2C%20je%20souhaite%20un%20audit%20gratuit%20de%20mon%20dossier%20d%27impay%C3%A9s."
+               class="wa-pill" data-content-key="contact_whatsapp"
+               target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.347-.347.52-.52.174-.174.232-.297.347-.495.115-.198.057-.371-.03-.52-.086-.148-.66-1.59-.904-2.176-.239-.578-.482-.5-.66-.51-.172-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              <span>Discuter sur WhatsApp</span>
+            </a>
           </div>
         </div>
 
@@ -2846,35 +2805,29 @@
         </div>
       </div>
 
+      <!-- Right Light Form Column -->
       <div class="contact-light-side">
-        <form class="contact-form-v2" id="contactForm" novalidate>
+        <form class="contact-form-v2" id="contactForm">
           <div class="hp-field" aria-hidden="true"><label>Site web<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
           <div class="form-row-2">
             <div class="form-group-v2">
-              <label for="cName">Nom complet *</label>
-              <input type="text" id="cName" name="nom" autocomplete="name" placeholder="Votre nom" required minlength="2">
+              <label for="cName">Nom complet</label>
+              <input type="text" id="cName" placeholder="Votre nom" required>
             </div>
             <div class="form-group-v2">
-              <label for="cTel">Téléphone *</label>
-              <input type="tel" id="cTel" name="telephone" autocomplete="tel" placeholder="+216 20 000 000" required>
-            </div>
-          </div>
-
-          <div class="form-row-2">
-            <div class="form-group-v2">
-              <label for="cCompany">Raison sociale *</label>
-              <input type="text" id="cCompany" name="entreprise" autocomplete="organization" placeholder="Nom de votre société" required>
-            </div>
-            <div class="form-group-v2">
-              <label for="cEmail">Email professionnel *</label>
-              <input type="email" id="cEmail" name="email" autocomplete="email" placeholder="vous@entreprise.com" required>
+              <label for="cTel">Téléphone</label>
+              <input type="tel" id="cTel" placeholder="+216 ...">
             </div>
           </div>
 
           <div class="form-group-v2">
+            <label for="cEmail">Email professionnel</label>
+            <input type="email" id="cEmail" placeholder="vous@entreprise.com" required>
+          </div>
+
+          <div class="form-group-v2">
             <label for="cSubject">Type de dossier</label>
-            <select id="cSubject" name="service">
-              <option value="" disabled selected>Choisir un type de dossier</option>
+            <select id="cSubject">
               <option value="Recouvrement amiable">Recouvrement amiable</option>
               <option value="Recouvrement judiciaire">Recouvrement judiciaire</option>
               <option value="Externalisation de relance">Externalisation de la relance</option>
@@ -2883,16 +2836,21 @@
           </div>
 
           <div class="form-group-v2">
-            <label for="cMessage">Message *</label>
-            <textarea id="cMessage" name="message" placeholder="Montant, ancienneté des créances, contexte…" required minlength="5"></textarea>
+            <label for="cMessage">Message</label>
+            <textarea id="cMessage" placeholder="Décrivez votre situation..."></textarea>
           </div>
 
-          <p id="contactFormError" class="form-error-v2" hidden></p>
-
-          <button type="submit" class="btn-black-pill" style="width: 100%; justify-content: center; padding: 14px; margin-top: 4px;">
+          <button type="submit" class="btn-black-pill" style="width: 100%; justify-content: center; padding: 14px; margin-top: 10px;">
             <span>Envoyer ma demande</span>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
+
+          <a href="https://wa.me/21620309212?text=Bonjour%20MIRAJ%20Recouvrement%2C%20je%20souhaite%20un%20audit%20gratuit%20de%20mon%20dossier%20d%27impay%C3%A9s."
+             class="wa-inline-link" data-content-key="contact_whatsapp"
+             target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.347-.347.52-.52.174-.174.232-.297.347-.495.115-.198.057-.371-.03-.52-.086-.148-.66-1.59-.904-2.176-.239-.578-.482-.5-.66-.51-.172-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span>Vous préférez discuter ? Écrivez-nous sur WhatsApp</span>
+          </a>
         </form>
       </div>
     </div>
@@ -2924,26 +2882,11 @@
     </div>
 
     <div>
-      <h4>Horaires</h4>
-      <ul class="footer-hours">
-        <li>Lun–Ven : 08:00–17:30</li>
-        <li>Sam : 08:00–14:00</li>
-      </ul>
-      <h4 style="margin-top:22px">Réseaux</h4>
-      <div class="footer-social">
-        <a href="https://wa.me/21620309212" data-content-key="contact_whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
-        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
-      </div>
-    </div>
-
-    <div>
       <h4>Contact &amp; Accès</h4>
       <ul>
         <li data-content-key="contact_phone">+216 20 309 212</li>
         <li data-content-key="contact_email">info@miraj-recouv.com</li>
         <li data-content-key="contact_address">62, Avenue de France, Ben Arous</li>
-        <li><a class="footer-map-link" href="https://www.google.com/maps/search/?api=1&amp;query=62+Avenue+de+France,+Ben+Arous" target="_blank" rel="noopener noreferrer">Voir sur Google Maps</a></li>
         <li class="footer-wa-item">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.347-.347.52-.52.174-.174.232-.297.347-.495.115-.198.057-.371-.03-.52-.086-.148-.66-1.59-.904-2.176-.239-.578-.482-.5-.66-.51-.172-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           <span class="footer-wa-prefix">WhatsApp :</span>
@@ -3242,50 +3185,30 @@
   // ── Formulaire de contact → API ──────────────────────────────
   const contactForm = document.getElementById('contactForm') || document.querySelector('form.contact-form-v2');
   if (contactForm) {
-    const errBox = document.getElementById('contactFormError');
-    function showFormError(msg) {
-      if (!errBox) return;
-      errBox.hidden = !msg;
-      errBox.textContent = msg || '';
-    }
     contactForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = this.querySelector('button[type="submit"]');
       const orig = btn.innerHTML;
-      showFormError('');
-      this.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
-
-      const nom = (document.getElementById('cName') || {}).value || '';
-      const email = (document.getElementById('cEmail') || {}).value || '';
-      const message = (document.getElementById('cMessage') || {}).value || '';
-      const companyEl = document.getElementById('cCompany');
-      const telEl = document.getElementById('cTel');
-      let valid = true;
-      if (nom.trim().length < 2) { document.getElementById('cName').classList.add('error'); valid = false; }
-      if (telEl && telEl.value.replace(/\D/g, '').length < 8) { telEl.classList.add('error'); valid = false; }
-      if (companyEl && companyEl.value.trim().length < 2) { companyEl.classList.add('error'); valid = false; }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) { document.getElementById('cEmail').classList.add('error'); valid = false; }
-      if (message.trim().length < 5) { document.getElementById('cMessage').classList.add('error'); valid = false; }
-      if (!valid) { showFormError('Merci de remplir tous les champs obligatoires.'); return; }
-
       btn.innerHTML = '<span>Envoi…</span>'; btn.disabled = true;
 
       try {
+        const companyEl = document.getElementById('cCompany');
+        const telEl = document.getElementById('cTel');
         const res = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            nom:        nom,
-            entreprise: companyEl ? companyEl.value : '',
-            email:      email,
-            telephone:  telEl ? telEl.value : '',
-            service:    document.getElementById('cSubject') ? document.getElementById('cSubject').value : '',
-            message:    message,
-            website:    (document.querySelector('#contactForm [name="website"]') ? document.querySelector('#contactForm [name="website"]').value : ''),
-            _t:         PAGE_LOADED_AT
+            nom:       document.getElementById('cName') ? document.getElementById('cName').value : '',
+            entreprise:companyEl ? companyEl.value : '',
+            email:     document.getElementById('cEmail') ? document.getElementById('cEmail').value : '',
+            telephone: telEl ? telEl.value : '',
+            service:   document.getElementById('cSubject') ? document.getElementById('cSubject').value : '',
+            message:   document.getElementById('cMessage') ? document.getElementById('cMessage').value : '',
+            website:   (document.querySelector('#contactForm [name="website"]') ? document.querySelector('#contactForm [name="website"]').value : ''),
+            _t:        PAGE_LOADED_AT
           })
         });
-        const data = await res.json().catch(() => ({}));
+        const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Erreur serveur');
 
         btn.innerHTML = '<span>✓ Message envoyé !</span>';
@@ -3294,7 +3217,7 @@
         setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.disabled = false; }, 4000);
       } catch (err) {
         btn.innerHTML = orig; btn.disabled = false;
-        showFormError(err.message || 'Impossible d’envoyer le formulaire.');
+        alert('Erreur : ' + err.message + '\n\nVérifiez que le serveur est bien démarré (node server.js)');
       }
     });
   }
@@ -3339,23 +3262,6 @@
           }
         });
       }
-      if (content.site_logo) {
-        document.querySelectorAll('img.brand-logo').forEach((img) => { img.src = content.site_logo; });
-      }
-      document.querySelectorAll('[data-seo]').forEach((el) => {
-        const val = content[el.getAttribute('data-seo')];
-        if (!val) return;
-        if (el.tagName === 'TITLE') el.textContent = val;
-        else if (el.tagName === 'META') el.setAttribute('content', val);
-        else if (el.tagName === 'LINK') el.setAttribute('href', val);
-      });
-      document.querySelectorAll('.counter[data-content-key]').forEach((el) => {
-        const raw = String(el.textContent || '');
-        const num = parseFloat(raw.replace(/[^\d.,-]/g, '').replace(',', '.'));
-        if (!isNaN(num)) el.dataset.target = String(Math.round(num));
-        el.dataset.prefix = raw.match(/^[^\d]*/)?.[0] || '';
-        el.dataset.suffix = raw.match(/[^\d]*$/)?.[0] || '';
-      });
     } catch (e) { /* mode statique : on conserve le contenu par défaut */ }
   }
   loadDynamicContent();

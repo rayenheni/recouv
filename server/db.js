@@ -3,26 +3,22 @@
 //  Initialisation SQLite + helpers
 // ============================================================
 
-const JsonDatabase = require('./json-db');
+const Database = require('better-sqlite3');
 const bcrypt   = require('bcryptjs');
 const path     = require('path');
 const fs       = require('fs');
 
+// Dossier data (compatible Vercel & Netlify serverless /tmp)
 const isServerless = Boolean(process.env.VERCEL || process.env.NETLIFY || process.env.NOW_BUILDER);
 const dataDir = isServerless ? '/tmp' : path.join(__dirname, 'data');
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 
+const DB_PATH = path.join(dataDir, 'miraj.db');
+
 let db;
 
 function getDB() {
-  if (db) return db;
-  try {
-    const Sqlite = require('better-sqlite3');
-    db = new Sqlite(path.join(dataDir, 'miraj.db'));
-  } catch {
-    console.warn('⚠️  better-sqlite3 indisponible — stockage JSON (server/data/miraj.json)');
-    db = new JsonDatabase(path.join(dataDir, 'miraj.json'));
-  }
+  if (!db) db = new Database(DB_PATH);
   return db;
 }
 
@@ -84,13 +80,7 @@ function initDB() {
       contact_email: "info@miraj-recouv.com",
       contact_whatsapp: "+216 20 309 212",
       contact_address: "62, Avenue de France, Ben Arous, Tunisie",
-      about_text: "Cabinet de recouvrement & contentieux en Tunisie et à l'international. Honoraires 100% au résultat.",
-      site_logo: "/assets/img/logo-miraj.svg",
-      seo_title: "MIRAJ Recouvrement — Recouvrement de créances en Tunisie & International",
-      seo_desc: "Société leader de recouvrement de créances en Tunisie. Recouvrement amiable et judiciaire, relance commerciale, études de solvabilité. Honoraires au résultat (no win, no fee). +15 ans d'expérience.",
-      seo_keywords: "recouvrement de creances tunisie, recouvrement amiable tunisie, recouvrement judiciaire tunis, agence de recouvrement tunisie",
-      seo_canonical: "https://miraj-recouv.com/",
-      seo_geo: "Ben Arous, Tunisie (TN-13) — Lat: 36.7531, Long: 10.2189"
+      about_text: "Cabinet de recouvrement & contentieux en Tunisie et à l'international. Honoraires 100% au résultat."
     };
     const stmt = db.prepare('INSERT OR IGNORE INTO site_content (key, value) VALUES (?, ?)');
     for (const [k, v] of Object.entries(defaultContent)) {

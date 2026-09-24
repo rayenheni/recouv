@@ -5,8 +5,6 @@
 
 const router    = require('express').Router();
 const bcrypt    = require('bcryptjs');
-const fs        = require('fs');
-const path      = require('path');
 const { getDB } = require('../db');
 const { signToken, requireAuth } = require('../middleware/auth');
 const { loginLimiter }           = require('../middleware/security');
@@ -31,48 +29,10 @@ router.post('/login', loginLimiter, (req, res) => {
 // ── Toutes les routes suivantes nécessitent un JWT valide ──────
 router.use(requireAuth);
 
-function parseId(raw) {
-  const n = parseInt(raw, 10);
-  return Number.isInteger(n) && n > 0 ? n : null;
-}
-
-function localToday() {
-  const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${y}-${m}-${day}`;
-}
-
-function listAndCount(table, req, extraLikeCols) {
-  const db = getDB();
-  const { q, read, limit = 50, offset = 0 } = req.query;
-  let limitNum = parseInt(limit, 10);
-  if (isNaN(limitNum) || limitNum < 1) limitNum = 50;
-  if (limitNum > 200) limitNum = 200;
-  let offsetNum = parseInt(offset, 10);
-  if (isNaN(offsetNum) || offsetNum < 0) offsetNum = 0;
-
-  let where = ' WHERE 1=1';
-  const params = [];
-  if (q && typeof q === 'string' && q.trim()) {
-    const like = `%${q.trim()}%`;
-    where += ` AND (${extraLikeCols.map(c => `${c} LIKE ?`).join(' OR ')})`;
-    extraLikeCols.forEach(() => params.push(like));
-  }
-  if (read === '0') where += ' AND is_read = 0';
-  if (read === '1') where += ' AND is_read = 1';
-
-  const rows = db.prepare(`SELECT * FROM ${table}${where} ORDER BY created_at DESC LIMIT ? OFFSET ?`)
-    .all(...params, limitNum, offsetNum);
-  const total = db.prepare(`SELECT COUNT(*) as n FROM ${table}${where}`).get(...params).n;
-  return { rows, total };
-}
-
 // ── GET /api/admin/stats ──────────────────────────────────────
 router.get('/stats', (_req, res) => {
   const db = getDB();
-  const today = localToday();
+  const today = new Date().toISOString().slice(0, 10);
 
   const stats = {
     contacts:         db.prepare("SELECT COUNT(*) as n FROM contacts").get().n,
@@ -85,41 +45,95 @@ router.get('/stats', (_req, res) => {
   res.json(stats);
 });
 
+// ── GET /api/admin/contacts ───────────────────────────────────
 router.get('/contacts', (req, res) => {
-  res.json(listAndCount('contacts', req, ['nom', 'email', 'entreprise', 'message']));
+  const db = getDB();
+  const { q, read, limit = 50, offset = 0 } = req.query;
+
+  let limitNum = parseInt(limit, 10);
+  if (isNaN(limitNum) || limitNum < 1) limitNum = 50;
+  if (limitNum > 200) limitNum = 200;
+
+  let offsetNum = parseInt(offset, 10);
+  if (isNaN(offsetNum) || offsetNum < 0) offsetNum = 0;
+
+  let sql = 'SELECT * FROM contacts WHERE 1=1';
+  const params = [];
+
+  if (q && typeof q === 'string') {
+    sql += ' AND (nom LIKE ? OR email LIKE ? OR entreprise LIKE ? OR message LIKE ?)';
+    const like = `%${q.trim()}%`;
+    params.push(like, like, like, like);
+  }
+  if (read === '0') { sql += ' AND is_read = 0'; }
+  if (read === '1') { sql += ' AND is_read = 1'; }
+
+  sql += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
+  params.push(limitNum, offsetNum);
+
+  const rows  = db.prepare(sql).all(...params);
+  const total = db.prepare('SELECT COUNT(*) as n FROM contacts').get().n;
+  res.json({ rows, total });
 });
 
+// ── GET /api/admin/downloads ──────────────────────────────────
 router.get('/downloads', (req, res) => {
-  res.json(listAndCount('downloads', req, ['nom', 'email', 'entreprise', 'guide']));
+  const db = getDB();
+  const { q, read, limit = 50, offset = 0 } = req.query;
+
+  let limitNum = parseInt(limit, 10);
+  if (isNaN(limitNum) || limitNum < 1) limitNum = 50;
+  if (limitNum > 200) limitNum = 200;
+
+  let offsetNum = parseInt(offset, 10);
+  if (isNaN(offsetNum) || offsetNum < 0) offsetNum = 0;
+
+  let sql = 'SELECT * FROM downloads WHERE 1=1';
+  const params = [];
+
+  if (q && typeof q === 'string') {
+    sql += ' AND (nom LIKE ? OR email LIKE ? OR entreprise LIKE ? OR guide LIKE ?)';
+    const like = `%${q.trim()}%`;
+    params.push(like, like, like, like);
+  }
+  if (read === '0') { sql += ' AND is_read = 0'; }
+  if (read === '1') { sql += ' AND is_read = 1'; }
+
+  sql += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
+  params.push(limitNum, offsetNum);
+
+  const rows  = db.prepare(sql).all(...params);
+  const total = db.prepare('SELECT COUNT(*) as n FROM downloads').get().n;
+  res.json({ rows, total });
 });
 
+// ── PATCH /api/admin/contacts/:id/read ───────────────────────
 router.patch('/contacts/:id/read', (req, res) => {
-  const id = parseId(req.params.id);
-  if (!id) return res.status(400).json({ error: 'Identifiant invalide' });
+  const db  = getDB();
   const val = req.body && req.body.is_read !== undefined ? (req.body.is_read ? 1 : 0) : 1;
-  getDB().prepare('UPDATE contacts SET is_read = ? WHERE id = ?').run(val, id);
+  db.prepare('UPDATE contacts SET is_read = ? WHERE id = ?').run(val, req.params.id);
   res.json({ success: true });
 });
 
+// ── PATCH /api/admin/downloads/:id/read ──────────────────────
 router.patch('/downloads/:id/read', (req, res) => {
-  const id = parseId(req.params.id);
-  if (!id) return res.status(400).json({ error: 'Identifiant invalide' });
+  const db  = getDB();
   const val = req.body && req.body.is_read !== undefined ? (req.body.is_read ? 1 : 0) : 1;
-  getDB().prepare('UPDATE downloads SET is_read = ? WHERE id = ?').run(val, id);
+  db.prepare('UPDATE downloads SET is_read = ? WHERE id = ?').run(val, req.params.id);
   res.json({ success: true });
 });
 
+// ── DELETE /api/admin/contacts/:id ───────────────────────────
 router.delete('/contacts/:id', (req, res) => {
-  const id = parseId(req.params.id);
-  if (!id) return res.status(400).json({ error: 'Identifiant invalide' });
-  getDB().prepare('DELETE FROM contacts WHERE id = ?').run(id);
+  const db = getDB();
+  db.prepare('DELETE FROM contacts WHERE id = ?').run(req.params.id);
   res.json({ success: true });
 });
 
+// ── DELETE /api/admin/downloads/:id ──────────────────────────
 router.delete('/downloads/:id', (req, res) => {
-  const id = parseId(req.params.id);
-  if (!id) return res.status(400).json({ error: 'Identifiant invalide' });
-  getDB().prepare('DELETE FROM downloads WHERE id = ?').run(id);
+  const db = getDB();
+  db.prepare('DELETE FROM downloads WHERE id = ?').run(req.params.id);
   res.json({ success: true });
 });
 
@@ -210,8 +224,7 @@ router.post('/content', (req, res) => {
     'contact_phone',
     'contact_email',
     'contact_whatsapp',
-    'contact_address',
-    'site_logo'
+    'contact_address'
   ];
 
   const db = getDB();
