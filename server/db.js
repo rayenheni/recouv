@@ -3,22 +3,26 @@
 //  Initialisation SQLite + helpers
 // ============================================================
 
-const Database = require('better-sqlite3');
+const JsonDatabase = require('./json-db');
 const bcrypt   = require('bcryptjs');
 const path     = require('path');
 const fs       = require('fs');
 
-// Dossier data (compatible Vercel & Netlify serverless /tmp)
 const isServerless = Boolean(process.env.VERCEL || process.env.NETLIFY || process.env.NOW_BUILDER);
 const dataDir = isServerless ? '/tmp' : path.join(__dirname, 'data');
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 
-const DB_PATH = path.join(dataDir, 'miraj.db');
-
 let db;
 
 function getDB() {
-  if (!db) db = new Database(DB_PATH);
+  if (db) return db;
+  try {
+    const Sqlite = require('better-sqlite3');
+    db = new Sqlite(path.join(dataDir, 'miraj.db'));
+  } catch {
+    console.warn('⚠️  better-sqlite3 indisponible — stockage JSON (server/data/miraj.json)');
+    db = new JsonDatabase(path.join(dataDir, 'miraj.json'));
+  }
   return db;
 }
 
