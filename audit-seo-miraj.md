@@ -326,3 +326,7 @@ app.use('/admin', (_req, res, next) => {
 3. **`<h1>` avec le mot-clé**, `sameAs` LinkedIn/Facebook, pages filles : ce sont des modifications de **contenu/structure**, hors du périmètre demandé.
 4. **Échappement des `&`** dans le corps du HTML (2 occurrences, rendu identique).
 5. **Déploiement Netlify/Vercel** : la protection `NON_PUBLIC` de `server.js` ne s'applique pas aux fichiers servis par la plateforme — publier uniquement les fichiers du site public dans ce cas.
+
+### 9.8 Mise à jour visuelle (26/09/2026)
+
+Les deux visuels d'ouverture (`hero.jpg` et `cabinet.jpg`) étaient les seuls de style **clair et photo-journalistique** face à 8 visuels **sombres, navy et dorés, surréels**. Ils ont été remplacés par des images du même registre : balance de justice dorée flottant dans un vide navy, particules lumineuses, lignes constellation, sans aucune figure humaine. Les dimensions natives sont conservées (1536×1024 et 1264×848), les attributs `alt` ont été réécrits pour décrire les nouveaux visuels, et `hero.webp`, `cabinet.webp` ainsi que `og-miraj.jpg` ont été régénérés.
