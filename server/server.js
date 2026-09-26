@@ -5,6 +5,7 @@
 
 const express = require('express');
 const cors    = require('cors');
+const compression = require('compression');
 const path    = require('path');
 const { initDB, createDefaultAdmin } = require('./db');
 const sec     = require('./middleware/security');
@@ -23,6 +24,9 @@ app.disable('x-powered-by');
 app.use(sec.securityHeaders);
 app.use(cors(sec.corsOptions));
 
+// ── Compression gzip/brotli ───────────────────────────────────
+app.use(compression());
+
 // ── Parsing JSON limité ──────────────────────────────────────
 app.use(express.json({ limit: '50kb' }));
 
@@ -33,10 +37,44 @@ app.use('/api', sec.sanitizeBody);
 // ── Static files ─────────────────────────────────────────────
 // Serve frontend (root) — en dev, pas de cache navigateur (preview toujours à jour)
 const isDevStatic = process.env.NODE_ENV !== 'production';
+
+// ── Fichiers non publics ──────────────────────────────────────
+// Le static racine publie le dépôt : on interdit explicitement l'accès au
+// code serveur, aux données (contacts, hash admin) et aux fichiers de travail.
+const NON_PUBLIC = [
+  /^\/server(\/|$)/i,
+  /^\/node_modules(\/|$)/i,
+  /^\/api\/.*\.js$/i,
+  /^\/package(-lock)?\.json$/i,
+  /^\/(netlify\.toml|vercel\.json)$/i,
+  /^\/.*\.(md|py|db|sqlite|sqlite3|log|ya?ml|lock)$/i,
+];
+app.use((req, res, next) => {
+  const p = decodeURIComponent(req.path);
+  if (NON_PUBLIC.some(re => re.test(p))) return res.status(404).type('text/plain').send('Not found');
+  next();
+});
+
+// Espace admin : jamais indexé (en-tête posé avant le static racine)
+app.use('/admin', (_req, res, next) => {
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  next();
+});
+
+// Assets (images, favicons…) : cache long en production, no-store en preview
+app.use('/assets', express.static(path.join(__dirname, '..', 'assets'), isDevStatic
+  ? { setHeaders(res) { res.setHeader('Cache-Control', 'no-store'); } }
+  : { maxAge: '1y', immutable: true }));
+
 app.use(express.static(path.join(__dirname, '..'), {
+  dotfiles: 'deny',
   setHeaders(res) { if (isDevStatic) res.setHeader('Cache-Control', 'no-store'); }
 }));
-// Serve admin panel
+
+// Favicon legacy (navigateurs/crawlers qui réclament /favicon.ico)
+app.get('/favicon.ico', (_req, res) => res.redirect(301, '/assets/img/favicon-48.png'));
+
+// Serve admin panel (l'en-tête X-Robots-Tag est posé plus haut, avant le static racine)
 app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
 
 // ── Routes API ────────────────────────────────────────────────

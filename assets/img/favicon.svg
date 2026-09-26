@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="34 6 309 309" width="512" height="512" role="img" aria-label="MIRAJ">
+  <defs>
+    <linearGradient id="mGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E7A13C"/>
+      <stop offset="45%" stop-color="#C6913A"/>
+      <stop offset="100%" stop-color="#7B8894"/>
+    </linearGradient>
+  </defs>
+  <g id="logo-mark">
+    <!-- Jambe gauche & V -->
+    <path d="M 72 292 L 72 100 L 176 226 L 280 100 L 280 292"
+          fill="none" stroke="url(#mGrad)" stroke-width="46"
+          stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Prolongement jambe droite flèche montante -->
+    <path d="M 280 110 L 280 72"
+          fill="none" stroke="url(#mGrad)" stroke-width="46"
+          stroke-linecap="square" />
+    <!-- Pointe de flèche -->
+    <polygon points="280,16 232,74 260,74 260,84 300,84 300,74 328,74"
+             fill="url(#mGrad)" />
+  </g>
+</svg>
