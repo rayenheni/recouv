@@ -52,7 +52,7 @@
       "@id": "https://miraj-recouv.com/#organization",
       "name": "MIRAJ Recouvrement",
       "url": "https://miraj-recouv.com/",
-      "logo": "https://miraj-recouv.com/assets/img/logo-miraj.svg",
+      "logo": "https://miraj-recouv.com/assets/img/logo-miraj.png",
       "image": "https://miraj-recouv.com/assets/img/og-miraj.jpg",
       "description": "MIRAJ est spécialisé dans le recouvrement de créances amiable et judiciaire en Tunisie et à l'international, la relance commerciale et la formation juridique.",
       "telephone": "+216-20-309-212",
@@ -1862,6 +1862,9 @@
     }
     .has-sub.open .sub-menu { display: block; }
 
+    /* Hide 75% badge on mobile — desktop only */
+    .hero-card-float { display: none !important; }
+
     /* Hero — ordre mobile : texte → photo → boutons */
     .hero-v2 { padding: 44px 0 60px; }
     .hero-v2-grid {
@@ -1937,23 +1940,39 @@
   }
 
   @media(max-width: 600px) {
+    html, body { overflow-x: hidden; }
     .container { padding: 0 18px; }
-    .nav-row { padding: 0 18px; }
-    .brand-logo { height: 46px; }
-    .stats-grid-4 { grid-template-columns: 1fr; }
+    .nav-row { padding: 0 18px; height: 70px; }
+    header { height: 70px; }
+    .brand-logo { height: 44px; }
+    .stats-grid-4 { grid-template-columns: 1fr; gap: 22px; }
+    .stat-col-v2 { padding-left: 16px; }
+    .stat-col-v2-num { font-size: 2.6rem; }
     .domain-tabs { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .tab-btn { padding: 12px 14px; gap: 10px; }
     .tab-btn .tab-icon { width: 36px; height: 36px; border-radius: 10px; }
     .tab-btn .tab-title { font-size: 0.82rem; }
     .methode-grid-6 { grid-template-columns: 1fr; }
     .cabinet-authority-grid { grid-template-columns: 1fr; }
-    .hero-v2-actions { flex-direction: column; width: 100%; }
-    .hero-v2-actions a { width: 100%; justify-content: center; }
+    .hero-v2 { padding: 28px 0 40px; }
+    .hero-v2 h1 { font-size: clamp(2rem, 8.5vw, 2.6rem); line-height: 1.05; }
+    .hero-v2-sub { font-size: 0.96rem; }
+    .hero-v2-actions { flex-direction: column; width: 100%; gap: 10px; }
+    .hero-v2-actions a { width: 100%; justify-content: center; padding: 15px 22px !important; font-size: 0.95rem !important; }
     .hero-trust { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .hero-v2-image-wrap { height: 280px; }
-    .form-row-2 { grid-template-columns: 1fr; }
+    .hero-v2-image-wrap { height: 280px; border-radius: 20px; }
+    .hero-badge-float { top: 12px; right: 12px; padding: 8px 12px; font-size: 0.72rem; border-radius: 10px; }
+    .hero-card-float { display: none !important; }
+    .form-row-2 { grid-template-columns: 1fr; gap: 16px; }
     .mobile-sticky-bar { display: flex; }
     body { padding-bottom: 68px; }
+
+    /* Logos marquee : cartes plus compactes sur mobile */
+    .logos-track .logo-item { min-width: 150px; height: 60px; margin-right: 24px; padding: 8px 16px; }
+    .logos-track .logo-item img { max-height: 36px; max-width: 110px; }
+
+    /* Sections padding optimisé mobile */
+    .cabinet-section, .expertises-section, .results-dark-section, .methode-section, .simulator-section, .ressources-section, .faq-section-v2, .contact-section-v2 { padding: 48px 0; }
 
     /* WhatsApp : bouton flottant (icône seule), au-dessus de la barre mobile */
     .wa-float { right: 14px; bottom: 84px; width: 54px; height: 54px; }
@@ -1970,7 +1989,7 @@
 <header>
   <div class="nav-row">
     <a href="#top" class="brand-lockup" aria-label="MIRAJ Recouvrement">
-      <img src="assets/img/logo-miraj.svg" alt="MIRAJ Recouvrement" class="brand-logo">
+      <img src="assets/img/logo-miraj.png" alt="MIRAJ Recouvrement" class="brand-logo">
     </a>
 
     <nav class="primary-nav" id="primaryNav">
@@ -2920,7 +2939,7 @@
   <div class="container footer-v2-grid">
     <div>
       <a href="#top" class="footer-v2-brand" aria-label="MIRAJ Recouvrement">
-        <img src="assets/img/logo-miraj.svg" alt="MIRAJ Recouvrement" class="brand-logo footer-logo">
+        <img src="assets/img/logo-miraj.png" alt="MIRAJ Recouvrement" class="brand-logo footer-logo">
       </a>
       <p data-content-key="about_text">
         Cabinet de recouvrement &amp; contentieux en Tunisie et à l'international. Honoraires 100% au résultat.
