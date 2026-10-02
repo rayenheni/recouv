@@ -71,7 +71,7 @@ function initDB() {
   // Seed default content (idempotent : ajoute aussi les nouvelles clés aux bases existantes)
   {
     const defaultContent = {
-      hero_badge: "— CABINET DE RECOUVREMENT — TUNISIE & INTERNATIONAL",
+      hero_badge: "— CABINET DE RECOUVREMENT — ASSISTANCE JURIDIQUE",
       hero_title: "Vos impayés, recouvrés. Votre trésorerie, protégée.",
       hero_subtitle: "Nous gérons l'intégralité de vos créances — de la relance amiable à l'exécution judiciaire. Honoraires uniquement au résultat.",
       stat_1_val: "75%",
