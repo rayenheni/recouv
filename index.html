@@ -21,8 +21,8 @@
 <!-- Géolocalisation & Local SEO (Tunisie / Ben Arous / Grand Tunis) -->
 <meta name="geo.region" content="TN-13">
 <meta name="geo.placename" content="Ben Arous, Tunisie">
-<meta name="geo.position" content="36.7531;10.2189">
-<meta name="ICBM" content="36.7531, 10.2189">
+<meta name="geo.position" content="36.7617263;10.2248333">
+<meta name="ICBM" content="36.7617263, 10.2248333">
 
 <!-- Open Graph / Réseaux Sociaux -->
 <meta property="og:locale" content="fr_TN">
@@ -68,6 +68,12 @@
           "email": "info@miraj-recouv.com",
           "url": "https://wa.me/21620309212",
           "availableLanguage": ["fr", "ar", "en"]
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "telephone": "+216-40-013-718",
+          "availableLanguage": ["fr", "ar"]
         }
       ],
       "priceRange": "$$",
@@ -80,9 +86,10 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 36.7531,
-        "longitude": 10.2189
+        "latitude": 36.7617263,
+        "longitude": 10.2248333
       },
+      "hasMap": "https://www.google.com/maps?q=36.7617263,10.2248333&z=17",
       "areaServed": [
         {
           "@type": "Country",
@@ -1626,6 +1633,10 @@
     font-size: 0.96rem; font-weight: 600; color: #ffffff; text-decoration: none;
   }
   .contact-info-text a:hover { color: #F5A623; }
+  .contact-info-text .contact-fixe-inline {
+    display: block; margin-top: 3px; font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.85);
+  }
+  .contact-info-text .contact-fixe-inline:hover { color: #F5A623; }
   .contact-dark-footer {
     border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; margin-top: 48px;
     display: flex; align-items: center; gap: 12px; font-size: 0.82rem; color: rgba(255,255,255,0.6);
@@ -1651,6 +1662,43 @@
     display: flex; align-items: flex-start; gap: 10px; font-size: 0.78rem; color: #6B7280;
   }
   .form-checkbox-v2 input { margin-top: 3px; accent-color: #F5A623; }
+
+  /* Carte Google Maps intégrée (sous la carte contact) */
+  .contact-info-text .contact-map-inline {
+    display: inline-block; margin-top: 4px; font-size: 0.82rem; font-weight: 700; color: #F5A623;
+  }
+  .contact-info-text .contact-map-inline:hover { text-decoration: underline; }
+  .contact-map-wrap {
+    margin-top: 28px; border-radius: 24px; overflow: hidden;
+    border: 1px solid #EBEAE5; box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+    background: #ffffff;
+  }
+  .contact-map-wrap iframe {
+    display: block; width: 100%; height: 380px; border: 0;
+  }
+  .contact-map-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 14px; padding: 18px 24px;
+  }
+  .contact-map-bar-address {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.92rem; font-weight: 600; color: #111827;
+  }
+  .contact-map-bar-address svg { color: #F5A623; flex-shrink: 0; }
+  .contact-map-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .contact-map-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 999px; font-size: 0.85rem; font-weight: 700;
+    text-decoration: none; transition: all 0.2s ease;
+  }
+  .contact-map-btn--gold { background: #F5A623; color: #111827; }
+  .contact-map-btn--gold:hover { background: #dd9418; transform: translateY(-1px); }
+  .contact-map-btn--ghost { background: #ffffff; color: #111827; border: 1.5px solid #E5E7EB; }
+  .contact-map-btn--ghost:hover { border-color: #F5A623; color: #F5A623; }
+  @media (max-width: 640px) {
+    .contact-map-wrap iframe { height: 300px; }
+    .contact-map-bar { padding: 16px; }
+  }
 
   /* ================================================================
      FOOTER SECTION (Fond blanc, liens hover orange + padding-left)
@@ -2131,7 +2179,7 @@
 
     <div class="cabinet-image-wrap reveal reveal--left">
       <div class="cabinet-image-inner">
-        <picture><source srcset="assets/img/cabinet-assistance.webp" type="image/webp"><img src="assets/img/cabinet-assistance.jpg" alt="Assistance juridique et recouvrement de créances MIRAJ : balance de justice dorée, marteau de juge, codes juridiques, contrat signé et dossier impayé avec billets en euros dans un bureau navy et doré" loading="lazy" width="1264" height="843"></picture>
+        <picture><source srcset="assets/img/cabinet-assistance.webp" type="image/webp"><img src="assets/img/cabinet-assistance.jpg" alt="Cabinet MIRAJ Recouvrement : une consultante présente les résultats de recouvrement à ses clients autour d'une table de conseil, graphique en croissance et grande flèche dorée vers le haut devant une skyline futuriste au crépuscule" loading="lazy" width="1536" height="862"></picture>
       </div>
       <div class="cabinet-badge-float">
         <div class="cabinet-badge-float-num"><span class="counter" data-target="15" data-prefix="+">+15</span></div>
@@ -2837,7 +2885,10 @@
               <div class="contact-info-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
               </div>
-              <span data-content-key="contact_phone">(+216) 20 309 212</span>
+              <div class="contact-info-text">
+                <span data-content-key="contact_phone">(+216) 20 309 212</span>
+                <a href="tel:+21640013718" class="contact-fixe-inline">Fixe : (+216) 40 013 718</a>
+              </div>
             </div>
 
             <div class="contact-info-row">
@@ -2851,7 +2902,10 @@
               <div class="contact-info-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
               </div>
-              <span data-content-key="contact_address">62, Avenue de France, Ben Arous</span>
+              <div class="contact-info-text">
+                <span data-content-key="contact_address">62, Avenue de France, Ben Arous</span>
+                <a href="https://www.google.com/maps?q=36.7617263,10.2248333&amp;z=17" target="_blank" rel="noopener noreferrer" class="contact-map-inline">Voir sur Google Maps ↗</a>
+              </div>
             </div>
 
             <div class="contact-info-row">
@@ -2931,6 +2985,24 @@
         </form>
       </div>
     </div>
+
+    <!-- Carte Google Maps — Localisation du cabinet -->
+    <div class="contact-map-wrap reveal">
+      <iframe src="https://www.google.com/maps?q=36.7617263,10.2248333&amp;z=17&amp;hl=fr&amp;output=embed" loading="lazy" title="MIRAJ Recouvrement — Localisation Google Maps : 62, Avenue de France, 2013 Ben Arous, Tunisie" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <div class="contact-map-bar">
+        <div class="contact-map-bar-address">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span>62, Avenue de France, 3ème étage – Bureau n°9, 2013 Ben Arous</span>
+        </div>
+        <div class="contact-map-actions">
+          <a href="https://www.google.com/maps?q=36.7617263,10.2248333&amp;z=17" target="_blank" rel="noopener noreferrer" class="contact-map-btn contact-map-btn--ghost">Ouvrir dans Google Maps ↗</a>
+          <a href="https://www.google.com/maps/dir/?api=1&amp;destination=36.7617263,10.2248333" target="_blank" rel="noopener noreferrer" class="contact-map-btn contact-map-btn--gold">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+            Obtenir l'itinéraire
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2976,6 +3048,7 @@
       <h4>Contact &amp; Accès</h4>
       <ul>
         <li data-content-key="contact_phone">+216 20 309 212</li>
+        <li>Fixe : <a href="tel:+21640013718">+216 40 013 718</a></li>
         <li data-content-key="contact_email">info@miraj-recouv.com</li>
         <li data-content-key="contact_address">62, Avenue de France, Ben Arous</li>
         <li class="footer-wa-item">
@@ -2985,7 +3058,7 @@
              data-content-key="contact_whatsapp" target="_blank" rel="noopener noreferrer">+216 20 309 212</a>
         </li>
       </ul>
-      <a href="https://www.google.com/maps/search/?api=1&query=36.7531,10.2189" target="_blank" rel="noopener noreferrer" class="footer-map-link">
+      <a href="https://www.google.com/maps/search/?api=1&query=36.7617263,10.2248333" target="_blank" rel="noopener noreferrer" class="footer-map-link">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Voir sur Google Maps ↗
       </a>
@@ -3000,7 +3073,7 @@
       </ul>
       <p style="margin-top:16px; font-size:0.84rem; color:#6B7280; line-height:1.5;">
         <strong style="color:#111827;">Siège :</strong> 62, Avenue de France, 3ème étage – Bureau n°9, 2013 Ben Arous, Tunisie<br>
-        <span style="font-size:0.78rem; color:#9CA3AF;">Lat: 36.7531, Long: 10.2189 — Grand Tunis</span>
+        <span style="font-size:0.78rem; color:#9CA3AF;">Lat: 36.7617263, Long: 10.2248333 — Grand Tunis</span>
       </p>
       <p style="margin-top:12px; font-size:0.82rem; color:#6B7280;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="2" style="vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
