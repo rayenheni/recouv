@@ -68,6 +68,12 @@
           "email": "info@miraj-recouv.com",
           "url": "https://wa.me/21620309212",
           "availableLanguage": ["fr", "ar", "en"]
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "telephone": "+216-40-013-718",
+          "availableLanguage": ["fr", "ar"]
         }
       ],
       "priceRange": "$$",
@@ -1627,6 +1633,10 @@
     font-size: 0.96rem; font-weight: 600; color: #ffffff; text-decoration: none;
   }
   .contact-info-text a:hover { color: #F5A623; }
+  .contact-info-text .contact-fixe-inline {
+    display: block; margin-top: 3px; font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.85);
+  }
+  .contact-info-text .contact-fixe-inline:hover { color: #F5A623; }
   .contact-dark-footer {
     border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; margin-top: 48px;
     display: flex; align-items: center; gap: 12px; font-size: 0.82rem; color: rgba(255,255,255,0.6);
@@ -2875,7 +2885,10 @@
               <div class="contact-info-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
               </div>
-              <span data-content-key="contact_phone">(+216) 20 309 212</span>
+              <div class="contact-info-text">
+                <span data-content-key="contact_phone">(+216) 20 309 212</span>
+                <a href="tel:+21640013718" class="contact-fixe-inline">Fixe : (+216) 40 013 718</a>
+              </div>
             </div>
 
             <div class="contact-info-row">
@@ -3035,6 +3048,7 @@
       <h4>Contact &amp; Accès</h4>
       <ul>
         <li data-content-key="contact_phone">+216 20 309 212</li>
+        <li>Fixe : <a href="tel:+21640013718">+216 40 013 718</a></li>
         <li data-content-key="contact_email">info@miraj-recouv.com</li>
         <li data-content-key="contact_address">62, Avenue de France, Ben Arous</li>
         <li class="footer-wa-item">
