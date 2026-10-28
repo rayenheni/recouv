@@ -1,6 +1,19 @@
 // ============================================================
 //  MIRAJ Recouvrement — db.js
 //  Initialisation SQLite + helpers
+//
+//  Ordre de priorité des moteurs de stockage :
+//   1. Turso (SQLite cloud) si TURSO_DATABASE_URL est défini
+//      → données PERSISTANTES, indispensable en serverless
+//        (Vercel/Netlify : le disque local est temporaire !)
+//   2. Fichier SQLite local via libsql (API compatible
+//      better-sqlite3), sinon via better-sqlite3
+//      → développement local / serveur avec disque persistant
+//   3. Fichier JSON (json-db.js) en dernier recours
+//
+//  Tous les moteurs exposent la même API synchrone
+//  (prepare/run/get/all/exec/transaction) : le reste du code
+//  ne change pas quel que soit le moteur actif.
 // ============================================================
 
 const JsonDatabase = require('./json-db');
@@ -12,18 +25,61 @@ const isServerless = Boolean(process.env.VERCEL || process.env.NETLIFY || proces
 const dataDir = isServerless ? '/tmp' : path.join(__dirname, 'data');
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 
+const TURSO_URL   = process.env.TURSO_DATABASE_URL;
+const TURSO_TOKEN = process.env.TURSO_AUTH_TOKEN;
+
 let db;
+let dbDriver = null; // 'turso' | 'libsql-local' | 'better-sqlite3' | 'json'
 
 function getDB() {
   if (db) return db;
+
+  // ── 1) Turso : base SQLite hébergée, données persistantes ───
+  // Le pilote `libsql` parle directement au serveur Turso :
+  // aucun fichier local n'est nécessaire, chaque requête lit/écrit
+  // dans le cloud → les données survivent aux redéploiements Vercel.
+  if (TURSO_URL) {
+    try {
+      const Database = require('libsql');
+      const client = new Database(TURSO_URL, { authToken: TURSO_TOKEN || undefined });
+      client.prepare('SELECT 1').get(); // échoue immédiatement si URL/token invalides
+      db = client;
+      dbDriver = 'turso';
+      console.log('☁️   Base de données Turso (cloud) connectée — données persistantes');
+      return db;
+    } catch (err) {
+      console.error(`❌  Turso injoignable (${err.message}) — repli sur le stockage local` +
+        (isServerless ? ' (⚠️ données TEMPORAIRES sur cette plateforme !)' : ''));
+    }
+  }
+
+  // ── 2) Fichier local via libsql ──────────────────────────────
+  try {
+    const Database = require('libsql');
+    db = new Database(path.join(dataDir, 'miraj.db'));
+    dbDriver = 'libsql-local';
+    return db;
+  } catch { /* on tente better-sqlite3 */ }
+
+  // ── 3) Fichier local via better-sqlite3 ──────────────────────
   try {
     const Sqlite = require('better-sqlite3');
     db = new Sqlite(path.join(dataDir, 'miraj.db'));
-  } catch {
-    console.warn('⚠️  better-sqlite3 indisponible — stockage JSON (server/data/miraj.json)');
-    db = new JsonDatabase(path.join(dataDir, 'miraj.json'));
-  }
+    dbDriver = 'better-sqlite3';
+    return db;
+  } catch { /* repli JSON */ }
+
+  // ── 4) Dernier recours : fichier JSON ────────────────────────
+  console.warn('⚠️  Aucun moteur SQLite disponible — stockage JSON (server/data/miraj.json)');
+  db = new JsonDatabase(path.join(dataDir, 'miraj.json'));
+  dbDriver = 'json';
   return db;
+}
+
+// Nom du moteur actif (pour /api/health et les logs)
+function getDBDriver() {
+  getDB();
+  return dbDriver;
 }
 
 // ── Initialisation des tables ─────────────────────────────────
@@ -69,6 +125,7 @@ function initDB() {
   `);
 
   // Seed default content (idempotent : ajoute aussi les nouvelles clés aux bases existantes)
+  // Transaction unique → un seul aller-retour réseau sur Turso au démarrage.
   {
     const defaultContent = {
       hero_badge: "— CABINET DE RECOUVREMENT — ASSISTANCE JURIDIQUE",
@@ -87,12 +144,13 @@ function initDB() {
       about_text: "Cabinet de recouvrement & contentieux en Tunisie et à l'international. Honoraires 100% au résultat."
     };
     const stmt = db.prepare('INSERT OR IGNORE INTO site_content (key, value) VALUES (?, ?)');
-    for (const [k, v] of Object.entries(defaultContent)) {
-      stmt.run(k, v);
-    }
+    const seedAll = db.transaction((entries) => {
+      for (const [k, v] of entries) stmt.run(k, v);
+    });
+    seedAll(Object.entries(defaultContent));
   }
 
-  console.log('📦  Base de données SQLite initialisée');
+  console.log(`📦  Base de données SQLite initialisée (moteur : ${dbDriver})`);
 }
 
 // ── Créer l'admin par défaut si inexistant ─────────────────────
@@ -113,4 +171,4 @@ function createDefaultAdmin() {
   }
 }
 
-module.exports = { getDB, initDB, createDefaultAdmin };
+module.exports = { getDB, getDBDriver, initDB, createDefaultAdmin };

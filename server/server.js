@@ -96,8 +96,12 @@ app.get('/api/content', (_req, res) => {
   }
 });
 
-// ── Health check ──────────────────────────────────────────────
-app.get('/api/health', (_req, res) => res.json({ status: 'ok', time: new Date().toISOString() }));
+// ── Health check (db = moteur actif : "turso" = données persistantes) ──
+app.get('/api/health', (_req, res) => {
+  let db = 'unknown';
+  try { db = require('./db').getDBDriver(); } catch { /* ignore */ }
+  res.json({ status: 'ok', time: new Date().toISOString(), db });
+});
 
 // ── SPA fallback for admin ────────────────────────────────────
 app.get('/admin*', (_req, res) => {
