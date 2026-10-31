@@ -23,29 +23,28 @@ function validate(body) {
   return errors;
 }
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { guide, nom, telephone, fonction, entreprise, email } = req.body;
 
   const errors = validate(req.body);
   if (errors.length) return res.status(400).json({ error: errors.join(', ') });
 
   try {
-    const db   = getDB();
-    const stmt = db.prepare(`
+    const db = getDB();
+    const [info] = await db.execute(`
       INSERT INTO downloads (guide, nom, telephone, fonction, entreprise, email)
       VALUES (?, ?, ?, ?, ?, ?)
-    `);
-    const info = stmt.run(
+    `, [
       guide.trim(),
       nom.trim(),
       telephone.trim(),
       fonction.trim(),
       entreprise.trim(),
       email.trim().toLowerCase()
-    );
+    ]);
 
-    console.log(`📥  Téléchargement [#${info.lastInsertRowid}] — ${GUIDE_LABELS[guide]} par ${nom}`);
-    res.json({ success: true, id: info.lastInsertRowid, guide: GUIDE_LABELS[guide] });
+    console.log(`📥  Téléchargement [#${info.insertId}] — ${GUIDE_LABELS[guide]} par ${nom}`);
+    res.json({ success: true, id: info.insertId, guide: GUIDE_LABELS[guide] });
   } catch (err) {
     console.error('Erreur download:', err.message);
     res.status(500).json({ error: 'Erreur serveur' });

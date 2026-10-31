@@ -5,48 +5,51 @@
 
 const router    = require('express').Router();
 const bcrypt    = require('bcryptjs');
-const { getDB } = require('../db');
+const { getDB, count } = require('../db');
 const { signToken, requireAuth } = require('../middleware/auth');
 const { loginLimiter }           = require('../middleware/security');
 
+// Encapsule les handlers async (Express 4 ne capte pas les rejets de promesses)
+const ah = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
+
 // ── POST /api/admin/login ─────────────────────────────────────
-router.post('/login', loginLimiter, (req, res) => {
+router.post('/login', loginLimiter, ah(async (req, res) => {
   const { username, password } = req.body || {};
   if (typeof username !== 'string' || typeof password !== 'string' || !username.trim() || !password) {
     return res.status(400).json({ error: 'Identifiants requis' });
   }
 
-  const db    = getDB();
-  const admin = db.prepare('SELECT * FROM admins WHERE username = ?').get(username.trim());
+  const db     = getDB();
+  const [rows] = await db.execute('SELECT * FROM admins WHERE username = ?', [username.trim()]);
+  const admin  = rows[0];
   if (!admin || !bcrypt.compareSync(password, admin.password_hash)) {
     return res.status(401).json({ error: 'Identifiants incorrects' });
   }
 
   const token = signToken({ id: admin.id, username: admin.username });
   res.json({ token, username: admin.username });
-});
+}));
 
 // ── Toutes les routes suivantes nécessitent un JWT valide ──────
 router.use(requireAuth);
 
 // ── GET /api/admin/stats ──────────────────────────────────────
-router.get('/stats', (_req, res) => {
-  const db = getDB();
+router.get('/stats', ah(async (_req, res) => {
   const today = new Date().toISOString().slice(0, 10);
 
   const stats = {
-    contacts:         db.prepare("SELECT COUNT(*) as n FROM contacts").get().n,
-    contacts_unread:  db.prepare("SELECT COUNT(*) as n FROM contacts WHERE is_read=0").get().n,
-    contacts_today:   db.prepare("SELECT COUNT(*) as n FROM contacts WHERE created_at LIKE ?").get(`${today}%`).n,
-    downloads:        db.prepare("SELECT COUNT(*) as n FROM downloads").get().n,
-    downloads_unread: db.prepare("SELECT COUNT(*) as n FROM downloads WHERE is_read=0").get().n,
-    downloads_today:  db.prepare("SELECT COUNT(*) as n FROM downloads WHERE created_at LIKE ?").get(`${today}%`).n,
+    contacts:         await count('SELECT COUNT(*) as n FROM contacts'),
+    contacts_unread:  await count('SELECT COUNT(*) as n FROM contacts WHERE is_read=0'),
+    contacts_today:   await count('SELECT COUNT(*) as n FROM contacts WHERE created_at LIKE ?', [`${today}%`]),
+    downloads:        await count('SELECT COUNT(*) as n FROM downloads'),
+    downloads_unread: await count('SELECT COUNT(*) as n FROM downloads WHERE is_read=0'),
+    downloads_today:  await count('SELECT COUNT(*) as n FROM downloads WHERE created_at LIKE ?', [`${today}%`]),
   };
   res.json(stats);
-});
+}));
 
 // ── GET /api/admin/contacts ───────────────────────────────────
-router.get('/contacts', (req, res) => {
+router.get('/contacts', ah(async (req, res) => {
   const db = getDB();
   const { q, read, limit = 50, offset = 0 } = req.query;
 
@@ -71,13 +74,13 @@ router.get('/contacts', (req, res) => {
   sql += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
   params.push(limitNum, offsetNum);
 
-  const rows  = db.prepare(sql).all(...params);
-  const total = db.prepare('SELECT COUNT(*) as n FROM contacts').get().n;
+  const [rows]  = await db.execute(sql, params);
+  const total = await count('SELECT COUNT(*) as n FROM contacts');
   res.json({ rows, total });
-});
+}));
 
 // ── GET /api/admin/downloads ──────────────────────────────────
-router.get('/downloads', (req, res) => {
+router.get('/downloads', ah(async (req, res) => {
   const db = getDB();
   const { q, read, limit = 50, offset = 0 } = req.query;
 
@@ -102,45 +105,45 @@ router.get('/downloads', (req, res) => {
   sql += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
   params.push(limitNum, offsetNum);
 
-  const rows  = db.prepare(sql).all(...params);
-  const total = db.prepare('SELECT COUNT(*) as n FROM downloads').get().n;
+  const [rows]  = await db.execute(sql, params);
+  const total = await count('SELECT COUNT(*) as n FROM downloads');
   res.json({ rows, total });
-});
+}));
 
 // ── PATCH /api/admin/contacts/:id/read ───────────────────────
-router.patch('/contacts/:id/read', (req, res) => {
+router.patch('/contacts/:id/read', ah(async (req, res) => {
   const db  = getDB();
   const val = req.body && req.body.is_read !== undefined ? (req.body.is_read ? 1 : 0) : 1;
-  db.prepare('UPDATE contacts SET is_read = ? WHERE id = ?').run(val, req.params.id);
+  await db.execute('UPDATE contacts SET is_read = ? WHERE id = ?', [val, req.params.id]);
   res.json({ success: true });
-});
+}));
 
 // ── PATCH /api/admin/downloads/:id/read ──────────────────────
-router.patch('/downloads/:id/read', (req, res) => {
+router.patch('/downloads/:id/read', ah(async (req, res) => {
   const db  = getDB();
   const val = req.body && req.body.is_read !== undefined ? (req.body.is_read ? 1 : 0) : 1;
-  db.prepare('UPDATE downloads SET is_read = ? WHERE id = ?').run(val, req.params.id);
+  await db.execute('UPDATE downloads SET is_read = ? WHERE id = ?', [val, req.params.id]);
   res.json({ success: true });
-});
+}));
 
 // ── DELETE /api/admin/contacts/:id ───────────────────────────
-router.delete('/contacts/:id', (req, res) => {
+router.delete('/contacts/:id', ah(async (req, res) => {
   const db = getDB();
-  db.prepare('DELETE FROM contacts WHERE id = ?').run(req.params.id);
+  await db.execute('DELETE FROM contacts WHERE id = ?', [req.params.id]);
   res.json({ success: true });
-});
+}));
 
 // ── DELETE /api/admin/downloads/:id ──────────────────────────
-router.delete('/downloads/:id', (req, res) => {
+router.delete('/downloads/:id', ah(async (req, res) => {
   const db = getDB();
-  db.prepare('DELETE FROM downloads WHERE id = ?').run(req.params.id);
+  await db.execute('DELETE FROM downloads WHERE id = ?', [req.params.id]);
   res.json({ success: true });
-});
+}));
 
 // ── GET /api/admin/export/contacts (CSV) ─────────────────────
-router.get('/export/contacts', (_req, res) => {
-  const db   = getDB();
-  const rows = db.prepare('SELECT * FROM contacts ORDER BY created_at DESC').all();
+router.get('/export/contacts', ah(async (_req, res) => {
+  const db      = getDB();
+  const [rows]  = await db.execute('SELECT * FROM contacts ORDER BY created_at DESC');
 
   const header = 'ID,Nom,Entreprise,Email,Téléphone,Service,Message,Lu,Date\n';
   const csv    = rows.map(r =>
@@ -151,12 +154,12 @@ router.get('/export/contacts', (_req, res) => {
   res.setHeader('Content-Type', 'text/csv; charset=utf-8');
   res.setHeader('Content-Disposition', 'attachment; filename="contacts-miraj.csv"');
   res.send('\uFEFF' + header + csv); // BOM pour Excel
-});
+}));
 
 // ── GET /api/admin/export/downloads (CSV) ────────────────────
-router.get('/export/downloads', (_req, res) => {
-  const db   = getDB();
-  const rows = db.prepare('SELECT * FROM downloads ORDER BY created_at DESC').all();
+router.get('/export/downloads', ah(async (_req, res) => {
+  const db      = getDB();
+  const [rows]  = await db.execute('SELECT * FROM downloads ORDER BY created_at DESC');
 
   const header = 'ID,Guide,Nom,Email,Téléphone,Fonction,Entreprise,Lu,Date\n';
   const csv    = rows.map(r =>
@@ -167,10 +170,10 @@ router.get('/export/downloads', (_req, res) => {
   res.setHeader('Content-Type', 'text/csv; charset=utf-8');
   res.setHeader('Content-Disposition', 'attachment; filename="telechargements-miraj.csv"');
   res.send('\uFEFF' + header + csv);
-});
+}));
 
 // ── POST /api/admin/change-password ──────────────────────────
-router.post('/change-password', (req, res) => {
+router.post('/change-password', ah(async (req, res) => {
   const { current, newPassword } = req.body || {};
   if (typeof current !== 'string' || typeof newPassword !== 'string' || !current || !newPassword) {
     return res.status(400).json({ error: 'Mots de passe requis' });
@@ -184,28 +187,29 @@ router.post('/change-password', (req, res) => {
     });
   }
 
-  const db    = getDB();
-  const admin = db.prepare('SELECT * FROM admins WHERE id = ?').get(req.admin.id);
+  const db     = getDB();
+  const [rows] = await db.execute('SELECT * FROM admins WHERE id = ?', [req.admin.id]);
+  const admin  = rows[0];
   if (!admin || !bcrypt.compareSync(current, admin.password_hash)) {
     return res.status(401).json({ error: 'Mot de passe actuel incorrect' });
   }
 
   const hash = bcrypt.hashSync(newPassword, 12);
-  db.prepare('UPDATE admins SET password_hash = ? WHERE id = ?').run(hash, req.admin.id);
+  await db.execute('UPDATE admins SET password_hash = ? WHERE id = ?', [hash, req.admin.id]);
   res.json({ success: true });
-});
+}));
 
 // ── GET /api/admin/content ────────────────────────────────────
-router.get('/content', (_req, res) => {
+router.get('/content', ah(async (_req, res) => {
   const db = getDB();
-  const rows = db.prepare('SELECT key, value FROM site_content').all();
+  const [rows] = await db.execute('SELECT `key`, `value` FROM site_content');
   const content = {};
   rows.forEach(r => { content[r.key] = r.value; });
   res.json(content);
-});
+}));
 
 // ── POST /api/admin/content ───────────────────────────────────
-router.post('/content', (req, res) => {
+router.post('/content', ah(async (req, res) => {
   if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body)) {
     return res.status(400).json({ error: 'Format de données invalide' });
   }
@@ -228,20 +232,17 @@ router.post('/content', (req, res) => {
   ];
 
   const db = getDB();
-  const stmt = db.prepare('INSERT INTO site_content (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value=excluded.value');
+  const upsert = 'INSERT INTO site_content (`key`, `value`) VALUES (?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`)';
 
-  const updateMany = db.transaction((data) => {
-    for (const [k, v] of Object.entries(data)) {
-      if (ALLOWED_KEYS.includes(k)) {
-        const valStr = typeof v === 'string' ? v.slice(0, 2000) : String(v).slice(0, 2000);
-        stmt.run(k, valStr);
-      }
+  for (const [k, v] of Object.entries(req.body)) {
+    if (ALLOWED_KEYS.includes(k)) {
+      const valStr = typeof v === 'string' ? v.slice(0, 2000) : String(v).slice(0, 2000);
+      await db.execute(upsert, [k, valStr]);
     }
-  });
+  }
 
-  updateMany(req.body);
   res.json({ success: true });
-});
+}));
 
 // Helper CSV
 function q(val) {

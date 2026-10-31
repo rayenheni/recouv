@@ -16,6 +16,21 @@ sec.assertProdConfig();
 const app  = express();
 const PORT = process.env.PORT || 3000;
 
+// ── Initialisation MySQL (asynchrone) ──────────────────────────
+// La promesse `ready` est attendue avant d'écouter (serveur classique)
+// et avant chaque route /api (serverless / cold start).
+async function initApp() {
+  try {
+    await initDB();
+    await createDefaultAdmin();
+  } catch (err) {
+    console.error('❌  MySQL indisponible :', err.message || err.code || err);
+    console.error('   Vérifiez DB_HOST, DB_PORT, DB_USER, DB_PASSWORD et DB_NAME.');
+    if (process.env.NODE_ENV === 'production') process.exit(1);
+  }
+}
+const ready = initApp();
+
 // ── Configurations Express ────────────────────────────────────
 app.set('trust proxy', 1);
 app.disable('x-powered-by');
@@ -78,16 +93,21 @@ app.get('/favicon.ico', (_req, res) => res.redirect(301, '/assets/img/favicon-48
 app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
 
 // ── Routes API ────────────────────────────────────────────────
+// Attend la fin de l'init MySQL avant de servir l'API (utile en serverless / cold start)
+app.use('/api', async (_req, res, next) => {
+  try { await ready; next(); }
+  catch { res.status(500).json({ error: 'Base de données indisponible' }); }
+});
+
 app.use('/api/contact',  sec.formLimiter, sec.antiSpam, require('./routes/contact'));
 app.use('/api/download', sec.formLimiter, sec.antiSpam, require('./routes/download'));
 app.use('/api/admin',    require('./routes/admin'));
 
 // ── Public site content ───────────────────────────────────────
-app.get('/api/content', (_req, res) => {
+app.get('/api/content', async (_req, res) => {
   try {
     const { getDB } = require('./db');
-    const db = getDB();
-    const rows = db.prepare('SELECT key, value FROM site_content').all();
+    const [rows] = await getDB().execute('SELECT `key`, `value` FROM site_content');
     const content = {};
     rows.forEach(r => { content[r.key] = r.value; });
     res.json(content);
@@ -124,16 +144,16 @@ app.use((err, req, res, _next) => {
 });
 
 // ── Start ─────────────────────────────────────────────────────
-initDB();
-createDefaultAdmin();
-
 if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`\n✅  Serveur MIRAJ démarré`);
-    console.log(`   Site    → http://localhost:${PORT}`);
-    console.log(`   Admin   → http://localhost:${PORT}/admin`);
-    console.log(`   API     → http://localhost:${PORT}/api\n`);
+  ready.then(() => {
+    app.listen(PORT, () => {
+      console.log(`\n✅  Serveur MIRAJ démarré`);
+      console.log(`   Site    → http://localhost:${PORT}`);
+      console.log(`   Admin   → http://localhost:${PORT}/admin`);
+      console.log(`   API     → http://localhost:${PORT}/api\n`);
+    });
   });
 }
 
 module.exports = app;
+module.exports.ready = ready;

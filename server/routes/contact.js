@@ -15,29 +15,28 @@ function validate(body) {
   return errors;
 }
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { nom, entreprise, email, telephone, service, message } = req.body;
 
   const errors = validate(req.body);
   if (errors.length) return res.status(400).json({ error: errors.join(', ') });
 
   try {
-    const db   = getDB();
-    const stmt = db.prepare(`
+    const db = getDB();
+    const [info] = await db.execute(`
       INSERT INTO contacts (nom, entreprise, email, telephone, service, message)
       VALUES (?, ?, ?, ?, ?, ?)
-    `);
-    const info = stmt.run(
+    `, [
       nom.trim(),
       (entreprise || '').trim(),
       email.trim().toLowerCase(),
       (telephone || '').trim(),
       (service || '').trim(),
       message.trim()
-    );
+    ]);
 
-    console.log(`📩  Nouveau contact [#${info.lastInsertRowid}] — ${nom} <${email}>`);
-    res.json({ success: true, id: info.lastInsertRowid });
+    console.log(`📩  Nouveau contact [#${info.insertId}] — ${nom} <${email}>`);
+    res.json({ success: true, id: info.insertId });
   } catch (err) {
     console.error('Erreur contact:', err.message);
     res.status(500).json({ error: 'Erreur serveur' });

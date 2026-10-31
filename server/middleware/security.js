@@ -148,6 +148,10 @@ function assertProdConfig() {
       console.error('❌ ERREUR CONFIG PRODUCTION : ADMIN_PASSWORD doit être défini avec au moins 10 caractères.');
       process.exit(1);
     }
+    if (!process.env.DB_NAME || !process.env.DB_USER || !process.env.DB_PASSWORD) {
+      console.error('❌ ERREUR CONFIG PRODUCTION : DB_NAME, DB_USER et DB_PASSWORD doivent être définis (MySQL).');
+      process.exit(1);
+    }
   }
 }
 
